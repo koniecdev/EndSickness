@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndSickness.API", "EndSickness.API\EndSickness.API.csproj", "{7741496D-6029-4CA2-A23C-1B6262D2EEA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndSickness.Domain", "EndSickness.Domain\EndSickness.Domain.csproj", "{030C4CEC-B867-4B80-B75A-EA939DC879E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7741496D-6029-4CA2-A23C-1B6262D2EEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7741496D-6029-4CA2-A23C-1B6262D2EEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7741496D-6029-4CA2-A23C-1B6262D2EEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7741496D-6029-4CA2-A23C-1B6262D2EEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{030C4CEC-B867-4B80-B75A-EA939DC879E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030C4CEC-B867-4B80-B75A-EA939DC879E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030C4CEC-B867-4B80-B75A-EA939DC879E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030C4CEC-B867-4B80-B75A-EA939DC879E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B55790B-BE63-4A08-A86E-FBDD723C43BE}
+	EndGlobalSection
+EndGlobal
