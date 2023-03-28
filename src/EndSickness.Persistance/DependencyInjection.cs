@@ -1,14 +1,14 @@
 ﻿using EndSickness.Application.Common.Interfaces;
-using EndSickness.Infrastructure.Extensions;
 using EndSickness.Persistance.EndSicknessDb;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EndSickness.Infrastructure;
+namespace EndSickness.Persistance;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddPersistance(this IServiceCollection services)
     {
+        services.AddScoped<IEndSicknessContext, EndSicknessContext>();
         return services;
     }
 }

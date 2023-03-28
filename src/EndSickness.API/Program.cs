@@ -1,4 +1,5 @@
 using EndSickness.Infrastructure;
+using EndSickness.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
 
 
