@@ -4,7 +4,7 @@ using EndSickness.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace EndSickness.Persistance.EndSicknessContext;
+namespace EndSickness.Persistance.EndSicknessDb;
 
 public class EndSicknessContext : DbContext, IEndSicknessContext
 {
@@ -15,7 +15,7 @@ public class EndSicknessContext : DbContext, IEndSicknessContext
     {
     }
      
-    public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
+    public DbSet<AppUser> AppUsers => Set<AppUser>();
     public DbSet<Medicine> Medicines => Set<Medicine>();
     public DbSet<MedicineList> MedicineLists => Set<MedicineList>();
     public DbSet<MedicineLog> MedicineLogs => Set<MedicineLog>();

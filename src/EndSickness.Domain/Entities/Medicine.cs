@@ -4,14 +4,20 @@ namespace EndSickness.Domain.Entities;
 
 public class Medicine : AuditableEntity
 {
-    private ApplicationUser? applicationUser;
+    private AppUser? applicationUser;
     private ICollection<MedicineList>? medicineLists;
 
-    public Medicine(string name, TimeSpan cooldown, int applicationUserId, int? maxDailyAmount, int? maxTreatmentTime)
+    public Medicine(string name, TimeSpan cooldown, int appUserId)
     {
         Name = name;
         Cooldown = cooldown;
-        ApplicationUserId = applicationUserId;
+        AppUserId = appUserId;
+    }
+    public Medicine(string name, TimeSpan cooldown, int appUserId, int? maxDailyAmount, int? maxTreatmentTime)
+    {
+        Name = name;
+        Cooldown = cooldown;
+        AppUserId = appUserId;
         MaxDailyAmount = maxDailyAmount;
         MaxTreatmentTime = maxTreatmentTime;
     }
@@ -19,10 +25,10 @@ public class Medicine : AuditableEntity
     public TimeSpan Cooldown { get; private set; }
     public int? MaxDailyAmount { get; private set; }
     public int? MaxTreatmentTime { get; private set; }
-    public int ApplicationUserId { get; private set; }
-    public virtual ApplicationUser ApplicationUser { 
+    public int AppUserId { get; private set; }
+    public virtual AppUser AppUser { 
         get => applicationUser
-            ?? throw new UninitializedNavigationPropertyAccessException(nameof(ApplicationUser));
+            ?? throw new UninitializedNavigationPropertyAccessException(nameof(AppUser));
         set => applicationUser = value;
     }
     public virtual ICollection<MedicineList> MedicineLists

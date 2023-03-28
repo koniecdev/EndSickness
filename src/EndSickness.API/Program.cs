@@ -6,7 +6,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructure();
 
 builder.Services.AddCors(options =>
 {
@@ -15,6 +14,8 @@ builder.Services.AddCors(options =>
         corsBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
+
+builder.Services.AddInfrastructure();
 
 
 var app = builder.Build();

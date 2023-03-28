@@ -4,12 +4,12 @@ using System.Net;
 
 namespace EndSickness.Domain.Entities;
 
-public class ApplicationUser : AuditableEntity
+public class AppUser : AuditableEntity
 {
     private ICollection<MedicineList>? medicineLists;
     private ICollection<Medicine>? medicines;
 
-    public ApplicationUser(string userId, string email, string username)
+    public AppUser(string userId, string email, string username)
     {
         UserId = userId;
         Email = email;

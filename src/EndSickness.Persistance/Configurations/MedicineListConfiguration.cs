@@ -9,6 +9,6 @@ internal class MedicineListConfiguration : IEntityTypeConfiguration<MedicineList
     public void Configure(EntityTypeBuilder<MedicineList> builder)
     {
         builder.Property(m => m.Name).HasMaxLength(200).IsRequired();
-        builder.Property(m => m.ApplicationUserId).IsRequired();
+        builder.Property(m => m.AppUserId).IsRequired();
     }
 }

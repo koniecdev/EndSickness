@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EndSickness.Persistance.Configurations;
 
-internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+internal class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
 {
-    public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+    public void Configure(EntityTypeBuilder<AppUser> builder)
     {
         builder.Property(m => m.UserId).HasMaxLength(200).IsRequired();
         builder.Property(m => m.Email).HasMaxLength(200).IsRequired();
