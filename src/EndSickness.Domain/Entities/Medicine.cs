@@ -15,11 +15,11 @@ public class Medicine : AuditableEntity
         MaxDailyAmount = maxDailyAmount;
         MaxTreatmentTime = maxTreatmentTime;
     }
-    public string Name { get; set; }
-    public TimeSpan Cooldown { get; set; }
-    public int? MaxDailyAmount { get; set; }
-    public int? MaxTreatmentTime { get; set; }
-    public int ApplicationUserId { get; set; }
+    public string Name { get; private set; }
+    public TimeSpan Cooldown { get; private set; }
+    public int? MaxDailyAmount { get; private set; }
+    public int? MaxTreatmentTime { get; private set; }
+    public int ApplicationUserId { get; private set; }
     public virtual ApplicationUser ApplicationUser { 
         get => applicationUser
             ?? throw new UninitializedNavigationPropertyAccessException(nameof(ApplicationUser));

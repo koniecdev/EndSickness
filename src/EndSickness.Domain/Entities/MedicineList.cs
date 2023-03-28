@@ -11,8 +11,8 @@ public class MedicineList : AuditableEntity
     {
         Name = name;
     }
-    public string Name { get; set; }
-    public int ApplicationUserId { get; set; }
+    public string Name { get; private set; }
+    public int ApplicationUserId { get; private set; }
     public virtual ApplicationUser ApplicationUser
     { 
         get => applicationUser ?? throw new UninitializedNavigationPropertyAccessException(nameof(ApplicationUser));

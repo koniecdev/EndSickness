@@ -13,8 +13,8 @@ public class MedicineLog : AuditableEntity
         MedicineId = medicineId;
         LastlyTaken = lastlyTaken;
     }
-    public DateTime LastlyTaken { get; set; }
-    public int MedicineListId { get; set; }
+    public DateTime LastlyTaken { get; private set; }
+    public int MedicineListId { get; private set; }
     public virtual MedicineList MedicineList
     { 
         get => medicineList ?? throw new UninitializedNavigationPropertyAccessException(nameof(MedicineList));
