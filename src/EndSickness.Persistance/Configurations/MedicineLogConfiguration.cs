@@ -8,6 +8,8 @@ internal class MedicineLogConfiguration : IEntityTypeConfiguration<MedicineLog>
 {
     public void Configure(EntityTypeBuilder<MedicineLog> builder)
     {
-        throw new NotImplementedException();
+        builder.Property(m => m.LastlyTaken).IsRequired();
+        builder.Property(m => m.MedicineListId).IsRequired();
+        builder.Property(m => m.MedicineId).IsRequired();
     }
 }

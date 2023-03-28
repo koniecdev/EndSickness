@@ -8,6 +8,7 @@ internal class MedicineListConfiguration : IEntityTypeConfiguration<MedicineList
 {
     public void Configure(EntityTypeBuilder<MedicineList> builder)
     {
-        throw new NotImplementedException();
+        builder.Property(m => m.Name).HasMaxLength(200).IsRequired();
+        builder.Property(m => m.ApplicationUserId).IsRequired();
     }
 }

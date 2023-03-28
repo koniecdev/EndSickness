@@ -8,6 +8,8 @@ internal class ApplicationUserConfiguration : IEntityTypeConfiguration<Applicati
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        throw new NotImplementedException();
+        builder.Property(m => m.UserId).HasMaxLength(200).IsRequired();
+        builder.Property(m => m.Email).HasMaxLength(200).IsRequired();
+        builder.Property(m => m.Username).HasMaxLength(200).IsRequired();
     }
 }

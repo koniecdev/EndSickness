@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EndSickness.Persistance.DesignTimeDbContextFactory;
 
-internal abstract class DesignTimeDbContextFactoryBase<TContext> : IDesignTimeDbContextFactory<TContext>
+public abstract class DesignTimeDbContextFactoryBase<TContext> : IDesignTimeDbContextFactory<TContext>
     where TContext : DbContext
 {
     private readonly IConfiguration _configuration;
