@@ -2,5 +2,5 @@
 
 public interface IAbstractFactory<T>
 {
-    T Create();
+    public T Create();
 }

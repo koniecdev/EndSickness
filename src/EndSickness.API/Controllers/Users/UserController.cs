@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace EndSickness.API.Controllers.UserInterface;
+﻿namespace EndSickness.API.Controllers.UserInterface;
 
 [Route("api/users")]
 public class UserController : BaseApiController
