@@ -1,7 +1,6 @@
-﻿using EndSickness.Application.Common.Interfaces;
-using EndSickness.Application.Common.Interfaces.FileStorage;
-using EndSickness.Infrastructure.Extensions;
+﻿using EndSickness.Infrastructure.Extensions;
 using EndSickness.Infrastructure.Services;
+using EndSickness.Infrastructure.Services.FileStorage.DirectoryDecorator;
 using EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,9 +11,13 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddAbstractFactory<IDateTime, DateTimeService>();
-        services.AddAbstractFactory<ICustomFile, CustomFileService>();
-        services.AddTransient<ICustomFileDecorator, PreventOverridingCustomFileDecorator>();
-        services.AddTransient<ICustomFileDecorator, CopyOnCreateCustomFileDecorator>();
+
+        services.AddAbstractFactory<ICustomFileSave, CustomFileSaveService>();
+        services.AddTransient<ICustomFileSaveDecorator, PreventOverridingCustomFileSaveDecorator>();
+
+        services.AddAbstractFactory<ICustomDirectoryCreate, CustomDirectoryCreateService>();
+        services.AddTransient<ICustomDirectoryCreateDecorator, RemoveInvalidCharsCustomDirectoryCreateDecorator>();
+
         return services;
     }
 }

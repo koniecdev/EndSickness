@@ -1,13 +1,10 @@
-﻿using EndSickness.Application.Common.Interfaces.FileStorage;
+﻿namespace EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
 
-namespace EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
-
-//you will not be able to resolve this through DI in lower layers, I think anyway just add all of factories and then do .Where(requireddecorator)
-public class PreventOverridingCustomFileDecorator : ICustomFileDecorator
+public class PreventOverridingCustomFileSaveDecorator : ICustomFileSaveDecorator
 {
-    public ICustomFile CustomFile { get; private set; }
+    public ICustomFileSave CustomFile { get; private set; }
 
-    public PreventOverridingCustomFileDecorator(ICustomFile customFile)
+    public PreventOverridingCustomFileSaveDecorator(ICustomFileSave customFile)
     {
         CustomFile = customFile;
     }

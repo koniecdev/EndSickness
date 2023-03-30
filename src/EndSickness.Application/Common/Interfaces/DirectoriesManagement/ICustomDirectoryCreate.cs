@@ -1,6 +1,6 @@
 ﻿namespace EndSickness.Application.Common.Interfaces.FileStorage;
 
-public interface ICustomDirectory
+public interface ICustomDirectoryCreate
 {
     void CreateDirectory(string path);
 }

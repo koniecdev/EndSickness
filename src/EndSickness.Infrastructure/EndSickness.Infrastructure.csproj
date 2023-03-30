@@ -15,8 +15,4 @@
     <ProjectReference Include="..\EndSickness.Persistance\EndSickness.Persistance.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\FileStorage\DirectoryDecorator\" />
-  </ItemGroup>
-
 </Project>

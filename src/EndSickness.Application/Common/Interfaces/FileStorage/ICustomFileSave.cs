@@ -1,6 +1,6 @@
 ﻿namespace EndSickness.Application.Common.Interfaces.FileStorage;
 
-public interface ICustomFile
+public interface ICustomFileSave
 {
     void WriteAllBytes(string outputFile, byte[] content);
 }
