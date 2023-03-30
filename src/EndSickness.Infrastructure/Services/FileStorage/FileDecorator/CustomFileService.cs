@@ -1,8 +1,10 @@
-﻿namespace EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
+﻿using EndSickness.Application.Common.Interfaces.FileStorage;
 
-public class CustomFileService : CustomFile
+namespace EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
+
+public class CustomFileService : ICustomFile
 {
-    public override void WriteAllBytes(string outputFile, byte[] content)
+    public void WriteAllBytes(string outputFile, byte[] content)
     {
         File.WriteAllBytes(outputFile, content);
     }

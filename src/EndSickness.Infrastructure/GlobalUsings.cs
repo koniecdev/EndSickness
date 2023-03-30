@@ -1,1 +1,2 @@
-﻿global using EndSickness.Application.Common.Interfaces.Services;
+﻿global using EndSickness.Application.Common.Interfaces;
+global using EndSickness.Application.Common.Interfaces.FileStorage;

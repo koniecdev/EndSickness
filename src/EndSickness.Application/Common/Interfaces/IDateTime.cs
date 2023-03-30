@@ -1,4 +1,4 @@
-﻿namespace EndSickness.Application.Common.Interfaces.Services;
+﻿namespace EndSickness.Application.Common.Interfaces;
 
 public interface IDateTime
 {
