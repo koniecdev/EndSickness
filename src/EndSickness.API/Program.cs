@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddPersistance();
+builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddInfrastructure();
 
 

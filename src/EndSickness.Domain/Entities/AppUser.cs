@@ -1,6 +1,4 @@
 ﻿using EndSickness.Domain.Common;
-using System.Data;
-using System.Net;
 
 namespace EndSickness.Domain.Entities;
 

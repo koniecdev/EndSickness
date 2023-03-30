@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EndSickness.Infrastructure\EndSickness.Infrastructure.csproj" />
+    <ProjectReference Include="..\EndSickness.Persistance\EndSickness.Persistance.csproj" />
   </ItemGroup>
 
 </Project>
