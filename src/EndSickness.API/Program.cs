@@ -1,7 +1,29 @@
 using EndSickness.Infrastructure;
 using EndSickness.Persistance;
+using EndSickness.Infrastructure.Middlewares;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder? builder = null!;
+
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+
+try
+{
+    Log.Information("Application is starting up");
+    builder = WebApplication.CreateBuilder(args);
+}
+catch(Exception ex)
+{
+    Log.Fatal(ex, "Could not start up application");
+    return;
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+
+builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +44,8 @@ builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
+app.GlobalErrorHandler();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,11 +55,29 @@ if (app.Environment.IsDevelopment())
 app.UseHsts();
 app.UseHttpsRedirection();
 
+app.UseSerilogRequestLogging();
+
+app.UseRouting();
 app.UseCors("AllowedPolicies");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
-app.Run();
+try
+{
+    Log.Information("Application is running");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

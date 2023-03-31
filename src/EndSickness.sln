@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndSickness.Domain", "EndSi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{65D7A20D-EE62-4A34-8730-843F7A6CC55B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D404633B-C342-43DF-BDED-9FD77EC0851B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D404633B-C342-43DF-BDED-9FD77EC0851B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5AABBF72-CB7C-4DA3-AC8B-FF10A8D4D291}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B9F2A12
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndSickness.Application.UnitTests", "EndSickness.Application.UnitTests\EndSickness.Application.UnitTests.csproj", "{F1D66E32-F5BE-4785-8B78-5D3F0164F025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsolatedEnvironment", "IsolatedEnvironment\IsolatedEnvironment.csproj", "{E371D8C3-D80B-4898-8874-8383EA2BF826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IsolatedEnvironment", "IsolatedEnvironment\IsolatedEnvironment.csproj", "{E371D8C3-D80B-4898-8874-8383EA2BF826}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

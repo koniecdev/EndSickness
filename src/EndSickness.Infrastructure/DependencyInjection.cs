@@ -1,4 +1,5 @@
-﻿using EndSickness.Infrastructure.Extensions;
+﻿using EndSickness.Infrastructure.ExceptionsHandling;
+using EndSickness.Infrastructure.Extensions;
 using EndSickness.Infrastructure.Services;
 using EndSickness.Infrastructure.Services.FileStorage.DirectoryDecorator;
 using EndSickness.Infrastructure.Services.FileStorage.FileDecorator;
@@ -17,6 +18,8 @@ public static class DependencyInjection
 
         services.AddAbstractFactory<ICustomDirectoryCreate, CustomDirectoryCreateService>();
         services.AddTransient<ICustomDirectoryCreateDecorator, RemoveInvalidCharsCustomDirectoryCreateDecorator>();
+
+        services.AddTransient<IErrorResponse, ErrorResponse>();
 
         return services;
     }

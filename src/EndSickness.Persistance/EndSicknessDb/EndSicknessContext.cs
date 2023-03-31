@@ -14,7 +14,7 @@ public class EndSicknessContext : DbContext, IEndSicknessContext
     public EndSicknessContext(DbContextOptions<EndSicknessContext> options) : base(options)
     {
     }
-     
+
     public DbSet<AppUser> AppUsers => Set<AppUser>();
     public DbSet<Medicine> Medicines => Set<Medicine>();
     public DbSet<MedicineList> MedicineLists => Set<MedicineList>();
