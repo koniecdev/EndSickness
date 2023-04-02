@@ -50,7 +50,17 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers", (string)null);
+                    b.ToTable("AppUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "defaultAdmin@koniec.dev",
+                            StatusId = 1,
+                            UserId = "00000000-0000-0000-0000-000000000000",
+                            Username = "DefaultAdmin"
+                        });
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.Medicine", b =>
@@ -70,8 +80,8 @@ namespace EndSickness.Persistance.Migrations
                     b.Property<int?>("MaxDailyAmount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MaxTreatmentTime")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan?>("MaxDaysOfTreatment")
+                        .HasColumnType("time");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -89,7 +99,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Medicines", (string)null);
+                    b.ToTable("Medicines");
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.MedicineList", b =>
@@ -115,7 +125,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("MedicineLists", (string)null);
+                    b.ToTable("MedicineLists");
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.MedicineLog", b =>
@@ -144,7 +154,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasIndex("MedicineListId");
 
-                    b.ToTable("MedicineLogs", (string)null);
+                    b.ToTable("MedicineLogs");
                 });
 
             modelBuilder.Entity("MedicineMedicineList", b =>
@@ -159,7 +169,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasIndex("MedicinesId");
 
-                    b.ToTable("MedicineMedicineList", (string)null);
+                    b.ToTable("MedicineMedicineList");
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.Medicine", b =>

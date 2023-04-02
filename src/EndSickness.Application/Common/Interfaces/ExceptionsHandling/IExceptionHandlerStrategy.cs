@@ -1,4 +1,4 @@
-﻿namespace EndSickness.Infrastructure.ExceptionsHandling.ExceptionHandlingStrategy;
+﻿namespace EndSickness.Application.Common.Interfaces.ExceptionsHandling;
 
 public interface IExceptionHandlerStrategy
 {

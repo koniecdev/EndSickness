@@ -23,6 +23,7 @@ public class EndSicknessContext : DbContext, IEndSicknessContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        new DbInitializer(modelBuilder).Seed();
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())

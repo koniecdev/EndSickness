@@ -4,9 +4,6 @@ namespace EndSickness.Domain.Entities;
 
 public class MedicineLog : AuditableEntity
 {
-    private MedicineList? medicineList;
-    private Medicine? medicine;
-
     public MedicineLog(int medicineListId, int medicineId, DateTime lastlyTaken)
     {
         MedicineListId = medicineListId;
@@ -15,15 +12,7 @@ public class MedicineLog : AuditableEntity
     }
     public DateTime LastlyTaken { get; private set; }
     public int MedicineListId { get; private set; }
-    public virtual MedicineList MedicineList
-    { 
-        get => medicineList ?? throw new UninitializedNavigationPropertyAccessException(nameof(MedicineList));
-        set => medicineList = value;
-    }
+    public virtual MedicineList MedicineList { get; set; } = null!;
     public int MedicineId { get; set; }
-    public virtual Medicine Medicine 
-    { 
-        get => medicine ?? throw new UninitializedNavigationPropertyAccessException(nameof(Medicine));
-        set => medicine = value;
-    }
+    public virtual Medicine Medicine { get; set; } = null!;
 }
