@@ -4,6 +4,7 @@ using EndSickness.Persistance.EndSicknessDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndSickness.Persistance.Migrations
 {
     [DbContext(typeof(EndSicknessContext))]
-    partial class EndSicknessContextModelSnapshot : ModelSnapshot
+    [Migration("20230403090316_RemoveMedicineListFromApplication")]
+    partial class RemoveMedicineListFromApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

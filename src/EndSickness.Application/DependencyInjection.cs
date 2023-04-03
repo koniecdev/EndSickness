@@ -1,5 +1,4 @@
-﻿using EndSickness.Application.Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace EndSickness.Application;

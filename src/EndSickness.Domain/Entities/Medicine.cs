@@ -38,5 +38,4 @@ public class Medicine : AuditableEntity
     public TimeSpan? MaxDaysOfTreatment { get; private set; }
     public int AppUserId { get; private set; }
     public virtual AppUser AppUser { get; set; } = null!;
-    public virtual ICollection<MedicineList> MedicineLists { get; set; } = null!;
 }

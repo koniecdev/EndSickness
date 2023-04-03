@@ -17,7 +17,6 @@ public class EndSicknessContext : DbContext, IEndSicknessContext
 
     public DbSet<AppUser> AppUsers => Set<AppUser>();
     public DbSet<Medicine> Medicines => Set<Medicine>();
-    public DbSet<MedicineList> MedicineLists => Set<MedicineList>();
     public DbSet<MedicineLog> MedicineLogs => Set<MedicineLog>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

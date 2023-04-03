@@ -27,12 +27,9 @@ public class EndSicknessContextMockFactory : IDbContextMockFactory<EndSicknessCo
         var medicine1 = new Medicine("Voltaren", TimeSpan.FromHours(12), appUser1.Id, 2) { Id = 2, StatusId = 1 };
         context.Medicines.Add(medicine1);
 
-        var defaultList = new MedicineList("Default List", appUser1.Id) { Id = 1, StatusId = 1 };
-        context.MedicineLists.Add(defaultList);
-
-        var log1 = new MedicineLog(defaultList.Id, medicine1.Id, new DateTime(2023, 3, 12, 13, 50, 0)) { Id = 1, StatusId = 1 };
+        var log1 = new MedicineLog(appUser1.Id, medicine1.Id, new DateTime(2023, 3, 12, 13, 50, 0)) { Id = 1, StatusId = 1 };
         context.MedicineLogs.Add(log1);
-        var log2 = new MedicineLog(defaultList.Id, medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 2, StatusId = 1 };
+        var log2 = new MedicineLog(appUser1.Id, medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 2, StatusId = 1 };
         context.MedicineLogs.Add(log2);
 
         context.SaveChanges();

@@ -14,6 +14,5 @@ public class AppUser : AuditableEntity
     public string Email { get; private set; }
     public string Username { get; private set; }
 
-    public virtual ICollection<MedicineList> MedicineLists { get; set; } = null!;
     public virtual ICollection<Medicine> Medicines { get; set; } = null!;
 }
