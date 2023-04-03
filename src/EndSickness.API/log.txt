@@ -18,3 +18,12 @@ INF - 04/02/2023 15:25:54 +02:00 Application is starting up
 INF - 04/02/2023 15:25:56 +02:00 Application is running
 INF - 04/02/2023 15:32:21 +02:00 Application is starting up
 INF - 04/02/2023 15:32:25 +02:00 Application is running
+INF - 04/03/2023 09:04:03 +02:00 Application is starting up
+INF - 04/03/2023 09:04:10 +02:00 Application is running
+INF - 04/03/2023 09:04:28 +02:00 HTTP "GET" "/swagger/indedwdx.html" responded 404 in 303.8242 ms
+INF - 04/03/2023 09:04:28 +02:00 HTTP "GET" "/favicon.ico" responded 404 in 1.6772 ms
+INF - 04/03/2023 09:05:10 +02:00 HTTP "GET" "/dupa" responded 404 in 3.4880 ms
+INF - 04/03/2023 09:05:50 +02:00 HTTP "GET" "/dupa" responded 404 in 0.1254 ms
+INF - 04/03/2023 09:05:53 +02:00 HTTP "GET" "/dupa" responded 404 in 0.0965 ms
+INF - 04/03/2023 09:06:26 +02:00 HTTP "GET" "/dupa" responded 404 in 0.1213 ms
+INF - 04/03/2023 09:06:41 +02:00 HTTP "GET" "/dupa" responded 404 in 0.1723 ms

@@ -1,5 +1,4 @@
-﻿using EndSickness.Domain.Exceptions;
-using EndSickness.Infrastructure.ExceptionsHandling.ExceptionHandlingStrategy;
+﻿using EndSickness.Infrastructure.ExceptionsHandling.ExceptionHandlingStrategy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -38,7 +37,6 @@ public class ExceptionHandlingMiddleware
 
         ExceptionHandler errorHandler = exception switch
         {
-            UninitializedNavigationPropertyAccessException ex => new(new UninitializedNavigationPropertyAccessExceptionHandlerStrategy(), ex),
             _ => new(new DefaultExceptionHandlerStrategy(), exception)
         };
 
