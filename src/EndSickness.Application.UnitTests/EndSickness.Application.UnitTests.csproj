@@ -30,4 +30,8 @@
     <ProjectReference Include="..\EndSickness.Persistance\EndSickness.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\Medicines\Commands\" />
+  </ItemGroup>
+
 </Project>

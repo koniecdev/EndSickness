@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿//using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace EndSickness.Persistance.DesignTimeDbContextFactory;
 
 public abstract class DesignTimeDbContextFactoryBase<TContext> :
         IDesignTimeDbContextFactory<TContext> where TContext : DbContext
 {
-    private const string ConnectionStringName = "DefaultDatabase";
+    private readonly string _connectionStringName = "DefaultDatabase";
 
     public TContext CreateDbContext(string[] args)
     {
@@ -17,8 +18,8 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
                   "ASPNETCORE_ENVIRONMENT");
 
         var dir = Directory.GetParent(AppContext.BaseDirectory);
-
-        if (EnvironmentName.Development.Equals(environmentName,
+        
+        if (Environments.Development.Equals(environmentName,
             StringComparison.OrdinalIgnoreCase))
         {
             var depth = 0;
@@ -51,7 +52,7 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
             .AddEnvironmentVariables()
             .Build();
 
-        var connectionString = configuration.GetConnectionString(ConnectionStringName);
+        var connectionString = configuration.GetConnectionString(_connectionStringName);
 
         return Create(connectionString);
     }
@@ -60,7 +61,7 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
     {
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new ArgumentException($"Connection string '{ConnectionStringName}' is null or empty.", nameof(connectionString));
+            throw new ArgumentException($"Connection string '{_connectionStringName}' is null or empty.", nameof(connectionString));
         }
 
         Console.WriteLine($"DesignTimeDbContextFactoryBase.Create(string): Connection string: '{connectionString}'.");

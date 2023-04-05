@@ -18,7 +18,7 @@ public class EndSicknessContextMockFactory : IDbContextMockFactory<EndSicknessCo
 
         //Remember - Seed of database are also applied - keep tracking of int IDs
 
-        var appUser1 = new AppUser(Guid.NewGuid().ToString(), "secondUser@koniec.dev", "secondUser") { Id = 2, StatusId = 1 };
+        var appUser1 = new AppUser("slayId", "secondUser@koniec.dev", "secondUser") { Id = 1337, StatusId = 1 };
         context.AppUsers.Add(appUser1);
 
         var medicine = new Medicine("Nurofen", TimeSpan.FromHours(4), appUser1.Id, 3, TimeSpan.FromDays(7)) { Id = 1, StatusId = 1 };

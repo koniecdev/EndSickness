@@ -1,3 +1,4 @@
+using EndSickness.Shared;
 using EndSickness.Infrastructure;
 using EndSickness.Persistance;
 using EndSickness.Infrastructure.Middlewares;
@@ -5,6 +6,8 @@ using Serilog;
 using Microsoft.OpenApi.Models;
 using EndSickness.API;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using EndSickness.Application;
+using EndSickness.API.Services;
 
 WebApplicationBuilder? builder = null!;
 
@@ -84,8 +87,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+builder.Services.AddShared();
+builder.Services.AddApplication();
 builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddInfrastructure();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
 var app = builder.Build();
