@@ -19,11 +19,11 @@ public class MappingProfile : Profile
         foreach (var type in types)
         {
             var instance = Activator.CreateInstance(type);
-            var toDto = type.GetMethod("Mapping") ?? instance!.GetType().GetInterface("IMapToDTO`1")?.GetMethod("Mapping");
-            var fromDto = type.GetMethod("Mapping") ?? instance!.GetType().GetInterface("IMapFromDTO`1")?.GetMethod("Mapping");
-            
-            toDto?.Invoke(instance, new object[] { this });
-            fromDto?.Invoke(instance, new object[] { this });
+            var queriesMapper = type.GetMethod("Mapping") ?? instance!.GetType().GetInterface("IMapQuery`1")?.GetMethod("Mapping");
+            var commandsMapper = type.GetMethod("Mapping") ?? instance!.GetType().GetInterface("IMapCommand`1")?.GetMethod("Mapping");
+
+            queriesMapper?.Invoke(instance, new object[] { this });
+            commandsMapper?.Invoke(instance, new object[] { this });
         }
     }
 }

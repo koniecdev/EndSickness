@@ -5,7 +5,7 @@ namespace EndSickness.Shared.Common.Mappings;
 public interface IMapCommand<TDestinationEntity>
 {
     void Mapping(Profile profile) {
-        profile.CreateMap(typeof(TDestinationEntity), GetType())
+        profile.CreateMap(GetType(), typeof(TDestinationEntity))
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
     }
 }

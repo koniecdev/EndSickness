@@ -2,6 +2,14 @@
 
 public record UpdateMedicineCommand : IRequest, IMapCommand<Medicine>
 {
+    public UpdateMedicineCommand()
+    {
+        
+    }
+    public UpdateMedicineCommand(int id)
+    {
+        Id = id;
+    }
     public int Id { get; init; }
     public string? Name { get; init; }
     public TimeSpan? Cooldown { get; init; }

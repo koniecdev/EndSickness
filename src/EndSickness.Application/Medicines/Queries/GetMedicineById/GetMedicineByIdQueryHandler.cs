@@ -2,7 +2,7 @@
 using EndSickness.Application.Common.Interfaces;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 
-namespace EndSickness.Application.Medicines.GetMedicineById.GetCreateMedicine;
+namespace EndSickness.Application.Medicines.Queries.GetMedicineById;
 
 public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery, GetMedicineByIdDto>
 {
@@ -19,9 +19,10 @@ public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery,
 
     public async Task<GetMedicineByIdDto> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
     {
-        //var fromDb = await _db.Medicines
-        //    .SingleAsync(m=>m.Id == request.Id, cancellationToken);
-        //_currentUser.IsAuthorized(fromDb.AppUserId);
-        throw new NotImplementedException();
+        var fromDb = await _db.Medicines.Include(m=>m.AppUser).Where(m=>m.StatusId != 0)
+            .SingleAsync(m => m.Id == request.Id, cancellationToken);
+        _currentUser.IsAuthorized(fromDb.AppUser.UserId);
+        var dto = _mapper.Map<GetMedicineByIdDto>(fromDb);
+        return dto;
     }
 }

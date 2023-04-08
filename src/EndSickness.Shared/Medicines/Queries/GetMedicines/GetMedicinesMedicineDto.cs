@@ -2,6 +2,10 @@
 
 public record GetMedicinesMedicineDto : IMapQuery<Medicine>
 {
+    public GetMedicinesMedicineDto()
+    {
+        Name = string.Empty;
+    }
     public GetMedicinesMedicineDto(int id, string name, int appUserId, TimeSpan cooldown, int? maxDailyAmount, TimeSpan? maxDaysOfTreatment)
     {
         Id = id;

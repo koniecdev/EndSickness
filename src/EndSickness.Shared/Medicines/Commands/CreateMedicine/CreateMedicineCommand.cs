@@ -2,6 +2,10 @@
 
 public record CreateMedicineCommand : IRequest<int>, IMapCommand<Medicine>
 {
+    public CreateMedicineCommand()
+    {
+        Name = string.Empty;
+    }
     public CreateMedicineCommand(string name, TimeSpan cooldown, int appUserId, int? maxDailyAmount, TimeSpan maxDaysOfTreatment)
     {
         Name = name;

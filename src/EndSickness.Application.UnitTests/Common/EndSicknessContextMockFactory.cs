@@ -20,8 +20,11 @@ public class EndSicknessContextMockFactory : IDbContextMockFactory<EndSicknessCo
         var appUser1 = new AppUser("slayId", "secondUser@koniec.dev", "secondUser") { Id = 1337, StatusId = 1 };
         context.AppUsers.Add(appUser1);
 
-        var appUser2 = new AppUser("slayId", "thirduser@koniec.dev", "thirdUser") { Id = 2200, StatusId = 1 };
+        var appUser2 = new AppUser("slayId1", "thirduser@koniec.dev", "thirdUser") { Id = 2200, StatusId = 1 };
         context.AppUsers.Add(appUser2);
+
+        var appUser3 = new AppUser("slayId2", "fourthuser@koniec.dev", "fourthUser") { Id = 2300, StatusId = 1 };
+        context.AppUsers.Add(appUser3);
 
         var medicine = new Medicine("Nurofen", TimeSpan.FromHours(4), appUser1.Id, 3, TimeSpan.FromDays(7)) { Id = 1, StatusId = 1 };
         context.Medicines.Add(medicine);
@@ -29,7 +32,7 @@ public class EndSicknessContextMockFactory : IDbContextMockFactory<EndSicknessCo
         var medicine1 = new Medicine("Voltaren", TimeSpan.FromHours(12), appUser1.Id, 2) { Id = 2, StatusId = 1 };
         context.Medicines.Add(medicine1);
 
-        var medicine2 = new Medicine("APAP", TimeSpan.FromHours(3), appUser2.Id, 2) { Id = 3, StatusId = 1 };
+        var medicine2 = new Medicine("APAP", TimeSpan.FromHours(3), appUser2.Id, 2) { Id = 3, StatusId = 0 };
         context.Medicines.Add(medicine2);
 
         var log1 = new MedicineLog(appUser1.Id, medicine1.Id, new DateTime(2023, 3, 12, 13, 50, 0)) { Id = 1, StatusId = 1 };
