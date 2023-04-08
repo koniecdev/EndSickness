@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace EndSickness.Shared.Medicines.Queries.GetUpdateMedicine;
+﻿namespace EndSickness.Shared.Medicines.Queries.GetUpdateMedicine;
 
 public class GetUpdateMedicineMedicineDto : IMapToDTO<Medicine>
 {

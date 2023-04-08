@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EndSickness.Application.Common.Behaviours;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace EndSickness.Application;
@@ -9,6 +10,8 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        //services.AddTransient(typeof(IRequestPreProcessor<>), typeof(LoggingBehaviour<>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         return services;
     }
 }

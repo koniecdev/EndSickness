@@ -1,23 +1,30 @@
-﻿using EndSickness.Shared.Common.Mappings;
+﻿using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+using EndSickness.Shared.Common.Mappings;
 
 namespace EndSickness.Application.UnitTests.Common;
 
-public abstract class QueryTestBase : IDisposable
+public class QueryTestBase : IDisposable
 {
     private bool _disposed = false;
     private readonly IDbContextMockFactory<EndSicknessContext> _dbContextMockFactory;
+    private readonly ICurrentUserFactory _currentUserFactory;
+
     protected readonly EndSicknessContext _context;
     protected readonly IMapper _mapper;
     protected readonly ICurrentUserService _currentUser;
+    protected readonly ICurrentUserService _unauthorizedCurrentUser;
 
     public QueryTestBase()
     {
         _dbContextMockFactory = new EndSicknessContextMockFactory();
         _context = _dbContextMockFactory.Create().Object;
         _mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); }).CreateMapper();
-        var currentUserMock = new Mock<ICurrentUserService>();
-        currentUserMock.Setup(m => m.AppUserId).Returns("slayId");
-        _currentUser = currentUserMock.Object;
+
+        _currentUserFactory = new ValidCurrentUserFactory();
+        _currentUser = _currentUserFactory.Create();
+
+        _currentUserFactory = new UnauthorizedCurrentUserFactory();
+        _unauthorizedCurrentUser = _currentUserFactory.Create();
     }
 
     protected virtual void Dispose(bool disposing)

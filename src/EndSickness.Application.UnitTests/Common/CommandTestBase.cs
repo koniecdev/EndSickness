@@ -1,24 +1,40 @@
-﻿using EndSickness.Shared.Common.Mappings;
+﻿using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+using EndSickness.Shared.Common.Mappings;
 
 namespace EndSickness.Application.UnitTests.Common;
 
-public abstract class CommandTestBase : IDisposable
+public class CommandTestBase : IDisposable
 {
-    private bool disposed = false;
+    private bool _disposed = false;
     private readonly IDbContextMockFactory<EndSicknessContext> _dbContextMockFactory;
+    private readonly ICurrentUserFactory _currentUserFactory;
+
+
     protected readonly EndSicknessContext _context;
     protected readonly IMapper _mapper;
+    protected readonly ICurrentUserService _currentUser;
 
     public CommandTestBase()
     {
         _dbContextMockFactory = new EndSicknessContextMockFactory();
         _context = _dbContextMockFactory.Create().Object;
         _mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); }).CreateMapper();
+        _currentUserFactory = new ValidCurrentUserFactory();
+        _currentUser = _currentUserFactory.Create();
+    }
+
+    public CommandTestBase(ICurrentUserFactory currentUserFactory)
+    {
+        _dbContextMockFactory = new EndSicknessContextMockFactory();
+        _context = _dbContextMockFactory.Create().Object;
+        _mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); }).CreateMapper();
+        _currentUserFactory = currentUserFactory;
+        _currentUser = _currentUserFactory.Create();
     }
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposed)
+        if (!_disposed)
         {
             if (disposing)
             {
@@ -26,7 +42,7 @@ public abstract class CommandTestBase : IDisposable
             }
 
             _dbContextMockFactory.Destroy(_context);
-            disposed = true;
+            _disposed = true;
         }
     }
 

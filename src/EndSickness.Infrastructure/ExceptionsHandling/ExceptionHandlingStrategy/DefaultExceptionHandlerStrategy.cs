@@ -7,7 +7,7 @@ public class DefaultExceptionHandlerStrategy : IExceptionHandlerStrategy
     public (int statusCode, string errorMessage) Handle(Exception exception)
     {
         int statusCode = (int)HttpStatusCode.InternalServerError;
-        string errorMessage = $"Internal server error! \n {exception.Message}";
+        string errorMessage = "We're sorry, some error occured, please get in touch with site administrator.";
         return (statusCode, errorMessage);
     }
 }

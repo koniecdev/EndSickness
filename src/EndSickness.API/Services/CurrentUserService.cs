@@ -1,5 +1,4 @@
 ﻿using EndSickness.Application;
-using EndSickness.Application.Common.Interfaces;
 using IdentityModel;
 using System.Security.Claims;
 
@@ -10,5 +9,12 @@ public class CurrentUserService : ICurrentUserService
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
     {
         AppUserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(JwtClaimTypes.Id) ?? string.Empty;
+    }
+    public void IsAuthorized(string objectUserId)
+    {
+        if (!objectUserId.Equals(AppUserId))
+        {
+            throw new UnauthorizedAccessException("Sorry, You do not have access to that resource.");
+        }
     }
 }

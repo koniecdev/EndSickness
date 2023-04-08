@@ -1,5 +1,4 @@
-﻿using EndSickness.Application.Common.Interfaces;
-using EndSickness.Shared.Medicines.Queries.GetCreateMedicine;
+﻿using EndSickness.Shared.Medicines.Queries.GetCreateMedicine;
 
 namespace EndSickness.Application.Medicines.Queries.GetCreateMedicine;
 

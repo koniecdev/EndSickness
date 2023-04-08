@@ -37,12 +37,14 @@ public class ExceptionHandlingMiddleware
 
         ExceptionHandler errorHandler = exception switch
         {
+            InvalidOperationException => new(new InvalidOperationExceptionHandlerStrategy(), exception),
+            UnauthorizedAccessException => new(new UnauthorizedAccessExceptionHandlerStrategy(), exception),
             _ => new(new DefaultExceptionHandlerStrategy(), exception)
         };
 
         (response.StatusCode, _errorResponse.Message) = errorHandler.Handle();
 
-        _logger.LogError(exception, "There was an error in {Layer} project: \n {ErrorMessage}", exception.Source, _errorResponse.Message);
+        _logger.LogError(exception, "There was an error in {Layer}: {ErrorMessage}", exception.Source, _errorResponse.Message);
         
         JsonSerializerSettings defaultSettings = new()
         {
@@ -51,6 +53,5 @@ public class ExceptionHandlingMiddleware
 
         var result = JsonConvert.SerializeObject(_errorResponse, defaultSettings);
         await context.Response.WriteAsync(result);
-
     }
 }

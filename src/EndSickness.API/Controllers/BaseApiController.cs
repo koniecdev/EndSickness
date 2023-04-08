@@ -6,4 +6,5 @@ namespace EndSickness.API.Controllers;
 [EnableCors("AllowedPolicies")]
 public class BaseApiController : ControllerBase
 {
+    protected IMediator Mediator => HttpContext.RequestServices.GetService<IMediator>()!;
 }

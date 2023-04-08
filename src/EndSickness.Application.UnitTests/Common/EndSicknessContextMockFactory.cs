@@ -1,5 +1,4 @@
 ﻿using EndSickness.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace EndSickness.Application.UnitTests.Common;
 

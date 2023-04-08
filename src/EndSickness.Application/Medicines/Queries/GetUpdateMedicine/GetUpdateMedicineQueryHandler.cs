@@ -20,10 +20,7 @@ public class GetUpdateMedicineQueryHandler : IRequestHandler<GetUpdateMedicineQu
     public async Task<GetUpdateMedicineVm> Handle(GetUpdateMedicineQuery request, CancellationToken cancellationToken)
     {
         var fromDb = await _db.Medicines.Include(m=>m.AppUser).SingleAsync(m => m.Id == request.Id, cancellationToken);
-        if (_currentUser.AppUserId != fromDb.AppUser.UserId)
-        {
-            throw new UnauthorizedAccessException();
-        }
+        _currentUser.IsAuthorized(fromDb.AppUser.UserId);
         var vm = new GetUpdateMedicineVm()
         {
             Medicine = _mapper.Map<GetUpdateMedicineMedicineDto>(fromDb)

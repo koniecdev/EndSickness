@@ -3,6 +3,7 @@ using EndSickness.Shared.Medicines.Queries.GetCreateMedicine;
 
 namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetCreateMedicine;
 
+[Collection("QueryCollection")]
 public class GetCreateMedicineQueryHandlerTest : QueryTestBase
 {
     private readonly GetCreateMedicineQueryHandler _handler;
