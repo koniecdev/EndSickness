@@ -1491,3 +1491,53 @@ System.InvalidOperationException: Sequence contains no elements.
    at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
    at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
    at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 25
+INF - 04/08/2023 15:08:37 +02:00 Application is starting up
+INF - 04/08/2023 15:08:51 +02:00 Application is running
+INF - 04/08/2023 19:46:57 +02:00 Application is starting up
+INF - 04/08/2023 19:47:00 +02:00 Application is running
+INF - 04/08/2023 19:47:54 +02:00 EndSickness Request: "GetMedicinesQuery" "GetMedicinesQuery { }"
+ERR - 04/08/2023 19:47:59 +02:00 HTTP "GET" "/api/v1/medicines" responded 500 in 11074.2029 ms
+System.NotImplementedException: The method or operation is not implemented.
+   at EndSickness.Application.Medicines.GetMedicineById.GetMedicines.GetMedicinesQueryHandler.Handle(GetMedicinesQuery request, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Medicines\Queries\GetMedicines\GetMedicinesQueryHandler.cs:line 13
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.UserInterface.MedicinesController.Get() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\UserInterface\MedicinesController.cs:line 14
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/08/2023 19:48:00 +02:00 There was an error in "EndSickness.Application": "We're sorry, some error occured, please get in touch with site administrator."
+System.NotImplementedException: The method or operation is not implemented.
+   at EndSickness.Application.Medicines.GetMedicineById.GetMedicines.GetMedicinesQueryHandler.Handle(GetMedicinesQuery request, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Medicines\Queries\GetMedicines\GetMedicinesQueryHandler.cs:line 13
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.UserInterface.MedicinesController.Get() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\UserInterface\MedicinesController.cs:line 14
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 25

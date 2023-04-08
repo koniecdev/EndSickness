@@ -18,8 +18,4 @@
     <ProjectReference Include="..\EndSickness.Shared\EndSickness.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Medicines\Commands\" />
-  </ItemGroup>
-
 </Project>

@@ -2,10 +2,10 @@
 
 namespace EndSickness.Shared.Common.Mappings;
 
-public interface IMapFromDTO<T>
+public interface IMapQuery<TDestinationEntity>
 {
     void Mapping(Profile profile) {
-        profile.CreateMap(GetType(), typeof(T))
+        profile.CreateMap(GetType(), typeof(TDestinationEntity))
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
     }
 }

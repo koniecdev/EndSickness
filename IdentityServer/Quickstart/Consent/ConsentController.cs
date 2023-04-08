@@ -170,7 +170,7 @@ namespace IdentityServerHost.Quickstart.UI
 			}
 			else
 			{
-				_logger.LogError("No consent request matching request: {0}", returnUrl);
+				_logger.LogError("No consent request matching request: {consent}", returnUrl);
 			}
 
 			return null;
@@ -215,7 +215,7 @@ namespace IdentityServerHost.Quickstart.UI
 			return vm;
 		}
 
-		private ScopeViewModel CreateScopeViewModel(IdentityResource identity, bool check)
+		private static ScopeViewModel CreateScopeViewModel(IdentityResource identity, bool check)
 		{
 			return new ScopeViewModel
 			{
@@ -247,7 +247,7 @@ namespace IdentityServerHost.Quickstart.UI
 			};
 		}
 
-		private ScopeViewModel GetOfflineAccessScope(bool check)
+		private static ScopeViewModel GetOfflineAccessScope(bool check)
 		{
 			return new ScopeViewModel
 			{
