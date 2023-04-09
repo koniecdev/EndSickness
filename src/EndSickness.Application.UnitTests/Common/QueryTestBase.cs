@@ -8,7 +8,6 @@ public class QueryTestBase : IDisposable
     private bool _disposed = false;
     private readonly IDbContextMockFactory<EndSicknessContext> _dbContextMockFactory;
     private readonly ICurrentUserFactory _currentUserFactory;
-    private readonly ICurrentUserFactory _freshCurrentUserFactory;
 
     protected readonly EndSicknessContext _context;
     protected readonly IMapper _mapper;
@@ -28,8 +27,8 @@ public class QueryTestBase : IDisposable
         _currentUserFactory = new UnauthorizedCurrentUserFactory();
         _unauthorizedCurrentUser = _currentUserFactory.Create();
 
-        _freshCurrentUserFactory = new UnauthorizedCurrentUserFactory();
-        _freshCurrentUser = _freshCurrentUserFactory.Create();
+        _currentUserFactory = new FreshCurrentUserFactory();
+        _freshCurrentUser = _currentUserFactory.Create();
     }
 
     protected virtual void Dispose(bool disposing)
