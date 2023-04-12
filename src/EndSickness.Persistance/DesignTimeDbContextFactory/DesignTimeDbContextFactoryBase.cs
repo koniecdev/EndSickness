@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
 
 namespace EndSickness.Persistance.DesignTimeDbContextFactory;
 
@@ -18,25 +19,21 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
                   "ASPNETCORE_ENVIRONMENT");
 
         var dir = Directory.GetParent(AppContext.BaseDirectory);
-        
-        if (Environments.Development.Equals(environmentName,
-            StringComparison.OrdinalIgnoreCase))
+
+        var depth = 0;
+        do
         {
-            var depth = 0;
-            do
-            {
-                dir = dir?.Parent;
-            }
-            while (++depth < 5 && dir?.Name != "bin");
             dir = dir?.Parent;
         }
+        while (++depth < 5 && dir?.Name != "src");
 
-        var basePath = dir?.FullName;
+        var appsettingsDir = dir?.GetFiles("appsettings.json", SearchOption.AllDirectories).First();
+
+        var basePath = appsettingsDir?.Directory?.FullName;
 
         ArgumentNullException.ThrowIfNull(basePath);
-        ArgumentNullException.ThrowIfNull(environmentName);
 
-        return Create(basePath, environmentName);
+        return Create(basePath, environmentName ?? string.Empty);
     }
 
     protected abstract TContext CreateNewInstance(DbContextOptions<TContext> options);

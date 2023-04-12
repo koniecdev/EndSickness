@@ -2098,3 +2098,4 @@ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'OwnerId
    at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
 ClientConnectionId:93d1f685-70b8-4696-8042-94c819f4e52d
 Error Number:207,State:1,Class:16
+INF - 04/12/2023 12:31:25 +02:00 Application is starting up
