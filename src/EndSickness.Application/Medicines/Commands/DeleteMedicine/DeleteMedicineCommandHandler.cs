@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EndSickness.Application.Common.Interfaces;
+﻿using EndSickness.Application.Common.Interfaces;
 using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
 
 namespace EndSickness.Application.Medicines.Commands.DeleteMedicine;

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Net;
+﻿using System.Net;
 
 namespace EndSickness.Infrastructure.ExceptionsHandling.ExceptionHandlingStrategy;
 

@@ -10,6 +10,5 @@ internal class MedicineLogConfiguration : IEntityTypeConfiguration<MedicineLog>
     {
         builder.Property(m => m.LastlyTaken).IsRequired();
         builder.Property(m => m.MedicineId).IsRequired();
-        builder.Property(m => m.AppUserId).IsRequired();
     }
 }

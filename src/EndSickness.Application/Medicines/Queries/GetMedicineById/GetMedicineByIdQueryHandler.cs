@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using EndSickness.Application.Common.Exceptions;
 using EndSickness.Application.Common.Interfaces;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 
 namespace EndSickness.Application.Medicines.Queries.GetMedicineById;
 
-public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery, GetMedicineByIdDto>
+public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery, GetMedicineByIdVm>
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
@@ -17,12 +19,18 @@ public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery,
         _currentUser = currentUser;
     }
 
-    public async Task<GetMedicineByIdDto> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
+    public async Task<GetMedicineByIdVm> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
     {
-        var fromDb = await _db.Medicines.Include(m=>m.AppUser).Where(m=>m.StatusId != 0)
-            .SingleAsync(m => m.Id == request.Id, cancellationToken);
-        _currentUser.IsAuthorized(fromDb.AppUser.UserId);
-        var dto = _mapper.Map<GetMedicineByIdDto>(fromDb);
-        return dto;
+        var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id)
+            .SingleOrDefaultAsync(cancellationToken);
+        if (fromDb is null)
+        {
+            throw new ResourceNotFoundException();
+        }
+        else
+        {
+            _currentUser.CheckOwnership(fromDb.OwnerId);
+            return _mapper.Map<GetMedicineByIdVm>(fromDb);
+        }
     }
 }

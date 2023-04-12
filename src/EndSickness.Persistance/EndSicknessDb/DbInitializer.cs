@@ -1,5 +1,4 @@
-﻿using EndSickness.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 namespace EndSickness.Persistance.EndSicknessDb;
 
 public class DbInitializer
@@ -13,8 +12,5 @@ public class DbInitializer
 
     public void Seed()
     {
-        modelBuilder.Entity<AppUser>().HasData(
-               new AppUser(new Guid().ToString(), "defaultAdmin@koniec.dev", "DefaultAdmin") { Id = 1, StatusId = 1 }
-        );
     }
 }

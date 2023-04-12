@@ -8,14 +8,14 @@ namespace EndSickness.API.Controllers.UserInterface;
 public class MedicinesController : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<GetMedicinesDto>> Get()
+    public async Task<ActionResult<GetMedicinesVm>> Get()
     {
         var result = await Mediator.Send(new GetMedicinesQuery());
         return result;
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetMedicineByIdDto>> Get(int id)
+    public async Task<ActionResult<GetMedicineByIdVm>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineByIdQuery(id));
         return result;

@@ -5,7 +5,8 @@ internal class UnauthorizedCurrentUserFactory : ICurrentUserFactory
     {
         var currentUserServiceMock = new Mock<ICurrentUserService>();
         currentUserServiceMock.Setup(m => m.AppUserId).Returns("");
-        currentUserServiceMock.Setup(m => m.IsAuthorized(It.IsAny<string>())).Throws<UnauthorizedAccessException>();
+        currentUserServiceMock.Setup(m => m.IsAuthorized).Returns(false);
+        currentUserServiceMock.Setup(m => m.CheckOwnership(It.IsAny<string>())).Throws<UnauthorizedAccessException>();
         return currentUserServiceMock.Object;
     }
 }

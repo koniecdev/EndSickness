@@ -1,4 +1,5 @@
-﻿using EndSickness.Application.Medicines.Queries.GetMedicines;
+﻿using EndSickness.Application.Common.Exceptions;
+using EndSickness.Application.Medicines.Queries.GetMedicines;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 
 namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicines;
@@ -7,13 +8,13 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicines
 public class GetMedicinesQueryHandlerTest : QueryTestBase
 {
     private readonly GetMedicinesQueryHandler _handler;
-    //private readonly GetMedicinesQueryHandler _notAuthorizedHandler;
+    private readonly GetMedicinesQueryHandler _notAuthorizedHandler;
     private readonly GetMedicinesQueryHandler _freshUserHandler;
 
     public GetMedicinesQueryHandlerTest() : base()
     {
         _handler = new(_context, _mapper, _currentUser);
-        //_notAuthorizedHandler = new(_context, _mapper, _unauthorizedCurrentUser);
+        _notAuthorizedHandler = new(_context, _mapper, _unauthorizedCurrentUser);
         _freshUserHandler = new(_context, _mapper, _freshCurrentUser);
     }
 
@@ -25,20 +26,31 @@ public class GetMedicinesQueryHandlerTest : QueryTestBase
     }
 
     [Fact]
-    public async Task GetMedicinesQueryTest_ShouldAllProperiesBePopulated()
+    public async Task GetMedicinesQueryTest_ShouldBeUnauthorized()
     {
-        var resultOuter = await _handler.Handle(new GetMedicinesQuery(), CancellationToken.None);
-        var result = resultOuter.Medicines.First(m=>m.Id == 1);
-        (result.Id == 1 && result.Name == "Nurofen" && result.Cooldown.Equals(TimeSpan.FromHours(4))
-            && result.AppUserId == 1337 && result.MaxDailyAmount == 3
-            && result.MaxDaysOfTreatment.Equals(TimeSpan.FromDays(7)))
-            .Should().Be(true);
+        try
+        {
+            var result = await _notAuthorizedHandler.Handle(new GetMedicinesQuery(), CancellationToken.None);
+            throw new Exception("Test method did not threw expected exception");
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<UnauthorizedAccessException>();
+        }
+        
     }
 
     [Fact]
     public async Task GetMedicinesQueryTest_ShouldBeEmpty()
     {
-        var result = await _freshUserHandler.Handle(new GetMedicinesQuery(), CancellationToken.None);
-        result.Medicines.Count.Should().Be(0);
+        try
+        {
+            var result = await _freshUserHandler.Handle(new GetMedicinesQuery(), CancellationToken.None);
+            throw new Exception("Test method did not threw expected exception");
+        }
+        catch(Exception ex)
+        {
+            ex.Should().BeOfType<EmptyResultException>();
+        }
     }
 }
