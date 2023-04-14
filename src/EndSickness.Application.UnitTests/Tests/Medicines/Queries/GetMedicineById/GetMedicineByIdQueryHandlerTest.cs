@@ -41,7 +41,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var result = await _handler.Handle(new GetMedicineByIdQuery(3), CancellationToken.None);
-            throw new Exception("Test method did not threw an expected exception");
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
         {
@@ -55,7 +55,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var result = await _handler.Handle(new GetMedicineByIdQuery(1337), CancellationToken.None);
-            throw new Exception("Test method did not threw expected exception");
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
         {
@@ -69,7 +69,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var result = await _notAuthorizedUserHandler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
-            throw new Exception("Test method did not threw expected exception");
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
         {
@@ -83,7 +83,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var result = await _forbiddenUserHandler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
-            throw new Exception("Test method did not threw expected exception");
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
         {

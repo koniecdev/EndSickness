@@ -1,4 +1,5 @@
-﻿using EndSickness.Application.Medicines.Commands.UpdateMedicine;
+﻿using EndSickness.Application.Common.Exceptions;
+using EndSickness.Application.Medicines.Commands.UpdateMedicine;
 using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
 using FluentValidation;
 
@@ -45,10 +46,10 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     public async Task NullDateRequestGiven_UpdateMedicine_ShouldBeValid()
     {
         var id = 1;
-        var command = new UpdateMedicineCommand(id) { Cooldown = null };
+        var command = new UpdateMedicineCommand(id) { Cooldown = TimeSpan.Zero };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        (updatedFromDb.Cooldown.Equals(null) && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
+        (updatedFromDb.Cooldown == TimeSpan.Zero && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
 
     [Fact]
@@ -65,23 +66,36 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task MinimumDataRequestGiven_UpdateMedicine_ShouldBeUnauthorized()
     {
-        var id = 1;
-        var newName = "Nurofen forte";
-        var command = new UpdateMedicineCommand(id) { Name = newName };
-        await ValidateRequestAsync(command, _unauthorizedUserHandler);
-        var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        updatedFromDb.Name.Should().Be(newName);
+        try
+        {
+            var id = 1;
+            var newName = "Nurofen forte";
+            var command = new UpdateMedicineCommand(id) { Name = newName };
+            await ValidateRequestAsync(command, _unauthorizedUserHandler);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
+        }
+        catch(Exception ex)
+        {
+            ex.Should().BeOfType<UnauthorizedAccessException>();
+        }
     }
 
     [Fact]
     public async Task MinimumDataRequestGiven_UpdateMedicine_ShouldBeForbidden()
     {
-        var id = 1;
-        var newName = "Nurofen forte";
-        var command = new UpdateMedicineCommand(id) { Name = newName };
-        await ValidateRequestAsync(command, _forbiddenUserHandler);
-        var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        updatedFromDb.Name.Should().Be(newName);
+        try
+        {
+            var id = 1;
+            var newName = "Nurofen forte";
+            var command = new UpdateMedicineCommand(id) { Name = newName };
+            await ValidateRequestAsync(command, _forbiddenUserHandler);
+            var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
+            updatedFromDb.Name.Should().Be(newName);
+        }
+        catch(Exception ex)
+        {
+            ex.Should().BeOfType<ForbiddenAccessException>();
+        }
     }
 
     private async Task ValidateRequestAsync(UpdateMedicineCommand command, UpdateMedicineCommandHandler handler)

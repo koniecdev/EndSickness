@@ -17,6 +17,10 @@ public class UpdateMedicineCommandHandler : IRequestHandler<UpdateMedicineComman
 
     public async Task Handle(UpdateMedicineCommand request, CancellationToken cancellationToken)
     {
-        
+        var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id).SingleAsync(cancellationToken)
+            ?? throw new ResourceNotFoundException();
+        _ownershipService.CheckOwnership(fromDb.OwnerId);
+        var mapped = _mapper.Map(request, fromDb);
+        await _db.SaveChangesAsync(cancellationToken);
     }
 }

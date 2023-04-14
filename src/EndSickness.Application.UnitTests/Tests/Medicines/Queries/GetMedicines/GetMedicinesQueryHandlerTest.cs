@@ -31,7 +31,7 @@ public class GetMedicinesQueryHandlerTest : QueryTestBase
         try
         {
             var result = await _freshUserHandler.Handle(new GetMedicinesQuery(), CancellationToken.None);
-            throw new Exception("Test method did not threw expected exception");
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
         {
