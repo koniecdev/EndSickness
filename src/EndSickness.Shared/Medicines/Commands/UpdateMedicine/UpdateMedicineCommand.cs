@@ -10,7 +10,7 @@ public record UpdateMedicineCommand : IRequest, IMapCommand<Medicine>
     {
         Id = id;
     }
-    public int Id { get; init; }
+    public int Id { get; private set; }
     public string? Name { get; init; }
     public TimeSpan? Cooldown { get; init; }
     public int? MaxDailyAmount { get; init; }

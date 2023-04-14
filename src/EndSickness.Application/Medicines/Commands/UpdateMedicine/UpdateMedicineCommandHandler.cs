@@ -6,13 +6,13 @@ public class UpdateMedicineCommandHandler : IRequestHandler<UpdateMedicineComman
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
-    private readonly ICurrentUserService _currentUser;
+    private readonly IResourceOwnershipService _ownershipService;
 
-    public UpdateMedicineCommandHandler(IEndSicknessContext db, IMapper mapper, ICurrentUserService currentUser)
+    public UpdateMedicineCommandHandler(IEndSicknessContext db, IMapper mapper, IResourceOwnershipService ownershipService)
     {
         _db = db;
         _mapper = mapper;
-        _currentUser = currentUser;
+        _ownershipService = ownershipService;
     }
 
     public async Task Handle(UpdateMedicineCommand request, CancellationToken cancellationToken)

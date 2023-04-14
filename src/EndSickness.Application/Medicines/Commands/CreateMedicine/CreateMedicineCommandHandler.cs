@@ -7,13 +7,11 @@ public class CreateMedicineCommandHandler : IRequestHandler<CreateMedicineComman
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
-    private readonly ICurrentUserService _currentUser;
 
-    public CreateMedicineCommandHandler(IEndSicknessContext db, IMapper mapper, ICurrentUserService currentUser)
+    public CreateMedicineCommandHandler(IEndSicknessContext db, IMapper mapper)
     {
         _db = db;
         _mapper = mapper;
-        _currentUser = currentUser;
     }
 
     public async Task<int> Handle(CreateMedicineCommand request, CancellationToken cancellationToken)

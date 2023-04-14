@@ -13,9 +13,9 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
 
     public CreateMedicineCommandHandlerTest()
     {
-        _handler = new(_context, _mapper, _currentUser);
-        _unauthorizedUserHandler = new(_context, _mapper, _unauthorizedCurrentUser);
-        _freshUserHandler = new(_context, _mapper, _freshCurrentUser);
+        _handler = new(_context, _mapper);
+        _unauthorizedUserHandler = new(_context, _mapper);
+        _freshUserHandler = new(_context, _mapper);
         _validator = new();
     }
 
