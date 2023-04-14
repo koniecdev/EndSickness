@@ -13,9 +13,9 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
 
     public GetMedicineByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _mapper, _currentUser);
-        _notAuthorizedUserHandler = new(_context, _mapper, _unauthorizedCurrentUser);
-        _forbiddenUserHandler = new(_context, _mapper, _freshCurrentUser);
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
+        _notAuthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
+        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipInvalidUser);
     }
 
     [Fact]

@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using EndSickness.Application.Common.Exceptions;
-using EndSickness.Application.Common.Interfaces;
-using EndSickness.Shared.Medicines.Queries.GetMedicines;
+﻿using EndSickness.Shared.Medicines.Queries.GetMedicines;
 
 namespace EndSickness.Application.Medicines.Queries.GetMedicines;
 

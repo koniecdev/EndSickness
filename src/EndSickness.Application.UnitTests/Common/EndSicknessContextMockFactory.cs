@@ -1,4 +1,5 @@
-﻿using EndSickness.Domain.Entities;
+﻿using EndSickness.Application.Common.Interfaces;
+using EndSickness.Domain.Entities;
 
 namespace EndSickness.Application.UnitTests.Common;
 

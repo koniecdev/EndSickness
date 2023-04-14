@@ -23,7 +23,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     public async Task MinimumDataRequestGiven_CreateMedicine_ValidUser_ShouldBeValid()
     {
         var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), null, null);
-        var response = await ValidateAndHandleRequest(command, _handler);
+        var response = await ValidateRequestAsync(command, _handler);
         response.Should().BeGreaterThan(0);
     }
 
@@ -51,6 +51,19 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
         response.Should().BeGreaterThan(0);
     }
 
+    private async Task<int> ValidateRequestAsync(CreateMedicineCommand command, CreateMedicineCommandHandler handler)
+    {
+        var validationResult = _validator.Validate(command);
+        if (validationResult.IsValid)
+        {
+            var response = await handler.Handle(command, CancellationToken.None);
+            return response;
+        }
+        else
+        {
+            throw new ValidationException(validationResult.Errors);
+        }
+    }
     private async Task<int> ValidateAndHandleRequest(CreateMedicineCommand command, CreateMedicineCommandHandler handler)
     {
         var validationResult = _validator.Validate(command);

@@ -5,3 +5,4 @@ global using Moq;
 global using EndSickness.Application.UnitTests.Common;
 global using FluentAssertions;
 global using Microsoft.EntityFrameworkCore;
+global using EndSickness.Application.Common.Interfaces;

@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using System.Diagnostics;
 
 namespace EndSickness.Persistance.DesignTimeDbContextFactory;
 
@@ -48,7 +46,6 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
             .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
             .AddEnvironmentVariables()
             .Build();
-
         var connectionString = configuration.GetConnectionString(_connectionStringName);
 
         return Create(connectionString);

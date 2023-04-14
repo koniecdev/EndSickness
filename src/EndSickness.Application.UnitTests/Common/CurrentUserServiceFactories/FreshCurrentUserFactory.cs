@@ -8,7 +8,6 @@ internal class FreshCurrentUserFactory : ICurrentUserFactory
         var currentUserServiceMock = new Mock<ICurrentUserService>();
         currentUserServiceMock.Setup(m => m.AppUserId).Returns("secondUserId");
         currentUserServiceMock.Setup(m => m.IsAuthorized).Returns(true);
-        currentUserServiceMock.Setup(m => m.CheckOwnership(It.IsAny<string>())).Throws<ForbiddenAccessException>();
 
         return currentUserServiceMock.Object;
     }

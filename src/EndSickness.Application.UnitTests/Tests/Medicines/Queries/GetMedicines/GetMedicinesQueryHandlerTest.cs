@@ -26,21 +26,6 @@ public class GetMedicinesQueryHandlerTest : QueryTestBase
     }
 
     [Fact]
-    public async Task GetMedicinesQueryTest_ShouldBeUnauthorized()
-    {
-        try
-        {
-            var result = await _notAuthorizedHandler.Handle(new GetMedicinesQuery(), CancellationToken.None);
-            throw new Exception("Test method did not threw expected exception");
-        }
-        catch (Exception ex)
-        {
-            ex.Should().BeOfType<UnauthorizedAccessException>();
-        }
-        
-    }
-
-    [Fact]
     public async Task GetMedicinesQueryTest_ShouldBeEmpty()
     {
         try

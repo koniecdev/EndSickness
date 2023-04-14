@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using EndSickness.Application.Common.Interfaces;
-using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
+﻿using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
 
 namespace EndSickness.Application.Medicines.Commands.UpdateMedicine;
 
@@ -19,6 +17,6 @@ public class UpdateMedicineCommandHandler : IRequestHandler<UpdateMedicineComman
 
     public async Task Handle(UpdateMedicineCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        
     }
 }

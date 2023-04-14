@@ -1,5 +1,4 @@
-﻿using EndSickness.Application;
-using EndSickness.Application.Common.Exceptions;
+﻿using EndSickness.Application.Common.Interfaces;
 using IdentityModel;
 using System.Security.Claims;
 
@@ -12,16 +11,4 @@ public class CurrentUserService : ICurrentUserService
     }
     public string AppUserId { get; set; }
     public bool IsAuthorized => !string.IsNullOrWhiteSpace(AppUserId);
-
-    public void CheckOwnership(string ownerId)
-    {
-        if (!IsAuthorized)
-        {
-            throw new UnauthorizedAccessException("Please log in first");
-        }
-        else if (ownerId != AppUserId)
-        {
-            throw new ForbiddenAccessException();
-        }
-    }
 }

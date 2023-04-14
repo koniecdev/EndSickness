@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using EndSickness.Application.Common.Exceptions;
-using EndSickness.Application.Common.Interfaces;
-using EndSickness.Shared.Medicines.Queries.GetMedicineById;
+﻿using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 
 namespace EndSickness.Application.Medicines.Queries.GetMedicineById;
 
@@ -10,27 +6,19 @@ public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery,
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
-    private readonly ICurrentUserService _currentUser;
+    private readonly IResourceOwnershipService _ownershipService;
 
-    public GetMedicineByIdQueryHandler(IEndSicknessContext db, IMapper mapper, ICurrentUserService currentUser)
+    public GetMedicineByIdQueryHandler(IEndSicknessContext db, IMapper mapper, IResourceOwnershipService ownershipService)
     {
         _db = db;
         _mapper = mapper;
-        _currentUser = currentUser;
+        _ownershipService = ownershipService;
     }
 
     public async Task<GetMedicineByIdVm> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
     {
-        var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id)
-            .SingleOrDefaultAsync(cancellationToken);
-        if (fromDb is null)
-        {
-            throw new ResourceNotFoundException();
-        }
-        else
-        {
-            _currentUser.CheckOwnership(fromDb.OwnerId);
-            return _mapper.Map<GetMedicineByIdVm>(fromDb);
-        }
+        var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id).SingleOrDefaultAsync(cancellationToken) ?? throw new ResourceNotFoundException();
+        _ownershipService.CheckOwnership(fromDb.OwnerId);
+        return _mapper.Map<GetMedicineByIdVm>(fromDb);
     }
 }

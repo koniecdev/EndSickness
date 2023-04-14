@@ -1,8 +1,7 @@
-﻿namespace EndSickness.Application;
+﻿namespace EndSickness.Application.Common.Interfaces;
 
 public interface ICurrentUserService
 {
     string AppUserId { get; }
     public bool IsAuthorized { get; }
-    public void CheckOwnership(string ownerId);
 }

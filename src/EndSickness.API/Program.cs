@@ -8,6 +8,7 @@ using EndSickness.API;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using EndSickness.Application;
 using EndSickness.API.Services;
+using EndSickness.Application.Common.Interfaces;
 
 WebApplicationBuilder? builder = null!;
 
