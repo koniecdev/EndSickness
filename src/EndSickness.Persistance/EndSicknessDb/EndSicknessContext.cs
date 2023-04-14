@@ -1,4 +1,6 @@
-﻿using EndSickness.Application.Common.Interfaces;
+﻿using EndSickness.Application;
+using EndSickness.Application.Common.Exceptions;
+using EndSickness.Application.Common.Interfaces;
 using EndSickness.Domain.Common;
 using EndSickness.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +10,19 @@ namespace EndSickness.Persistance.EndSicknessDb;
 
 public class EndSicknessContext : DbContext, IEndSicknessContext
 {
+    private readonly ICurrentUserService? _currentUserService;
+
     public EndSicknessContext()
     {    
     }
     public EndSicknessContext(DbContextOptions<EndSicknessContext> options) : base(options)
     {
     }
+    public EndSicknessContext(DbContextOptions<EndSicknessContext> options, ICurrentUserService currentUserService) : base(options)
+    {
+        _currentUserService = currentUserService;
+    }
 
-    public DbSet<AppUser> AppUsers => Set<AppUser>();
     public DbSet<Medicine> Medicines => Set<Medicine>();
     public DbSet<MedicineLog> MedicineLogs => Set<MedicineLog>();
 
@@ -33,6 +40,7 @@ public class EndSicknessContext : DbContext, IEndSicknessContext
             {
                 case EntityState.Added:
                     item.Entity.StatusId = 1;
+                    item.Entity.OwnerId = _currentUserService?.AppUserId ?? throw new UserNotResolvedException();
                     break;
                 case EntityState.Deleted:
                     item.Entity.StatusId = 0;

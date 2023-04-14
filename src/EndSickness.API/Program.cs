@@ -8,6 +8,7 @@ using EndSickness.API;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using EndSickness.Application;
 using EndSickness.API.Services;
+using EndSickness.Application.Common.Interfaces;
 
 WebApplicationBuilder? builder = null!;
 
@@ -86,12 +87,12 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddShared();
 builder.Services.AddApplication();
 builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddInfrastructure();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
 var app = builder.Build();

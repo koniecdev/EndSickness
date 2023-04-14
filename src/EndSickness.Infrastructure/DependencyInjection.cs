@@ -1,4 +1,5 @@
-﻿using EndSickness.Infrastructure.ExceptionsHandling;
+﻿using EndSickness.Application;
+using EndSickness.Infrastructure.ExceptionsHandling;
 using EndSickness.Infrastructure.Extensions;
 using EndSickness.Infrastructure.Services;
 using EndSickness.Infrastructure.Services.FileStorage.DirectoryDecorator;
@@ -12,6 +13,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddAbstractFactory<IDateTime, DateTimeService>();
+        services.AddAbstractFactory<IResourceOwnershipService, ResourceOwnershipService>();
 
         services.AddAbstractFactory<ICustomFileSave, CustomFileSaveService>();
         services.AddTransient<ICustomFileSaveDecorator, PreventOverridingCustomFileSaveDecorator>();

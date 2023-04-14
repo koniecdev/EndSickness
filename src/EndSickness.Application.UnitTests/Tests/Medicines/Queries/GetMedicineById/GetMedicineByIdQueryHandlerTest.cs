@@ -1,4 +1,5 @@
-﻿using EndSickness.Application.Medicines.Queries.GetMedicineById;
+﻿using EndSickness.Application.Common.Exceptions;
+using EndSickness.Application.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 
 namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicineById;
@@ -7,12 +8,14 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicineB
 public class GetMedicineByIdQueryHandlerTest : QueryTestBase
 {
     private readonly GetMedicineByIdQueryHandler _handler;
-    private readonly GetMedicineByIdQueryHandler _notAuthorizedHandler;
+    private readonly GetMedicineByIdQueryHandler _notAuthorizedUserHandler;
+    private readonly GetMedicineByIdQueryHandler _forbiddenUserHandler;
 
     public GetMedicineByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _mapper, _currentUser);
-        _notAuthorizedHandler = new(_context, _mapper, _unauthorizedCurrentUser);
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
+        _notAuthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
+        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipInvalidUser);
     }
 
     [Fact]
@@ -23,7 +26,17 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
     }
 
     [Fact]
-    public async Task GetMedicineByIdQueryTest_ShouldNotFindDeleted()
+    public async Task GetMedicineByIdQueryTest_ShouldAllProperiesBePopulated()
+    {
+        var result = await _handler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
+        (result.Id == 1 && result.Name == "Nurofen" && result.Cooldown.Equals(TimeSpan.FromHours(4))
+            && result.MaxDailyAmount == 3
+            && result.MaxDaysOfTreatment == 7)
+            .Should().Be(true);
+    }
+
+    [Fact]
+    public async Task GetMedicineByIdQueryTest_QueryForDeletedResource()
     {
         try
         {
@@ -32,18 +45,8 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         }
         catch (Exception ex)
         {
-            ex.Should().BeOfType<InvalidOperationException>();
+            ex.Should().BeOfType<ResourceNotFoundException>();
         }
-    }
-
-    [Fact]
-    public async Task GetMedicineByIdQueryTest_ShouldAllProperiesBePopulated()
-    {
-        var result = await _handler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
-        (result.Id == 1 && result.Name == "Nurofen" && result.Cooldown.Equals(TimeSpan.FromHours(4))
-            && result.AppUserId == 1337 && result.MaxDailyAmount == 3
-            && result.MaxDaysOfTreatment.Equals(TimeSpan.FromDays(7)))
-            .Should().Be(true);
     }
 
     [Fact]
@@ -56,7 +59,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         }
         catch(Exception ex)
         {
-            ex.Should().BeOfType<InvalidOperationException>();
+            ex.Should().BeOfType<ResourceNotFoundException>();
         }
     }
 
@@ -65,12 +68,26 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
     {
         try
         {
-            var result = await _notAuthorizedHandler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
+            var result = await _notAuthorizedUserHandler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
             throw new Exception("Test method did not threw expected exception");
         }
         catch (Exception ex)
         {
             ex.Should().BeOfType<UnauthorizedAccessException>();
+        }
+    }
+
+    [Fact]
+    public async Task GetMedicineByIdQueryTest_ShouldBeForbidden()
+    {
+        try
+        {
+            var result = await _forbiddenUserHandler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
+            throw new Exception("Test method did not threw expected exception");
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<ForbiddenAccessException>();
         }
     }
 }

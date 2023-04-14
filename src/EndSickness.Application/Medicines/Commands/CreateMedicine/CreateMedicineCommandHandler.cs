@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using EndSickness.Application.Common.Interfaces;
-using EndSickness.Domain.Entities;
+﻿using EndSickness.Domain.Entities;
 using EndSickness.Shared.Medicines.Commands.CreateMedicine;
 
 namespace EndSickness.Application.Medicines.Commands.CreateMedicine;

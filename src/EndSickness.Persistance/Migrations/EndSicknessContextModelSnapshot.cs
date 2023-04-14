@@ -22,47 +22,6 @@ namespace EndSickness.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EndSickness.Domain.Entities.AppUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "defaultAdmin@koniec.dev",
-                            StatusId = 1,
-                            UserId = "00000000-0000-0000-0000-000000000000",
-                            Username = "DefaultAdmin"
-                        });
-                });
-
             modelBuilder.Entity("EndSickness.Domain.Entities.Medicine", b =>
                 {
                     b.Property<int>("Id")
@@ -71,17 +30,14 @@ namespace EndSickness.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<TimeSpan>("Cooldown")
                         .HasColumnType("time");
 
                     b.Property<int?>("MaxDailyAmount")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan?>("MaxDaysOfTreatment")
-                        .HasColumnType("time");
+                    b.Property<int?>("MaxDaysOfTreatment")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -90,14 +46,16 @@ namespace EndSickness.Persistance.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasDefaultValue("");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("Medicines");
                 });
@@ -110,60 +68,35 @@ namespace EndSickness.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastlyTaken")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("MedicineId");
 
                     b.ToTable("MedicineLogs");
                 });
 
-            modelBuilder.Entity("EndSickness.Domain.Entities.Medicine", b =>
-                {
-                    b.HasOne("EndSickness.Domain.Entities.AppUser", "AppUser")
-                        .WithMany("Medicines")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("EndSickness.Domain.Entities.MedicineLog", b =>
                 {
-                    b.HasOne("EndSickness.Domain.Entities.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EndSickness.Domain.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
-
                     b.Navigation("Medicine");
-                });
-
-            modelBuilder.Entity("EndSickness.Domain.Entities.AppUser", b =>
-                {
-                    b.Navigation("Medicines");
                 });
 #pragma warning restore 612, 618
         }

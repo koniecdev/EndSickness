@@ -22,15 +22,15 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task MinimumDataRequestGiven_CreateMedicine_ValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 1337, null, null);
-        var response = await ValidateAndHandleRequest(command, _handler);
+        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), null, null);
+        var response = await ValidateRequestAsync(command, _handler);
         response.Should().BeGreaterThan(0);
     }
 
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_ValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 1337, 4, TimeSpan.FromDays(7));
+        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
         var response = await ValidateAndHandleRequest(command, _handler);
         response.Should().BeGreaterThan(0);
     }
@@ -38,7 +38,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_NotAuthorizedUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 1337, 4, TimeSpan.FromDays(7));
+        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
         var response = await ValidateAndHandleRequest(command, _unauthorizedUserHandler);
         response.Should().BeGreaterThan(0);
     }
@@ -46,11 +46,24 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_NotValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 1337, 4, TimeSpan.FromDays(7));
+        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
         var response = await ValidateAndHandleRequest(command, _freshUserHandler);
         response.Should().BeGreaterThan(0);
     }
 
+    private async Task<int> ValidateRequestAsync(CreateMedicineCommand command, CreateMedicineCommandHandler handler)
+    {
+        var validationResult = _validator.Validate(command);
+        if (validationResult.IsValid)
+        {
+            var response = await handler.Handle(command, CancellationToken.None);
+            return response;
+        }
+        else
+        {
+            throw new ValidationException(validationResult.Errors);
+        }
+    }
     private async Task<int> ValidateAndHandleRequest(CreateMedicineCommand command, CreateMedicineCommandHandler handler)
     {
         var validationResult = _validator.Validate(command);

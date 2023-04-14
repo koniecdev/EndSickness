@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace EndSickness.Infrastructure.Middlewares;
 
@@ -26,21 +27,27 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            await HandleExceptionAsync(httpContext, ex);
+            await ProcessExceptionAsync(httpContext.Response, ex);
         }
     }
 
-    public async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    public async Task ProcessExceptionAsync(HttpResponse response, Exception exception)
     {
-        context.Response.ContentType = "application/json";
-        var response = context.Response;
-
-        ExceptionHandler errorHandler = exception switch
+        response.ContentType = "application/json";
+        ExceptionHandler? errorHandler;
+        var exceptionStrategies = Assembly.GetExecutingAssembly().GetExportedTypes().Where(m => typeof(IExceptionHandlerStrategy).IsAssignableFrom(m) && !m.IsInterface && !m.IsAbstract).ToList();
+        if (exceptionStrategies.Any(m => m.Name.StartsWith(exception.GetType().Name)))
         {
-            InvalidOperationException => new(new InvalidOperationExceptionHandlerStrategy(), exception),
-            UnauthorizedAccessException => new(new UnauthorizedAccessExceptionHandlerStrategy(), exception),
-            _ => new(new DefaultExceptionHandlerStrategy(), exception)
-        };
+            var exceptionName = exception.GetType().Name;
+            var selectedHandler = exceptionStrategies.First(m => m.Name.Contains(exceptionName)) ?? typeof(DefaultExceptionHandlerStrategy);
+            errorHandler = 
+                new(Activator.CreateInstance(selectedHandler) as IExceptionHandlerStrategy ?? new DefaultExceptionHandlerStrategy(),
+                exception);
+        }
+        else
+        {
+            errorHandler = new(new DefaultExceptionHandlerStrategy(), exception);
+        }
 
         (response.StatusCode, _errorResponse.Message) = errorHandler.Handle();
 
@@ -52,6 +59,6 @@ public class ExceptionHandlingMiddleware
         };
 
         var result = JsonConvert.SerializeObject(_errorResponse, defaultSettings);
-        await context.Response.WriteAsync(result);
+        await response.WriteAsync(result);
     }
 }
