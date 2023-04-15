@@ -22,7 +22,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task MinimumDataRequestGiven_CreateMedicine_ValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), null, null);
+        var command = new CreateMedicineCommand("Polopiryna", 3, 0, 0);
         var response = await ValidateRequestAsync(command, _handler);
         response.Should().BeGreaterThan(0);
     }
@@ -30,7 +30,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_ValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
+        var command = new CreateMedicineCommand("Polopiryna", 3, 4, 7);
         var response = await ValidateAndHandleRequest(command, _handler);
         response.Should().BeGreaterThan(0);
     }
@@ -38,7 +38,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_NotAuthorizedUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
+        var command = new CreateMedicineCommand("Polopiryna", 3, 4, 7);
         var response = await ValidateAndHandleRequest(command, _unauthorizedUserHandler);
         response.Should().BeGreaterThan(0);
     }
@@ -46,7 +46,7 @@ public class CreateMedicineCommandHandlerTest : CommandTestBase
     [Fact]
     public async Task FullRequestGiven_CreateMedicine_NotValidUser_ShouldBeValid()
     {
-        var command = new CreateMedicineCommand("Polopiryna", TimeSpan.FromHours(3), 4, 7);
+        var command = new CreateMedicineCommand("Polopiryna", 3, 4, 7);
         var response = await ValidateAndHandleRequest(command, _freshUserHandler);
         response.Should().BeGreaterThan(0);
     }

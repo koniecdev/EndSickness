@@ -1,5 +1,4 @@
-﻿using EndSickness.Application.Common.Interfaces;
-using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 using EndSickness.Shared.Common.Mappings;
 
 namespace EndSickness.Application.UnitTests.Common;

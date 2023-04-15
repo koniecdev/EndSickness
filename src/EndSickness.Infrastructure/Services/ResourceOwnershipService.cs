@@ -1,5 +1,4 @@
-﻿using EndSickness.Application;
-using EndSickness.Application.Common.Exceptions;
+﻿using EndSickness.Application.Common.Exceptions;
 
 namespace EndSickness.Infrastructure.Services;
 public class ResourceOwnershipService : IResourceOwnershipService

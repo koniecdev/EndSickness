@@ -29,7 +29,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
     public async Task GetMedicineByIdQueryTest_ShouldAllProperiesBePopulated()
     {
         var result = await _handler.Handle(new GetMedicineByIdQuery(1), CancellationToken.None);
-        (result.Id == 1 && result.Name == "Nurofen" && result.Cooldown.Equals(TimeSpan.FromHours(4))
+        (result.Id == 1 && result.Name == "Nurofen" && result.HourlyCooldown == 4
             && result.MaxDailyAmount == 3
             && result.MaxDaysOfTreatment == 7)
             .Should().Be(true);

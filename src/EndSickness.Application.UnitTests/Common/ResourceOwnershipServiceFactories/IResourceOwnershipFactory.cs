@@ -1,5 +1,4 @@
-﻿using EndSickness.Application.Common.Interfaces;
-namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 
 public interface IResourceOwnershipFactory
 {

@@ -1,4 +1,7 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetMedicineById;
+﻿using EndSickness.Shared.Medicines.Commands.CreateMedicine;
+using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
+using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
+using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 
 namespace EndSickness.API.Controllers.UserInterface;
@@ -19,5 +22,24 @@ public class MedicinesController : BaseApiController
     {
         var result = await Mediator.Send(new GetMedicineByIdQuery(id));
         return result;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<int>> Create(CreateMedicineCommand command)
+    {
+        var result = await Mediator.Send(command);
+        return result;
+    }
+
+    [HttpPatch]
+    public async Task Update(UpdateMedicineCommand command)
+    {
+        await Mediator.Send(command);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task Delete(int id)
+    {
+        await Mediator.Send(new DeleteMedicineCommand(id));
     }
 }

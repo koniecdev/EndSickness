@@ -1,6 +1,4 @@
-﻿using EndSickness.Application.Common.Exceptions;
-
-namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 internal class FreshCurrentUserFactory : ICurrentUserFactory
 {
     public ICurrentUserService Create()

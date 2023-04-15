@@ -1,6 +1,4 @@
-﻿using EndSickness.Application.Common.Interfaces;
-
-namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 internal class UnauthorizedCurrentUserFactory : ICurrentUserFactory
 {
     public ICurrentUserService Create()

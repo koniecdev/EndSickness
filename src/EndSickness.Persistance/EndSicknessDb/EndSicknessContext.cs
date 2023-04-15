@@ -1,5 +1,4 @@
-﻿using EndSickness.Application;
-using EndSickness.Application.Common.Exceptions;
+﻿using EndSickness.Application.Common.Exceptions;
 using EndSickness.Application.Common.Interfaces;
 using EndSickness.Domain.Common;
 using EndSickness.Domain.Entities;

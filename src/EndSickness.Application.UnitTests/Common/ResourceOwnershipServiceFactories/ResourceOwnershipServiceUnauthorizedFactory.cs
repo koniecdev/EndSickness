@@ -1,7 +1,4 @@
-﻿using EndSickness.Application.Common.Exceptions;
-using EndSickness.Application.Common.Interfaces;
-
-namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿namespace EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 internal class ResourceOwnershipServiceUnauthorizedFactory : IResourceOwnershipFactory
 {
     public IResourceOwnershipService Create()

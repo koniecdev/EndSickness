@@ -25,7 +25,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     {
         var id = 1;
         var newName = "Nurofen forte";
-        var command = new UpdateMedicineCommand(id) { Name = newName };
+        var command = new UpdateMedicineCommand() { Id = id, Name = newName };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == 3).Should().Be(true);
@@ -35,21 +35,21 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     public async Task NewDateRequestGiven_UpdateMedicine_ShouldBeValid()
     {
         var id = 1;
-        var newCd = TimeSpan.FromHours(6);
-        var command = new UpdateMedicineCommand(id) { Cooldown = newCd };
+        var newCd = 6;
+        var command = new UpdateMedicineCommand() { Id = id, HourlyCooldown = newCd };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        (updatedFromDb.Cooldown.Equals(newCd) && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
+        (updatedFromDb.HourlyCooldown == newCd && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
 
     [Fact]
     public async Task NullDateRequestGiven_UpdateMedicine_ShouldBeValid()
     {
         var id = 1;
-        var command = new UpdateMedicineCommand(id) { Cooldown = TimeSpan.Zero };
+        var command = new UpdateMedicineCommand() { Id = id, HourlyCooldown = 0 };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        (updatedFromDb.Cooldown == TimeSpan.Zero && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
+        (updatedFromDb.HourlyCooldown == 0 && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     {
         var id = 1;
         var newName = "Nurofen forte";
-        var command = new UpdateMedicineCommand(id) { Name = newName, MaxDailyAmount = 0 };
+        var command = new UpdateMedicineCommand() { Id = id, Name = newName, MaxDailyAmount = 0 };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == 0 && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
@@ -70,7 +70,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         {
             var id = 1;
             var newName = "Nurofen forte";
-            var command = new UpdateMedicineCommand(id) { Name = newName };
+            var command = new UpdateMedicineCommand() { Id = id, Name = newName };
             await ValidateRequestAsync(command, _unauthorizedUserHandler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
@@ -87,7 +87,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         {
             var id = 1;
             var newName = "Nurofen forte";
-            var command = new UpdateMedicineCommand(id) { Name = newName };
+            var command = new UpdateMedicineCommand() { Id = id, Name = newName };
             await ValidateRequestAsync(command, _forbiddenUserHandler);
             var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
             updatedFromDb.Name.Should().Be(newName);
