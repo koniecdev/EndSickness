@@ -4,6 +4,7 @@ using EndSickness.Persistance.EndSicknessDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndSickness.Persistance.Migrations
 {
     [DbContext(typeof(EndSicknessContext))]
-    partial class EndSicknessContextModelSnapshot : ModelSnapshot
+    [Migration("20230415105910_RemoveNullableTypesFromEntity")]
+    partial class RemoveNullableTypesFromEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +59,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medicines", (string)null);
+                    b.ToTable("Medicines");
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.MedicineLog", b =>
@@ -85,7 +87,7 @@ namespace EndSickness.Persistance.Migrations
 
                     b.HasIndex("MedicineId");
 
-                    b.ToTable("MedicineLogs", (string)null);
+                    b.ToTable("MedicineLogs");
                 });
 
             modelBuilder.Entity("EndSickness.Domain.Entities.MedicineLog", b =>

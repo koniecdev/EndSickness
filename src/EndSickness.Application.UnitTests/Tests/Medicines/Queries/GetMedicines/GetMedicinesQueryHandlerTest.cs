@@ -8,13 +8,11 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicines
 public class GetMedicinesQueryHandlerTest : QueryTestBase
 {
     private readonly GetMedicinesQueryHandler _handler;
-    private readonly GetMedicinesQueryHandler _notAuthorizedHandler;
     private readonly GetMedicinesQueryHandler _freshUserHandler;
 
     public GetMedicinesQueryHandlerTest() : base()
     {
         _handler = new(_context, _mapper, _currentUser);
-        _notAuthorizedHandler = new(_context, _mapper, _unauthorizedCurrentUser);
         _freshUserHandler = new(_context, _mapper, _freshCurrentUser);
     }
 

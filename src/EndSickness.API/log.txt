@@ -2403,3 +2403,4 @@ EndSickness.Application.Common.Exceptions.EmptyResultException: Request yielded 
    at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
    at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 27
 INF - 04/14/2023 10:32:38 +02:00 Application is starting up
+INF - 04/15/2023 12:57:50 +02:00 Application is starting up

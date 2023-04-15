@@ -16,6 +16,7 @@ public class MappingProfile : Profile
         p.GetInterfaces().Any(i =>
             i.IsGenericType && (i.GetGenericTypeDefinition() == typeof(IMapCommand<>) || i.GetGenericTypeDefinition() == typeof(IMapQuery<>))))
         .ToList();
+        types.Add(assembly.GetExportedTypes().First(m => m.Name.Contains(nameof(NullableTypesMappings))));
         foreach (var type in types)
         {
             var instance = Activator.CreateInstance(type);

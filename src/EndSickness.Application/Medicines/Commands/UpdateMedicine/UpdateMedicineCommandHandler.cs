@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
+﻿using EndSickness.Domain.Entities;
+using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
 
 namespace EndSickness.Application.Medicines.Commands.UpdateMedicine;
 
@@ -20,7 +21,7 @@ public class UpdateMedicineCommandHandler : IRequestHandler<UpdateMedicineComman
         var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id).SingleAsync(cancellationToken)
             ?? throw new ResourceNotFoundException();
         _ownershipService.CheckOwnership(fromDb.OwnerId);
-        var mapped = _mapper.Map(request, fromDb);
+        fromDb = _mapper.Map(request, fromDb);
         await _db.SaveChangesAsync(cancellationToken);
     }
 }

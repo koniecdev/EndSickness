@@ -4,6 +4,9 @@ namespace EndSickness.Domain.Entities;
 
 public class MedicineLog : AuditableEntity
 {
+    public MedicineLog()
+    {
+    }
     public MedicineLog(int medicineId, DateTime lastlyTaken)
     {
         MedicineId = medicineId;

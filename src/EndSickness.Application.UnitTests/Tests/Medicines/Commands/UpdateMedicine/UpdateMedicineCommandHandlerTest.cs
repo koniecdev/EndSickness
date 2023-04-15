@@ -53,14 +53,14 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
-    public async Task DataWithNullRequestGiven_UpdateMedicine_ShouldBeValid()
+    public async Task ResetDataRequestGiven_UpdateMedicine_ShouldBeValid()
     {
         var id = 1;
         var newName = "Nurofen forte";
-        var command = new UpdateMedicineCommand(id) { Name = newName, MaxDailyAmount = null };
+        var command = new UpdateMedicineCommand(id) { Name = newName, MaxDailyAmount = 0 };
         await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
-        (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == null && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
+        (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == 0 && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
 
     [Fact]
