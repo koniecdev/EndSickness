@@ -4,7 +4,7 @@ using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 
-namespace EndSickness.API.Controllers.UserInterface;
+namespace EndSickness.API.Controllers;
 
 [Authorize]
 [Route("api/v1/medicines")]

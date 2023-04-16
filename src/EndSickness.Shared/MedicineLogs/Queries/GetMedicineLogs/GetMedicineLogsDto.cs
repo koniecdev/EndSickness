@@ -1,20 +1,21 @@
-﻿namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
+﻿using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
 
+namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
 public record GetMedicineLogsDto : IMapQuery<MedicineLog>
 {
     public GetMedicineLogsDto()
     {
-        Name = string.Empty;
+
     }
-    public GetMedicineLogsDto(string name, int hourlyCooldown, int maxDailyAmount, int maxDaysOfTreatment)
+    public GetMedicineLogsDto(int id, DateTime lastlyTaken, int medicineId, GetMedicineLogsMedicineDto medicine)
     {
-        Name = name;
-        HourlyCooldown = hourlyCooldown;
-        MaxDailyAmount = maxDailyAmount;
-        MaxDaysOfTreatment = maxDaysOfTreatment;
+        Id = id;
+        LastlyTaken = lastlyTaken;
+        MedicineId = medicineId;
+        Medicine = medicine;
     }
-    public string Name { get; init; }
-    public int HourlyCooldown { get; init; }
-    public int MaxDailyAmount { get; init; }
-    public int MaxDaysOfTreatment { get; init; }
+    public int Id { get; init; }
+    public DateTime LastlyTaken { get; init; }
+    public int MedicineId { get; init; }
+    public GetMedicineLogsMedicineDto Medicine { get; init; } = null!;
 }

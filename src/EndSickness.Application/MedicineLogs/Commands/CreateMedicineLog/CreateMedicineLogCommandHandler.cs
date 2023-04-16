@@ -23,6 +23,7 @@ public class CreateMedicineLogCommandHandler : IRequestHandler<CreateMedicineLog
             ?? throw new ResourceNotFoundException(nameof(Medicine), request.MedicineId);
         _ownershipService.CheckOwnership(medFromDb.OwnerId);
         _db.MedicineLogs.Add(mapped);
-        return await _db.SaveChangesAsync(cancellationToken);
+        await _db.SaveChangesAsync(cancellationToken);
+        return mapped.Id;
     }
 }
