@@ -30,10 +30,17 @@ public class EndSicknessContextMockFactory : IDbContextMockFactory<EndSicknessCo
         var medicine2 = new Medicine("APAP", 3, 2, 6) { Id = 3, StatusId = 0, OwnerId = "secondUserId" };
         context.Medicines.Add(medicine2);
 
-        var log1 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 12, 13, 50, 0)) { Id = 1, StatusId = 1, OwnerId = "validUserId" };
+        var medicine3 = new Medicine("Nospa", 3, 2, 6) { Id = 4, StatusId = 1, OwnerId = "secondUserId" };
+        context.Medicines.Add(medicine3);
+
+        var log1 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 12, 13, 50, 0)) { Id = 4, StatusId = 1, OwnerId = "validUserId" };
         context.MedicineLogs.Add(log1);
-        var log2 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 2, StatusId = 1, OwnerId = "validUserId" };
+        var log2 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 5, StatusId = 1, OwnerId = "validUserId" };
         context.MedicineLogs.Add(log2);
+        var log3 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 6, StatusId = 0, OwnerId = "validUserId" };
+        context.MedicineLogs.Add(log3);
+        var log4 = new MedicineLog(medicine1.Id, new DateTime(2023, 3, 13, 10, 50, 0)) { Id = 7, StatusId = 1, OwnerId = "secondUserId" };
+        context.MedicineLogs.Add(log4);
 
         context.SaveChanges();
 

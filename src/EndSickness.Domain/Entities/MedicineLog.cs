@@ -13,6 +13,6 @@ public class MedicineLog : AuditableEntity
         LastlyTaken = lastlyTaken;
     }
     public DateTime LastlyTaken { get; private set; }
-    public int MedicineId { get; set; }
+    public int MedicineId { get; private set; }
     public virtual Medicine Medicine { get; set; } = null!;
 }
