@@ -20,7 +20,7 @@ public class GetMedicinesQueryHandlerTest : QueryTestBase
     public async Task GetMedicinesQueryTest_ShouldBeValid()
     {
         var result = await _handler.Handle(new GetMedicinesQuery(), CancellationToken.None);
-        result.Medicines.Count.Should().Be(2);
+        result.Medicines.Count.Should().Be(4);
     }
 
     [Fact]

@@ -1,7 +1,4 @@
-﻿using EndSickness.Domain.Entities;
-using MediatR;
-
-namespace EndSickness.Application.Common.Exceptions;
+﻿namespace EndSickness.Application.Common.Exceptions;
 
 public class ResourceNotFoundException : Exception
 {

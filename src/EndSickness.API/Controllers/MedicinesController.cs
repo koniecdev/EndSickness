@@ -24,6 +24,18 @@ public class MedicinesController : BaseApiController
         return result;
     }
 
+    [HttpGet("dosages")]
+    public async Task<ActionResult<GetMedicineByIdVm>> Dosages()
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpGet("{id}/dosages")]
+    public async Task<ActionResult<GetMedicineByIdVm>> Dosages(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     [HttpPost]
     public async Task<ActionResult<int>> Create(CreateMedicineCommand command)
     {

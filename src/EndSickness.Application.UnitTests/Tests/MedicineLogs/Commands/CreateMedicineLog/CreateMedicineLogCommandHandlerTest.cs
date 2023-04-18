@@ -87,6 +87,21 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         }
     }
 
+    [Fact]
+    public async Task OverdoseRequest_CreateMedicineLog_ValidUser_ShouldBeInvalid()
+    {
+        try
+        {
+            var command = new CreateMedicineLogCommand(5, _time.Now);
+            var response = await ValidateAndHandleRequest(command, _handler);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<OverdoseException>();
+        }
+    }
+
     private async Task<int> ValidateAndHandleRequest(CreateMedicineLogCommand command, CreateMedicineLogCommandHandler handler)
     {
         var validationResult = _validator.Validate(command);

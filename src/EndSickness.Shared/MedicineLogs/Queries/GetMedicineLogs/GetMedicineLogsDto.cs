@@ -1,6 +1,4 @@
-﻿using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
-
-namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
+﻿namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
 public record GetMedicineLogsDto : IMapQuery<MedicineLog>
 {
     public GetMedicineLogsDto()
