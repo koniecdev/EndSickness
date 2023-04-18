@@ -16,7 +16,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     {
         _handler = new(_context, _mapper, _resourceOwnershipValidUser);
         _unauthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
-        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipInvalidUser);
+        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipForbiddenUser);
         _validator = new();
     }
 

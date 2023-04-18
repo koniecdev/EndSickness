@@ -16,7 +16,7 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     {
         _handler = new(_context, _resourceOwnershipValidUser);
         _unauthorizedUserHandler = new(_context, _resourceOwnershipUnauthorizedUser);
-        _freshUserHandler = new(_context, _resourceOwnershipInvalidUser);
+        _freshUserHandler = new(_context, _resourceOwnershipForbiddenUser);
         _validator = new();
     }
 

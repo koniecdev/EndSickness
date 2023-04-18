@@ -40,7 +40,7 @@ public class GetDosageByIdQueryHandlerTest : QueryTestBase
     {
         var request = new GetDosageByIdQuery(5);
         var fromDb = await _handler.Handle(request, CancellationToken.None);
-        fromDb.LastDose.Should().Be(new TimeOnly(11, 0, 0));
+        fromDb.LastDose.Should().Be(new TimeOnly(23, 0, 0));
         fromDb.NextDose.Should().Be(new TimeOnly(14, 0, 0));
     }
 }

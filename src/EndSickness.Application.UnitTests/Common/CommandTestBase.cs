@@ -15,11 +15,11 @@ public class CommandTestBase : IDisposable
     protected readonly IDateTime _time;
     protected readonly ICurrentUserService _currentUser;
     protected readonly ICurrentUserService _unauthorizedCurrentUser;
-    protected readonly ICurrentUserService _freshCurrentUser;
+    protected readonly ICurrentUserService _forbiddenCurrentUser;
 
     protected readonly IResourceOwnershipService _resourceOwnershipValidUser;
     protected readonly IResourceOwnershipService _resourceOwnershipUnauthorizedUser;
-    protected readonly IResourceOwnershipService _resourceOwnershipInvalidUser;
+    protected readonly IResourceOwnershipService _resourceOwnershipForbiddenUser;
 
 
 
@@ -40,7 +40,7 @@ public class CommandTestBase : IDisposable
         _unauthorizedCurrentUser = _currentUserFactory.Create();
 
         _currentUserFactory = new FreshCurrentUserFactory();
-        _freshCurrentUser = _currentUserFactory.Create();
+        _forbiddenCurrentUser = _currentUserFactory.Create();
 
         _resourceOwnershipFactory = new ResourceOwnershipServiceValidUserFactory();
         _resourceOwnershipValidUser = _resourceOwnershipFactory.Create();
@@ -49,7 +49,7 @@ public class CommandTestBase : IDisposable
         _resourceOwnershipUnauthorizedUser = _resourceOwnershipFactory.Create();
 
         _resourceOwnershipFactory = new ResourceOwnershipServiceInvalidUserFactory();
-        _resourceOwnershipInvalidUser = _resourceOwnershipFactory.Create();
+        _resourceOwnershipForbiddenUser = _resourceOwnershipFactory.Create();
     }
 
     protected virtual void Dispose(bool disposing)

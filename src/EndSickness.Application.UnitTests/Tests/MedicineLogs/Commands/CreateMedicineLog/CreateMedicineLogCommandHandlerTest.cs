@@ -8,23 +8,23 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.CreateMe
 public class CreateMedicineLogCommandHandlerTest : CommandTestBase
 {
     private readonly CreateMedicineLogCommandHandler _handler;
-    private readonly CreateMedicineLogCommandHandler _unauthorizedUserHandler;
-    private readonly CreateMedicineLogCommandHandler _freshUserHandler;
     private readonly CreateMedicineLogCommandValidator _validator;
+    private readonly CreateMedicineLogCommandValidator _validatorUnauthorized;
+    private readonly CreateMedicineLogCommandValidator _validatorForbidden;
 
     public CreateMedicineLogCommandHandlerTest()
     {
-        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
-        _unauthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
-        _freshUserHandler = new(_context, _mapper, _resourceOwnershipInvalidUser);
-        _validator = new(_time);
+        _handler = new(_context, _mapper);
+        _validator = new(_time, _context, _resourceOwnershipValidUser);
+        _validatorUnauthorized = new(_time, _context, _resourceOwnershipUnauthorizedUser);
+        _validatorForbidden = new(_time, _context, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
     public async Task MinimumDataRequestGiven_CreateMedicineLog_ValidUser_ShouldBeValid()
     {
         var command = new CreateMedicineLogCommand(1, _time.Now);
-        var response = await ValidateAndHandleRequest(command, _handler);
+        var response = await ValidateAndHandleRequest(command, _validator);
         response.Should().BeGreaterThan(0);
     }
 
@@ -34,7 +34,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1111, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _handler);
+            var response = await ValidateAndHandleRequest(command, _validator);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
@@ -49,7 +49,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now - TimeSpan.FromDays(1000));
-            var response = await ValidateAndHandleRequest(command, _handler);
+            var response = await ValidateAndHandleRequest(command, _validator);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -64,7 +64,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _unauthorizedUserHandler);
+            var response = await ValidateAndHandleRequest(command, _validatorUnauthorized);
         }
         catch(Exception ex)
         {
@@ -78,7 +78,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _freshUserHandler);
+            var response = await ValidateAndHandleRequest(command, _validatorForbidden);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
@@ -88,12 +88,12 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
-    public async Task OverdoseRequest_CreateMedicineLog_ValidUser_ShouldBeInvalid()
+    public async Task SingleOverdoseRequest_CreateMedicineLog_ValidUser_ShouldBeInvalid()
     {
         try
         {
-            var command = new CreateMedicineLogCommand(5, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _handler);
+            var command = new CreateMedicineLogCommand(5, new DateTime(2023, 1, 2, 13, 0, 0));
+            var response = await ValidateAndHandleRequest(command, _validator);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -102,12 +102,50 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task<int> ValidateAndHandleRequest(CreateMedicineLogCommand command, CreateMedicineLogCommandHandler handler)
+    [Fact]
+    public async Task HourlyOverdoseRequest_CreateMedicineLog_ValidUser_ShouldBeInvalid()
     {
-        var validationResult = _validator.Validate(command);
+        try
+        {
+            var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 1, 14, 0, 0));
+            var response = await ValidateAndHandleRequest(command, _validator);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<OverdoseException>();
+        }
+    }
+
+    [Fact]
+    public async Task DailyOverdoseRequest_CreateMedicineLog_ValidUser_ShouldBeValid()
+    {
+        try
+        {
+            var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 2, 7, 0, 0));
+            var response = await ValidateAndHandleRequest(command, _validator);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<OverdoseException>();
+        }
+    }
+
+    [Fact]
+    public async Task ValidRequest_CreateMedicineLog_ValidUser_ShouldBeValid()
+    {
+        var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 2, 15, 0, 0));
+        var response = await ValidateAndHandleRequest(command, _validator);
+        response.Should().BeGreaterThan(0);
+    }
+
+    private async Task<int> ValidateAndHandleRequest(CreateMedicineLogCommand command, CreateMedicineLogCommandValidator validator)
+    {
+        var validationResult = await validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            var response = await handler.Handle(command, CancellationToken.None);
+            var response = await _handler.Handle(command, CancellationToken.None);
             return response;
         }
         else
