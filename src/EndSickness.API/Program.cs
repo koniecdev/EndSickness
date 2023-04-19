@@ -10,6 +10,7 @@ using EndSickness.Application;
 using EndSickness.API.Services;
 using EndSickness.Application.Common.Interfaces;
 using EndSickness.Infrastructure.JsonConverters;
+using Microsoft.OpenApi.Any;
 
 WebApplicationBuilder? builder = null!;
 
@@ -88,6 +89,18 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
     c.OperationFilter<AuthorizeCheckOperationFilter>();
+    c.MapType<DateOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "date",
+        Example = new OpenApiString("dd-MM-yyyy")
+    });
+    c.MapType<TimeOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "time",
+        Example = new OpenApiString("HH:mm:ss")
+    });
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "EndTrip API", Version = "v1" });
 });
 builder.Services.AddEndpointsApiExplorer();

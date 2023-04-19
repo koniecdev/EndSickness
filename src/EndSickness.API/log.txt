@@ -4104,3 +4104,13 @@ INF - 04/19/2023 20:15:52 +02:00 HTTP "GET" "/favicon.ico" responded 404 in 204.
 INF - 04/19/2023 20:16:01 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
 WRN - 04/19/2023 20:16:07 +02:00 EndSickness long running request "GetDosageByIdQuery" : 6258ms "GetDosageByIdQuery { MedicineId = 1 }"
 INF - 04/19/2023 20:16:07 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 8702.6019 ms
+INF - 04/19/2023 20:27:41 +02:00 Application is starting up
+INF - 04/19/2023 20:27:43 +02:00 Application is running
+INF - 04/19/2023 20:28:59 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/19/2023 20:29:05 +02:00 EndSickness long running request "GetDosageByIdQuery" : 6224ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 20:29:05 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 9000.5986 ms
+INF - 04/19/2023 20:31:36 +02:00 Application is starting up
+INF - 04/19/2023 20:31:38 +02:00 Application is running
+INF - 04/19/2023 20:32:31 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/19/2023 20:32:36 +02:00 EndSickness long running request "GetDosageByIdQuery" : 5708ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 20:32:37 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 8579.7571 ms
