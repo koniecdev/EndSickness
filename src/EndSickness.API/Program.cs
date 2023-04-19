@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using EndSickness.Application;
 using EndSickness.API.Services;
 using EndSickness.Application.Common.Interfaces;
+using EndSickness.Infrastructure.JsonConverters;
+using Microsoft.OpenApi.Any;
 
 WebApplicationBuilder? builder = null!;
 
@@ -37,7 +39,12 @@ var authUrl = builder.Configuration.GetSection("AppSettings").GetValue(typeof(st
 
 builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+        options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+    });
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowedPolicies", corsBuilder =>
@@ -82,6 +89,18 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
     c.OperationFilter<AuthorizeCheckOperationFilter>();
+    c.MapType<DateOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "date",
+        Example = new OpenApiString("dd-MM-yyyy")
+    });
+    c.MapType<TimeOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "time",
+        Example = new OpenApiString("HH:mm:ss")
+    });
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "EndTrip API", Version = "v1" });
 });
 builder.Services.AddEndpointsApiExplorer();
@@ -126,7 +145,8 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers().RequireAuthorization("ApiScope");
+    endpoints.MapControllers()
+    .RequireAuthorization("ApiScope");
 });
 
 try

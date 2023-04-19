@@ -7,27 +7,19 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetDosageByI
 public class GetDosageByIdQueryHandlerTest : QueryTestBase
 {
     private readonly GetDosageByIdQueryHandler _handler;
+    private readonly GetDosageByIdQueryValidator _validator;
 
     public GetDosageByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _resourceOwnershipValidUser);
+        _handler = new(_context);
+        _validator = new(_context, _resourceOwnershipValidUser);
     }
 
     [Fact]
-    public async Task ValidDataset_ValidUser_ShouldBeValid()
-    {
-        var request = new GetDosageByIdQuery(1);
-        var fromDb = await _handler.Handle(request, CancellationToken.None);
-        fromDb.LastDose.Should().Be(new TimeOnly(12, 0, 0));
-        fromDb.NextDose.Should().Be(new TimeOnly(16, 0, 0));
-        fromDb.TakeUntil.Should().Be(new DateOnly(2023, 3, 19));
-        fromDb.MedicineName.Should().Be("Nurofen");
-    }
-
-    [Fact]
-    public async Task ValidDataset_ValidUser_ShouldCalculateNextDayNextDose()
+    public async Task ValidDataset_ValidUser_NextDoseShouldBeNext24HFromFirstDose()
     {
         var request = new GetDosageByIdQuery(4);
+        await _validator.ValidateAsync(request);
         var fromDb = await _handler.Handle(request, CancellationToken.None);
         fromDb.LastDose.Should().Be(new TimeOnly(20, 49, 0));
         fromDb.NextDose.Should().Be(new TimeOnly(12, 0, 0));
@@ -36,11 +28,13 @@ public class GetDosageByIdQueryHandlerTest : QueryTestBase
     }
 
     [Fact]
-    public async Task ValidDataset_ValidUser_ShouldCalculateNextDayNextDoseWithLastDoseOverlap()
+    public async Task ValidDataset_ValidUser_NextDoseShouldBeOverNext24HFromFirstDose()
     {
         var request = new GetDosageByIdQuery(5);
+        await _validator.ValidateAsync(request);
         var fromDb = await _handler.Handle(request, CancellationToken.None);
-        fromDb.LastDose.Should().Be(new TimeOnly(11, 0, 0));
-        fromDb.NextDose.Should().Be(new TimeOnly(14, 0, 0));
+        fromDb.LastDose.Should().Be(new TimeOnly(10, 0, 0));
+        fromDb.NextDose.Should().Be(new TimeOnly(13, 0, 0));
+        fromDb.MedicineName.Should().Be("Ibuprom");
     }
 }

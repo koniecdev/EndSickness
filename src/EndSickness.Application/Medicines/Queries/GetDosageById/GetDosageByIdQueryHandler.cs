@@ -6,19 +6,15 @@ namespace EndSickness.Application.Medicines.Queries.GetDosageById;
 public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, GetDosageByIdVm>
 {
     private readonly IEndSicknessContext _db;
-    private readonly IResourceOwnershipService _ownershipService;
 
-    public GetDosageByIdQueryHandler(IEndSicknessContext db, IResourceOwnershipService ownershipService)
+    public GetDosageByIdQueryHandler(IEndSicknessContext db)
     {
         _db = db;
-        _ownershipService = ownershipService;
     }
 
     public async Task<GetDosageByIdVm> Handle(GetDosageByIdQuery request, CancellationToken cancellationToken)
     {
-        var medicine = await _db.Medicines.SingleOrDefaultAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken)
-            ?? throw new ResourceNotFoundException();
-        _ownershipService.CheckOwnership(medicine.OwnerId);
+        var medicine = await _db.Medicines.SingleAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken);
         var medicineLogs = await _db.MedicineLogs
             .OrderByDescending(m=>m.LastlyTaken)
             .Where(m => m.MedicineId == medicine.Id && m.StatusId != 0)

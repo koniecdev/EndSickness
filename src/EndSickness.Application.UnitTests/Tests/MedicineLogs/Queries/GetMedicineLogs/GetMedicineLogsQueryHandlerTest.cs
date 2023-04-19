@@ -17,6 +17,6 @@ public class GetMedicineLogsQueryHandlerTest : QueryTestBase
     public async Task GetMedicinesQueryTest_ShouldBeValid()
     {
         var result = await _handler.Handle(new GetMedicineLogsQuery(), CancellationToken.None);
-        result.MedicineLogs.Count.Should().Be(9);
+        result.MedicineLogs.Count.Should().Be(11);
     }
 }

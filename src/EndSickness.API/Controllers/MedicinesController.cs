@@ -1,6 +1,7 @@
 ﻿using EndSickness.Shared.Medicines.Commands.CreateMedicine;
 using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
 using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
+using EndSickness.Shared.Medicines.Queries.GetDosageById;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 
@@ -31,9 +32,10 @@ public class MedicinesController : BaseApiController
     }
 
     [HttpGet("{id}/dosages")]
-    public async Task<ActionResult<GetMedicineByIdVm>> Dosages(int id)
+    public async Task<ActionResult<GetDosageByIdVm>> Dosages(int id)
     {
-        throw new NotImplementedException();
+        var result = await Mediator.Send(new GetDosageByIdQuery(id));
+        return result;
     }
 
     [HttpPost]
