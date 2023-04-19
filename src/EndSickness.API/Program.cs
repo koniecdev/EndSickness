@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using EndSickness.Application;
 using EndSickness.API.Services;
 using EndSickness.Application.Common.Interfaces;
+using EndSickness.Infrastructure.JsonConverters;
 
 WebApplicationBuilder? builder = null!;
 
@@ -37,7 +38,12 @@ var authUrl = builder.Configuration.GetSection("AppSettings").GetValue(typeof(st
 
 builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+        options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+    });
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowedPolicies", corsBuilder =>
@@ -126,7 +132,8 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers().RequireAuthorization("ApiScope");
+    endpoints.MapControllers()
+    .RequireAuthorization("ApiScope");
 });
 
 try

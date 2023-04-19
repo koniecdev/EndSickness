@@ -18,6 +18,7 @@ public class AuthorizationBehaviour<TRequest> : IRequestPreProcessor<TRequest> w
             {
                 _logger.LogError("Unauthorized request has been registered");
                 throw new UnauthorizedAccessException();
+                
             }
         }, cancellationToken);
     }

@@ -92,7 +92,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
     {
         try
         {
-            var command = new CreateMedicineLogCommand(5, new DateTime(2023, 1, 2, 13, 0, 0));
+            var command = new CreateMedicineLogCommand(5, new DateTime(2023, 1, 2, 12, 30, 0));
             var response = await ValidateAndHandleRequest(command, _validator);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
