@@ -6,10 +6,12 @@ namespace EndSickness.Application.Medicines.Queries.GetDosageById;
 public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, GetDosageByIdVm>
 {
     private readonly IEndSicknessContext _db;
+    private readonly ICalculateNeariestDosageService _calculateNeariestDosageService;
 
-    public GetDosageByIdQueryHandler(IEndSicknessContext db)
+    public GetDosageByIdQueryHandler(IEndSicknessContext db, ICalculateNeariestDosageService calculateNeariestDosageService)
     {
         _db = db;
+        _calculateNeariestDosageService = calculateNeariestDosageService;
     }
 
     public async Task<GetDosageByIdVm> Handle(GetDosageByIdQuery request, CancellationToken cancellationToken)
@@ -19,40 +21,21 @@ public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, Get
             .OrderByDescending(m=>m.LastlyTaken)
             .Where(m => m.MedicineId == medicine.Id && m.StatusId != 0)
             .ToListAsync(cancellationToken);
+
         if(medicineLogs.Count == 0)
         {
             throw new EmptyResultException();
         }
 
-        DateTime? vmNextDose;
-
         DateTime vmLastDose = medicineLogs.First().LastlyTaken;
-        var previousDayDoses = medicineLogs.OrderBy(m=>m.LastlyTaken).Where(m => m.LastlyTaken >= vmLastDose - TimeSpan.FromHours(24)).ToList();
-        var theoreticalNextDoseIfWeDontIncludeDailyLimit = previousDayDoses.Last().LastlyTaken + TimeSpan.FromHours(medicine.HourlyCooldown);
+        DateTime vmNextDose = _calculateNeariestDosageService.Calculate(vmLastDose, medicine, medicineLogs);
 
-        if(previousDayDoses.Count == medicine.MaxDailyAmount)
-        {
-            var nextDoseWithDailyMax = previousDayDoses.First().LastlyTaken + TimeSpan.FromHours(24);
-            if (nextDoseWithDailyMax < theoreticalNextDoseIfWeDontIncludeDailyLimit)
-            {
-                vmNextDose = theoreticalNextDoseIfWeDontIncludeDailyLimit;
-            }
-            else
-            {
-                vmNextDose = nextDoseWithDailyMax;
-            }
-        }
-        else //overdose is not possible
-        {
-            vmNextDose = theoreticalNextDoseIfWeDontIncludeDailyLimit;
-        }
         return new GetDosageByIdVm()
         {
             MedicineId = medicine.Id,
             MedicineName = medicine.Name,
             LastDose = TimeOnly.FromDateTime(vmLastDose),
-            NextDose = TimeOnly.FromDateTime(vmNextDose.Value),
-            TakeUntil = DateOnly.FromDateTime(previousDayDoses.First().LastlyTaken + TimeSpan.FromDays(medicine.MaxDaysOfTreatment))
+            NextDose = TimeOnly.FromDateTime(vmNextDose),
         };
     }
 }

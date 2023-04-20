@@ -4114,3 +4114,778 @@ INF - 04/19/2023 20:31:38 +02:00 Application is running
 INF - 04/19/2023 20:32:31 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
 WRN - 04/19/2023 20:32:36 +02:00 EndSickness long running request "GetDosageByIdQuery" : 5708ms "GetDosageByIdQuery { MedicineId = 1 }"
 INF - 04/19/2023 20:32:37 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 8579.7571 ms
+INF - 04/19/2023 21:01:59 +02:00 Application is starting up
+INF - 04/19/2023 21:02:01 +02:00 Application is running
+INF - 04/19/2023 21:03:06 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/19/2023 21:03:12 +02:00 EndSickness long running request "GetDosageByIdQuery" : 6109ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 21:03:12 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 8765.1905 ms
+INF - 04/19/2023 21:03:31 +02:00 EndSickness Request: "GetMedicineLogsQuery" "GetMedicineLogsQuery { }"
+WRN - 04/19/2023 21:03:32 +02:00 EndSickness long running request "GetMedicineLogsQuery" : 913ms "GetMedicineLogsQuery { }"
+INF - 04/19/2023 21:03:32 +02:00 HTTP "GET" "/api/v1/medicine-logs" responded 200 in 972.2811 ms
+INF - 04/19/2023 21:04:06 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 400 in 119.0772 ms
+INF - 04/19/2023 21:04:42 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 400 in 6.5392 ms
+INF - 04/19/2023 21:05:13 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 13:04:51, MedicineId = 1 }"
+ERR - 04/19/2023 21:05:14 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 1297.7899 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:05:19 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:07:13 +02:00 EndSickness Request: "GetMedicineByIdQuery" "GetMedicineByIdQuery { Id = 1 }"
+INF - 04/19/2023 21:07:13 +02:00 HTTP "GET" "/api/v1/medicines/1" responded 200 in 115.3710 ms
+INF - 04/19/2023 21:08:31 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 16:00:00, MedicineId = 1 }"
+WRN - 04/19/2023 21:08:32 +02:00 EndSickness long running request "CreateMedicineLogCommand" : 718ms "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 16:00:00, MedicineId = 1 }"
+INF - 04/19/2023 21:08:32 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 763.0941 ms
+INF - 04/19/2023 21:08:40 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 20:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:08:41 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 404.8709 ms
+FluentValidation.ValidationException: You have provided date older than 2023 or date in the future.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 29
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:08:41 +02:00 There was an error in "EndSickness.Application": ""
+FluentValidation.ValidationException: You have provided date older than 2023 or date in the future.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 29
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:08:56 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 21:08:56 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 92.7431 ms
+INF - 04/19/2023 21:09:07 +02:00 EndSickness Request: "GetMedicinesQuery" "GetMedicinesQuery { }"
+INF - 04/19/2023 21:09:07 +02:00 HTTP "GET" "/api/v1/medicines" responded 200 in 75.3554 ms
+INF - 04/19/2023 21:09:40 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 20:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:09:40 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 467.4204 ms
+FluentValidation.ValidationException: You have provided date older than 2023 or date in the future.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 29
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:09:40 +02:00 There was an error in "EndSickness.Application": ""
+FluentValidation.ValidationException: You have provided date older than 2023 or date in the future.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 29
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:09:52 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 20:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:09:52 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 473.4646 ms
+FluentValidation.ValidationException: You have provided date older than 2023 or date in the future.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 29
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 21
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method180(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+INF - 04/19/2023 21:17:59 +02:00 Application is starting up
+INF - 04/19/2023 21:18:02 +02:00 Application is running
+INF - 04/19/2023 21:21:00 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 19-Apr-23 20:20:49, MedicineId = 1 }"
+ERR - 04/19/2023 21:21:01 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 3573.7177 ms
+FluentValidation.ValidationException: Validation failed: 
+ -- LastlyTaken: You have provided date older than 2023 or date in the future. Severity: Error
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 34
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:21:09 +02:00 There was an error in "EndSickness.Application": "You have provided date older than 2023 or date in the future.
+"
+FluentValidation.ValidationException: Validation failed: 
+ -- LastlyTaken: You have provided date older than 2023 or date in the future. Severity: Error
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 34
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:22:56 +02:00 EndSickness Request: "GetMedicineLogsQuery" "GetMedicineLogsQuery { }"
+WRN - 04/19/2023 21:23:04 +02:00 EndSickness long running request "GetMedicineLogsQuery" : 7385ms "GetMedicineLogsQuery { }"
+INF - 04/19/2023 21:23:04 +02:00 HTTP "GET" "/api/v1/medicine-logs" responded 200 in 7532.0607 ms
+INF - 04/19/2023 21:23:28 +02:00 HTTP "PATCH" "/api/v1/medicine-logs" responded 400 in 110.5263 ms
+INF - 04/19/2023 21:23:44 +02:00 EndSickness Request: "UpdateMedicineLogCommand" "UpdateMedicineLogCommand { Id = 1002, LastlyTaken = 01-Jan-23 12:00:00, MedicineId =  }"
+WRN - 04/19/2023 21:23:45 +02:00 EndSickness long running request "UpdateMedicineLogCommand" : 1356ms "UpdateMedicineLogCommand { Id = 1002, LastlyTaken = 01-Jan-23 12:00:00, MedicineId =  }"
+INF - 04/19/2023 21:23:45 +02:00 HTTP "PATCH" "/api/v1/medicine-logs" responded 200 in 1585.2647 ms
+INF - 04/19/2023 21:24:08 +02:00 EndSickness Request: "UpdateMedicineLogCommand" "UpdateMedicineLogCommand { Id = 1003, LastlyTaken = 01-Jan-23 16:00:00, MedicineId =  }"
+INF - 04/19/2023 21:24:08 +02:00 HTTP "PATCH" "/api/v1/medicine-logs" responded 200 in 123.3977 ms
+INF - 04/19/2023 21:24:39 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 21:24:39 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 435.1837 ms
+INF - 04/19/2023 21:25:21 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 20:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:25:23 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 1127.3351 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:25:23 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:26:05 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 400 in 13.7246 ms
+INF - 04/19/2023 21:26:31 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 20:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:26:32 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 1319.3075 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:26:32 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:26:52 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 21:26:52 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 203.7120 ms
+INF - 04/19/2023 21:27:06 +02:00 EndSickness Request: "GetMedicineLogByIdQuery" "GetMedicineLogByIdQuery { Id = 1 }"
+ERR - 04/19/2023 21:27:07 +02:00 HTTP "GET" "/api/v1/medicine-logs/1" responded 500 in 665.8194 ms
+EndSickness.Application.Common.Exceptions.ResourceNotFoundException: Resource do not exists
+   at EndSickness.Application.MedicineLogs.Queries.GetMedicineLogById.GetMedicineLogByIdQueryHandler.Handle(GetMedicineLogByIdQuery request, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Queries\GetMedicineLogById\GetMedicineLogByIdQueryHandler.cs:line 20
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 38
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Get(Int32 id) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 23
+   at lambda_method223(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:27:07 +02:00 There was an error in "EndSickness.Application": "Resource do not exists"
+EndSickness.Application.Common.Exceptions.ResourceNotFoundException: Resource do not exists
+   at EndSickness.Application.MedicineLogs.Queries.GetMedicineLogById.GetMedicineLogByIdQueryHandler.Handle(GetMedicineLogByIdQuery request, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Queries\GetMedicineLogById\GetMedicineLogByIdQueryHandler.cs:line 20
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 38
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Get(Int32 id) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 23
+   at lambda_method223(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:27:16 +02:00 EndSickness Request: "GetMedicineLogsQuery" "GetMedicineLogsQuery { }"
+INF - 04/19/2023 21:27:16 +02:00 HTTP "GET" "/api/v1/medicine-logs" responded 200 in 67.8165 ms
+INF - 04/19/2023 21:28:38 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 20:00:00, MedicineId = 1 }"
+INF - 04/19/2023 21:30:15 +02:00 Application is starting up
+INF - 04/19/2023 21:30:18 +02:00 Application is running
+INF - 04/19/2023 21:33:06 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 20:00:00, MedicineId = 1 }"
+WRN - 04/19/2023 21:33:19 +02:00 EndSickness long running request "CreateMedicineLogCommand" : 12818ms "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 20:00:00, MedicineId = 1 }"
+INF - 04/19/2023 21:33:19 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 16004.3275 ms
+INF - 04/19/2023 21:33:31 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/19/2023 21:33:31 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 403.8465 ms
+INF - 04/19/2023 21:34:09 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 00:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:34:13 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 4544.9972 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:34:14 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:34:30 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 00:00:00, MedicineId = 1 }"
+INF - 04/19/2023 21:48:46 +02:00 Application is starting up
+INF - 04/19/2023 21:48:52 +02:00 Application is running
+INF - 04/19/2023 21:51:54 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 401 in 244.4581 ms
+INF - 04/19/2023 21:52:04 +02:00 HTTP "GET" "/favicon.ico" responded 404 in 8.5696 ms
+INF - 04/19/2023 21:52:11 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 01-Jan-23 00:00:00, MedicineId = 1 }"
+ERR - 04/19/2023 21:52:22 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 12219.0432 ms
+System.ArgumentException: We do not support creating doses older than newest noted dose.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 21:52:22 +02:00 There was an error in "EndSickness.Application": "We do not support creating doses older than newest noted dose."
+System.ArgumentException: We do not support creating doses older than newest noted dose.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 58
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 21:55:51 +02:00 EndSickness Request: "GetMedicinesQuery" "GetMedicinesQuery { }"
+WRN - 04/19/2023 21:55:51 +02:00 EndSickness long running request "GetMedicinesQuery" : 606ms "GetMedicinesQuery { }"
+INF - 04/19/2023 21:55:51 +02:00 HTTP "GET" "/api/v1/medicines" responded 200 in 710.7204 ms
+INF - 04/19/2023 22:01:37 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 02-Jan-23 08:00:00, MedicineId = 2 }"
+WRN - 04/19/2023 22:01:38 +02:00 EndSickness long running request "CreateMedicineLogCommand" : 653ms "CreateMedicineLogCommand { LastlyTaken = 02-Jan-23 08:00:00, MedicineId = 2 }"
+INF - 04/19/2023 22:01:38 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 695.5728 ms
+INF - 04/19/2023 22:01:47 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 02-Jan-23 12:00:00, MedicineId = 2 }"
+INF - 04/19/2023 22:01:47 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 101.1964 ms
+INF - 04/19/2023 22:01:53 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 02-Jan-23 16:00:00, MedicineId = 2 }"
+INF - 04/19/2023 22:01:54 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 99.8022 ms
+INF - 04/19/2023 22:02:00 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 02-Jan-23 20:00:00, MedicineId = 2 }"
+INF - 04/19/2023 22:02:00 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 97.1903 ms
+INF - 04/19/2023 22:02:12 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 2 }"
+INF - 04/19/2023 22:02:12 +02:00 HTTP "GET" "/api/v1/medicines/2/dosages" responded 200 in 222.0226 ms
+INF - 04/19/2023 22:02:30 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 03-Jan-23 00:00:00, MedicineId = 2 }"
+ERR - 04/19/2023 22:02:31 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 849.0928 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 22:02:32 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 22:02:40 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 03-Jan-23 07:00:00, MedicineId = 2 }"
+ERR - 04/19/2023 22:02:40 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 500 in 824.0065 ms
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ERR - 04/19/2023 22:02:41 +02:00 There was an error in "EndSickness.Application": "We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help."
+EndSickness.Application.Common.Exceptions.OverdoseException: We do not support scenario when You overdose medicine. For any questions, get in touch with professional medical help.
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.PreventOverdosingAsync(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 53
+   at EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog.CreateMedicineLogCommandValidator.<.ctor>b__3_2(CreateMedicineLogCommand command, DateTime newDoseDateTime, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\MedicineLogs\Commands\CreateMedicineLog\CreateMedicineLogCommandValidator.cs:line 22
+   at FluentValidation.Internal.RuleComponent`2.ValidateAsync(ValidationContext`1 context, TProperty value, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/RuleComponent.cs:line 71
+   at FluentValidation.Internal.PropertyRule`2.ValidateAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/Internal/PropertyRule.cs:line 143
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 241
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.<>c__DisplayClass2_0.<<Handle>b__3>d.MoveNext() in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 28
+--- End of stack trace from previous location ---
+   at EndSickness.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\ValidationBehaviour.cs:line 29
+   at EndSickness.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Application\Common\Behaviours\PerformanceBehaviour.cs:line 18
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at EndSickness.API.Controllers.MedicineLogsController.Create(CreateMedicineLogCommand command) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.API\Controllers\MedicineLogsController.cs:line 30
+   at lambda_method83(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at EndSickness.Infrastructure.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\Ariteku\source\repos\EndSickness\src\EndSickness.Infrastructure\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+INF - 04/19/2023 22:03:02 +02:00 EndSickness Request: "CreateMedicineLogCommand" "CreateMedicineLogCommand { LastlyTaken = 03-Jan-23 11:00:00, MedicineId = 2 }"
+INF - 04/19/2023 22:03:02 +02:00 HTTP "POST" "/api/v1/medicine-logs" responded 200 in 201.3199 ms
+INF - 04/19/2023 22:03:08 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 2 }"
+INF - 04/19/2023 22:03:08 +02:00 HTTP "GET" "/api/v1/medicines/2/dosages" responded 200 in 82.2291 ms
+INF - 04/20/2023 21:56:12 +02:00 Application is starting up
+INF - 04/20/2023 21:58:13 +02:00 Application is starting up
+INF - 04/20/2023 21:58:16 +02:00 Application is running
+INF - 04/20/2023 21:59:32 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/20/2023 21:59:38 +02:00 EndSickness long running request "GetDosagesQuery" : 6069ms "GetDosagesQuery { }"
+INF - 04/20/2023 21:59:38 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8314.2763 ms

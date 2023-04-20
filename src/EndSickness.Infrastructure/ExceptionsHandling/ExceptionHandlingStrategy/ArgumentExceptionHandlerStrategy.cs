@@ -2,7 +2,7 @@
 
 namespace EndSickness.Infrastructure.ExceptionsHandling.ExceptionHandlingStrategy;
 
-public class ArgumentNullExceptionHandlerStrategy : IExceptionHandlerStrategy
+public class ArgumentExceptionHandlerStrategy : IExceptionHandlerStrategy
 {
     public (int statusCode, string errorMessage) Handle(Exception exception)
     {

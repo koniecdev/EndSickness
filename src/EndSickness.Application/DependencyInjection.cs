@@ -1,4 +1,5 @@
 ﻿using EndSickness.Application.Common.Behaviours;
+using EndSickness.Application.Services.CalculateDosage;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,6 +13,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddTransient<ICalculateNeariestDosageService, CalculateNeariestDosageService>();
         return services;
     }
 }

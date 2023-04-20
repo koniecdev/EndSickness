@@ -1,5 +1,6 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using FluentValidation;
+using FluentValidation.Results;
 
 namespace EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog;
 
@@ -26,11 +27,15 @@ public class CreateMedicineLogCommandValidator : AbstractValidator<CreateMedicin
     {
         if (newDoseDateTime < new DateTime(2023, 1, 1) || newDoseDateTime > _dateTime.Now)
         {
-            throw new ValidationException("You have provided date older than 2023 or date in the future.");
+            List<ValidationFailure> failures = new()
+            {
+                new ValidationFailure(nameof(command.LastlyTaken), "You have provided date older than 2023 or date in the future.", newDoseDateTime)
+            };
+            throw new ValidationException(failures);
         }
-        var operatingMedicine = await _db.Medicines.FirstOrDefaultAsync(m => m.Id == command.MedicineId, cancellationToken)
+        var operatingMedicine = await _db.Medicines.FirstOrDefaultAsync(m => m.Id == command.MedicineId && m.StatusId != 0, cancellationToken)
             ?? throw new ResourceNotFoundException();
-        var previousMedicineLogs = await _db.MedicineLogs.Where(m => m.MedicineId == command.MedicineId).ToListAsync(cancellationToken);
+        var previousMedicineLogs = await _db.MedicineLogs.Where(m => m.MedicineId == command.MedicineId && m.StatusId != 0).ToListAsync(cancellationToken);
 
         if(previousMedicineLogs.Count > 0)
         {

@@ -10,5 +10,4 @@ public record GetDosageByIdVm
     public string MedicineName { get; init; }
     public TimeOnly LastDose { get; init; }
     public TimeOnly NextDose { get; init; }
-    public DateOnly TakeUntil { get; init; }
 }

@@ -1,4 +1,5 @@
 ﻿using EndSickness.Application.Medicines.Queries.GetDosageById;
+using EndSickness.Application.Services.CalculateDosage;
 using EndSickness.Shared.Medicines.Queries.GetDosageById;
 
 namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetDosageById;
@@ -11,7 +12,7 @@ public class GetDosageByIdQueryHandlerTest : QueryTestBase
 
     public GetDosageByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context);
+        _handler = new(_context, new CalculateNeariestDosageService());
         _validator = new(_context, _resourceOwnershipValidUser);
     }
 
@@ -23,7 +24,6 @@ public class GetDosageByIdQueryHandlerTest : QueryTestBase
         var fromDb = await _handler.Handle(request, CancellationToken.None);
         fromDb.LastDose.Should().Be(new TimeOnly(20, 49, 0));
         fromDb.NextDose.Should().Be(new TimeOnly(12, 0, 0));
-        fromDb.TakeUntil.Should().Be(new DateOnly(2023, 1, 18));
         fromDb.MedicineName.Should().Be("Nospa");
     }
 
