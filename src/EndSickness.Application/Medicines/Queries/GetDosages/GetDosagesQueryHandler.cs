@@ -1,6 +1,4 @@
-﻿using EndSickness.Domain.Entities;
-using EndSickness.Shared.Medicines.Queries.GetDosageById;
-using EndSickness.Shared.Medicines.Queries.GetDosages;
+﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
 
 namespace EndSickness.Application.Medicines.Queries.GetDosages;
 

@@ -1,5 +1,4 @@
 ﻿using EndSickness.Shared.Medicines.Queries.GetDosageById;
-using System.Collections.Immutable;
 
 namespace EndSickness.Application.Medicines.Queries.GetDosageById;
 

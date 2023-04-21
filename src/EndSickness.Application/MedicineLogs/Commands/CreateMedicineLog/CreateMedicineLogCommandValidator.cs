@@ -1,5 +1,4 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
-using FluentValidation;
 using FluentValidation.Results;
 
 namespace EndSickness.Application.MedicineLogs.Commands.CreateMedicineLog;

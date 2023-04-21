@@ -3,6 +3,7 @@ using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
+using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogsByMedicineId;
 
 namespace EndSickness.API.Controllers;
 
@@ -21,6 +22,13 @@ public class MedicineLogsController : BaseApiController
     public async Task<ActionResult<GetMedicineLogByIdVm>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineLogByIdQuery(id));
+        return result;
+    }
+
+    [HttpGet("medicine/{id}")]
+    public async Task<ActionResult<GetMedicineLogsByMedicineIdVm>> GetByMedicineId(int id)
+    {
+        var result = await Mediator.Send(new GetMedicineLogsByMedicineIdQuery(id));
         return result;
     }
 
