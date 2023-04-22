@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosageById;
+﻿using EndSickness.Domain.Entities;
+using EndSickness.Shared.Medicines.Queries.GetDosageById;
 
 namespace EndSickness.Application.Medicines.Queries.GetDosageById;
 
@@ -26,6 +27,11 @@ public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, Get
             throw new EmptyResultException();
         }
 
+        return VmFactory(medicine, medicineLogs);
+    }
+
+    private GetDosageByIdVm VmFactory(Medicine medicine, ICollection<MedicineLog> medicineLogs)
+    {
         DateTime vmLastDose = medicineLogs.First().LastlyTaken;
         DateTime vmNextDose = _calculateNeariestDosageService.Calculate(vmLastDose, medicine, medicineLogs);
 

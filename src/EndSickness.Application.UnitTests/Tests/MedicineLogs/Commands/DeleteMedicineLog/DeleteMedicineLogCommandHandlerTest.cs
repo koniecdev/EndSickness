@@ -8,16 +8,16 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.DeleteMe
 public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
 {
     private readonly DeleteMedicineLogCommandHandler _handler;
-    private readonly DeleteMedicineLogCommandHandler _unauthorizedUserHandler;
-    private readonly DeleteMedicineLogCommandHandler _freshUserHandler;
     private readonly DeleteMedicineLogCommandValidator _validator;
+    private readonly DeleteMedicineLogCommandValidator _validatorUnauthorized;
+    private readonly DeleteMedicineLogCommandValidator _validatorForbidden;
 
     public DeleteMedicineLogCommandHandlerTest()
     {
-        _handler = new(_context, _resourceOwnershipValidUser);
-        _unauthorizedUserHandler = new(_context, _resourceOwnershipUnauthorizedUser);
-        _freshUserHandler = new(_context, _resourceOwnershipForbiddenUser);
-        _validator = new();
+        _handler = new(_context);
+        _validator = new(_context, _resourceOwnershipValidUser);
+        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
+        _validatorForbidden = new(_context, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     {
         var id = 4;
         var command = new DeleteMedicineLogCommand(id);
-        await ValidateAndHandleRequest(command, _handler);
+        await ValidateAndHandleRequest(command, _validator);
         _context.MedicineLogs.Where(m => m.StatusId != 0 && m.Id == id).Count().Should().Be(0);
     }
 
@@ -35,7 +35,7 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineLogCommand(4);
         try
         {
-            await ValidateAndHandleRequest(command, _unauthorizedUserHandler);
+            await ValidateAndHandleRequest(command, _validatorUnauthorized);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -45,13 +45,28 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
+    public async Task DeleteMedicineLog_ForbiddenUser_ShouldNotDelete()
+    {
+        var command = new DeleteMedicineLogCommand(4);
+        try
+        {
+            await ValidateAndHandleRequest(command, _validatorForbidden);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
+        }
+        catch (Exception ex)
+        {
+            ex.Should().BeOfType<ForbiddenAccessException>();
+        }
+    }
+
+    [Fact]
     public async Task DeleteMedicineLog_ValidUser_ShouldBeNotFound()
     {
         var command = new DeleteMedicineLogCommand(124214);
         try
         {
-            await ValidateAndHandleRequest(command, _freshUserHandler);
-            throw new Exception("Test method returned unexpected exception");
+            await ValidateAndHandleRequest(command, _validator);
+            throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
         {
@@ -59,12 +74,12 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task ValidateAndHandleRequest(DeleteMedicineLogCommand command, DeleteMedicineLogCommandHandler handler)
+    private async Task ValidateAndHandleRequest(DeleteMedicineLogCommand command, DeleteMedicineLogCommandValidator validator)
     {
-        var validationResult = _validator.Validate(command);
+        var validationResult = await validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            await handler.Handle(command, CancellationToken.None);
+            await _handler.Handle(command, CancellationToken.None);
         }
         else
         {

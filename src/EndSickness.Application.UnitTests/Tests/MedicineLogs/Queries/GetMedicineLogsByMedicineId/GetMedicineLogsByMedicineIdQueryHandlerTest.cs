@@ -1,4 +1,5 @@
 ﻿using EndSickness.Application.Common.Exceptions;
+using EndSickness.Application.MedicineLogs.Queries.GetMedicineLogById;
 using EndSickness.Application.MedicineLogs.Queries.GetMedicineLogsByMedicineId;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogsByMedicineId;
 
