@@ -8,28 +8,34 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Queries.GetMedici
 public class GetMedicineLogByIdQueryHandlerTest : QueryTestBase
 {
     private readonly GetMedicineLogByIdQueryHandler _handler;
-    private readonly GetMedicineLogByIdQueryHandler _notAuthorizedUserHandler;
-    private readonly GetMedicineLogByIdQueryHandler _forbiddenUserHandler;
+    private readonly GetMedicineLogByIdQueryValidator _validator;
+    private readonly GetMedicineLogByIdQueryValidator _validatorUnauthorized;
+    private readonly GetMedicineLogByIdQueryValidator _validatorForbidden;
 
     public GetMedicineLogByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
-        _notAuthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
-        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipInvalidUser);
+        _handler = new(_context, _mapper);
+        _validator = new(_context, _resourceOwnershipValidUser);
+        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
+        _validatorForbidden = new(_context, _resourceOwnershipInvalidUser);
     }
 
     [Fact]
     public async Task GetMedicineLogByIdQueryTest_ShouldBeValid()
     {
-        var result = await _handler.Handle(new GetMedicineLogByIdQuery(4), CancellationToken.None);
+        var query = new GetMedicineLogByIdQuery(4);
+        await _validator.ValidateAsync(query);
+        var result = await _handler.Handle(query, CancellationToken.None);
         result.Id.Should().Be(4);
     }
 
     [Fact]
     public async Task GetMedicineLogByIdQueryTest_ShouldAllProperiesBePopulated()
     {
+        var query = new GetMedicineLogByIdQuery(4);
+        await _validator.ValidateAsync(query);
         var newData = new DateTime(2023, 3, 12, 13, 50, 0);
-        var result = await _handler.Handle(new GetMedicineLogByIdQuery(4), CancellationToken.None);
+        var result = await _handler.Handle(query, CancellationToken.None);
         (result.Id == 4 && result.LastlyTaken.Equals(newData) && result.Medicine.Name.Equals("Voltaren"))
             .Should().Be(true);
     }
@@ -39,7 +45,9 @@ public class GetMedicineLogByIdQueryHandlerTest : QueryTestBase
     {
         try
         {
-            var result = await _handler.Handle(new GetMedicineLogByIdQuery(6), CancellationToken.None);
+            var query = new GetMedicineLogByIdQuery(6);
+            await _validator.ValidateAsync(query);
+            var result = await _handler.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -53,6 +61,8 @@ public class GetMedicineLogByIdQueryHandlerTest : QueryTestBase
     {
         try
         {
+            var query = new GetMedicineLogByIdQuery(1337);
+            await _validator.ValidateAsync(query);
             var result = await _handler.Handle(new GetMedicineLogByIdQuery(1337), CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
@@ -67,7 +77,9 @@ public class GetMedicineLogByIdQueryHandlerTest : QueryTestBase
     {
         try
         {
-            var result = await _notAuthorizedUserHandler.Handle(new GetMedicineLogByIdQuery(4), CancellationToken.None);
+            var query = new GetMedicineLogByIdQuery(4);
+            await _validatorUnauthorized.ValidateAsync(query);
+            var result = await _handler.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -81,7 +93,9 @@ public class GetMedicineLogByIdQueryHandlerTest : QueryTestBase
     {
         try
         {
-            var result = await _forbiddenUserHandler.Handle(new GetMedicineLogByIdQuery(4), CancellationToken.None);
+            var query = new GetMedicineLogByIdQuery(4);
+            await _validatorForbidden.ValidateAsync(query);
+            var result = await _handler.Handle(new GetMedicineLogByIdQuery(4), CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
