@@ -8,16 +8,16 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Commands.DeleteMedic
 public class DeleteMedicineCommandHandlerTest : CommandTestBase
 {
     private readonly DeleteMedicineCommandHandler _handler;
-    private readonly DeleteMedicineCommandHandler _unauthorizedUserHandler;
-    private readonly DeleteMedicineCommandHandler _freshUserHandler;
     private readonly DeleteMedicineCommandValidator _validator;
+    private readonly DeleteMedicineCommandValidator _validatorUnauthorized;
+    private readonly DeleteMedicineCommandValidator _validatorForbidden;
 
     public DeleteMedicineCommandHandlerTest()
     {
-        _handler = new(_context, _resourceOwnershipValidUser);
-        _unauthorizedUserHandler = new(_context, _resourceOwnershipUnauthorizedUser);
-        _freshUserHandler = new(_context, _resourceOwnershipForbiddenUser);
-        _validator = new();
+        _handler = new(_context);
+        _validator = new(_context, _resourceOwnershipValidUser);
+        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
+        _validatorForbidden = new(_context, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class DeleteMedicineCommandHandlerTest : CommandTestBase
     {
         var id = 1;
         var command = new DeleteMedicineCommand(id);
-        await ValidateAndHandleRequest(command, _handler);
+        await ValidateAndHandleRequest(command, _validator);
         _context.Medicines.Where(m => m.StatusId != 0 && m.Id == id).Count().Should().Be(0);
     }
 
@@ -35,7 +35,7 @@ public class DeleteMedicineCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineCommand(1);
         try
         {
-            await ValidateAndHandleRequest(command, _unauthorizedUserHandler);
+            await ValidateAndHandleRequest(command, _validatorUnauthorized);
             throw new Exception("Test method returned unexpected exception");
         }
         catch (Exception ex)
@@ -50,7 +50,7 @@ public class DeleteMedicineCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineCommand(1);
         try
         {
-            await ValidateAndHandleRequest(command, _freshUserHandler);
+            await ValidateAndHandleRequest(command, _validatorForbidden);
             throw new Exception("Test method returned unexpected exception");
         }
         catch (Exception ex)
@@ -65,7 +65,7 @@ public class DeleteMedicineCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineCommand(124214);
         try
         {
-            await ValidateAndHandleRequest(command, _freshUserHandler);
+            await ValidateAndHandleRequest(command, _validator);
             throw new Exception("Test method returned unexpected exception");
         }
         catch (Exception ex)
@@ -74,12 +74,12 @@ public class DeleteMedicineCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task ValidateAndHandleRequest(DeleteMedicineCommand command, DeleteMedicineCommandHandler handler)
+    private async Task ValidateAndHandleRequest(DeleteMedicineCommand command, DeleteMedicineCommandValidator validator)
     {
-        var validationResult = _validator.Validate(command);
+        var validationResult = await validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            await handler.Handle(command, CancellationToken.None);
+            await _handler.Handle(command, CancellationToken.None);
         }
         else
         {

@@ -8,16 +8,16 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Commands.UpdateMedic
 public class UpdateMedicineCommandHandlerTest : CommandTestBase
 {
     private readonly UpdateMedicineCommandHandler _handler;
-    private readonly UpdateMedicineCommandHandler _unauthorizedUserHandler;
-    private readonly UpdateMedicineCommandHandler _forbiddenUserHandler;
     private readonly UpdateMedicineCommandValidator _validator;
+    private readonly UpdateMedicineCommandValidator _validatorUnauthorized;
+    private readonly UpdateMedicineCommandValidator _validatorForbidden;
 
     public UpdateMedicineCommandHandlerTest()
     {
-        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
-        _unauthorizedUserHandler = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
-        _forbiddenUserHandler = new(_context, _mapper, _resourceOwnershipForbiddenUser);
-        _validator = new();
+        _handler = new(_context, _mapper);
+        _validator = new(_context, _resourceOwnershipValidUser);
+        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
+        _validatorForbidden = new(_context, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         var id = 1;
         var newName = "Nurofen forte";
         var command = new UpdateMedicineCommand() { Id = id, Name = newName };
-        await ValidateRequestAsync(command, _handler);
+        await ValidateRequestAsync(command, _validator);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == 3).Should().Be(true);
     }
@@ -37,7 +37,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         var id = 1;
         var newCd = 6;
         var command = new UpdateMedicineCommand() { Id = id, HourlyCooldown = newCd };
-        await ValidateRequestAsync(command, _handler);
+        await ValidateRequestAsync(command, _validator);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.HourlyCooldown == newCd && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
@@ -47,7 +47,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
     {
         var id = 1;
         var command = new UpdateMedicineCommand() { Id = id, HourlyCooldown = 0 };
-        await ValidateRequestAsync(command, _handler);
+        await ValidateRequestAsync(command, _validator);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.HourlyCooldown == 0 && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
@@ -58,7 +58,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         var id = 1;
         var newName = "Nurofen forte";
         var command = new UpdateMedicineCommand() { Id = id, Name = newName, MaxDailyAmount = 0 };
-        await ValidateRequestAsync(command, _handler);
+        await ValidateRequestAsync(command, _validator);
         var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
         (updatedFromDb.Name.Equals(newName) && updatedFromDb.MaxDailyAmount == 0 && updatedFromDb.MaxDaysOfTreatment == 7).Should().Be(true);
     }
@@ -71,7 +71,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
             var id = 1;
             var newName = "Nurofen forte";
             var command = new UpdateMedicineCommand() { Id = id, Name = newName };
-            await ValidateRequestAsync(command, _unauthorizedUserHandler);
+            await ValidateRequestAsync(command, _validatorUnauthorized);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
@@ -88,7 +88,7 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
             var id = 1;
             var newName = "Nurofen forte";
             var command = new UpdateMedicineCommand() { Id = id, Name = newName };
-            await ValidateRequestAsync(command, _forbiddenUserHandler);
+            await ValidateRequestAsync(command, _validatorForbidden);
             var updatedFromDb = await _context.Medicines.SingleAsync(m => m.Id == id);
             updatedFromDb.Name.Should().Be(newName);
         }
@@ -98,12 +98,12 @@ public class UpdateMedicineCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task ValidateRequestAsync(UpdateMedicineCommand command, UpdateMedicineCommandHandler handler)
+    private async Task ValidateRequestAsync(UpdateMedicineCommand command, UpdateMedicineCommandValidator validator)
     {
-        var validationResult = _validator.Validate(command);
+        var validationResult = await validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            await handler.Handle(command, CancellationToken.None);
+            await _handler.Handle(command, CancellationToken.None);
         }
         else
         {

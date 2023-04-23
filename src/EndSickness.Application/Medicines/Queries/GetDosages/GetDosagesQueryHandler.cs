@@ -1,4 +1,7 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
+﻿using EndSickness.Domain.Entities;
+using EndSickness.Shared.Medicines.Queries.GetDosageById;
+using EndSickness.Shared.Medicines.Queries.GetDosages;
+using System.Threading;
 
 namespace EndSickness.Application.Medicines.Queries.GetDosages;
 
@@ -23,8 +26,14 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
         {
             throw new EmptyResultException();
         }
+        
+        return await VmFactory(listOfMedicineIdThatUserTake, cancellationToken);
+    }
+
+    private async Task<GetDosagesVm> VmFactory(ICollection<int> medicineLogsIds, CancellationToken cancellationToken)
+    {
         var vm = new GetDosagesVm();
-        foreach(var medicineId in listOfMedicineIdThatUserTake)
+        foreach (var medicineId in medicineLogsIds)
         {
             var medicine = await _db.Medicines.SingleAsync(m => m.Id == medicineId && m.StatusId != 0, cancellationToken);
             var medicineLogs = await _db.MedicineLogs
