@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Globalization;
 namespace EndSickness.Data.JsonConverters;
 
 public class DateOnlyConverter : JsonConverter<DateOnly>

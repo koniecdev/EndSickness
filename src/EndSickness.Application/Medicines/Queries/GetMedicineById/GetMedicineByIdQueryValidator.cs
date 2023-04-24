@@ -1,5 +1,4 @@
-﻿using EndSickness.Application.Common.Validation;
-using EndSickness.Shared.Medicines.Queries.GetMedicineById;
+﻿using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 
 namespace EndSickness.Application.Medicines.Queries.GetMedicineById;
 

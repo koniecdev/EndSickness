@@ -9,9 +9,9 @@
             <span>@Model.Username - <a href="/Home/Logout">Logout</a></span>
         </div>
     </header>
-    <div>
+    <div class="main_container">
         <section class="user_medicines">
-            <h3>Your medicines</h3>
+            <h2>Your medicines</h2>
             @foreach(var item in Model.MedicineList.Medicines)
             {
                 <div class="user_medicine">
@@ -20,21 +20,25 @@
                     </div>
                     <div class="user_medicine_actions">
                         <a href="/Medicine/Update/@item.Id" class="btn_update">
-                            Edit
+                            <img src="/img/icons8-edit-24.png">
                         </a>
                         <a href="/Medicine/Delete/@item.Id" class="btn_delete">
-                            Delete
+                            <img src="/img/icons8-remove-24.png">
                         </a>
                     </div>
                 </div>
             }
-            <a href="/Medicine/Create" class="btn_add">Add new medicine</a>
+            <a href="/Medicine/Create" class="btn_add">
+                <img src="/img/icons8-plus-24.png">
+                <span>Add new medicine</span>
+            </a>
         </section>
         <main class="user_dosages">
             <header>
-                <h3>Your schedule</h3>
+                <h2>Your schedule</h2>
                 <a href="/Dosage/Note" class="btn_add">
-                    Note a dose
+                    <img src="/img/icons8-plus-24.png">
+                    <span>Note a dose</span>
                 </a>
             </header>
             <div class="user_dosages_list">
@@ -55,11 +59,17 @@
                         </div>
                         <div class="user_dosage_column">
                             <span>Max. dosage time</span>
-                            <span>@(Model.MedicineList.Medicines.Single(m=>m.Id == item.MedicineId).MaxDaysOfTreatment == 1 ? "day" : "days")</span>
+                            <span>
+                                @{
+                                    var x = Model.MedicineList.Medicines.Single(m=>m.Id == item.MedicineId).MaxDaysOfTreatment;
+                                }
+                                @x
+                                @(x == 1 ? "day" : "days")
+                            </span>
                         </div>
-                        <div class="user_dosage_column">
+                        <div class="user_dosage_column user_dosage_column_actions">
                             <a href="/Medicine/Delete/Dosages/@item.MedicineId" class="btn_delete">
-                                Delete
+                                <img src="/img/icons8-remove-24.png">
                             </a>
                         </div>
                     </div>

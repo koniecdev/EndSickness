@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer.Data;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.EntityFrameworkCore;
+
+namespace IdentityServer.Data;
 
 public class MyPersistedGrantStore : IPersistedGrantStore
 {
@@ -33,7 +33,6 @@ public class MyPersistedGrantStore : IPersistedGrantStore
             existingGrant.SessionId = grant.SessionId;
             existingGrant.SubjectId = grant.SubjectId;
             existingGrant.Type = grant.Type;
-            existingGrant.ConcurrencyStamp = grant.ConcurrencyStamp;
         }
 
         await _dbContext.SaveChangesAsync();
@@ -84,11 +83,6 @@ public class MyPersistedGrantStore : IPersistedGrantStore
             _dbContext.PersistedGrants.RemoveRange(grants);
             await _dbContext.SaveChangesAsync();
         }
-    }
-
-    public PersistedGrantStore(PersistedGrantDbContext dbContext)
-    {
-        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
     public async Task<IEnumerable<PersistedGrant>> GetAllAsync(PersistedGrantFilter filter)

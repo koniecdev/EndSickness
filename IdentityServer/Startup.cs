@@ -6,6 +6,7 @@ using IdentityServer.Data;
 using IdentityServer.Models;
 using IdentityServer.Services;
 using IdentityServer4.Services;
+using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +39,8 @@ namespace IdentityServer
 				.AddEntityFrameworkStores<ApplicationDbContext>()
 				.AddDefaultTokenProviders();
 			services.AddTransient<IProfileService, ProfileService>();
-			var builder = services.AddIdentityServer(options =>
+            services.AddScoped<IPersistedGrantStore, MyPersistedGrantStore>();
+            var builder = services.AddIdentityServer(options =>
 			{
 				options.Events.RaiseErrorEvents = true;
 				options.Events.RaiseInformationEvents = true;
@@ -53,8 +55,9 @@ namespace IdentityServer
 				.AddInMemoryClients(Config.Clients)
 				.AddJwtBearerClientAuthentication()
 				.AddAspNetIdentity<ApplicationUser>()
-				.AddProfileService<ProfileService>();
-
+				.AddProfileService<ProfileService>()
+                .AddInMemoryPersistedGrants()
+				.AddPersistedGrantStore<MyPersistedGrantStore>();
 			// not recommended for production - you need to store your key material somewhere secure
 			builder.AddDeveloperSigningCredential();
 

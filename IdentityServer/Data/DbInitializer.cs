@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace IdentityServer.Data;
 public class DbInitializer
 {
-    private readonly ModelBuilder modelBuilder;
+    private readonly ModelBuilder _modelBuilder;
     private readonly UserManager<IdentityUser> _userManager;
 
     public DbInitializer(ModelBuilder modelBuilder, UserManager<IdentityUser> userManager)
     {
-        this.modelBuilder = modelBuilder;
+        _modelBuilder = modelBuilder;
         _userManager = userManager;
     }
 
     public async Task Seed()
     {
-        modelBuilder.Entity<IdentityRole>().HasData(
+        _modelBuilder.Entity<IdentityRole>().HasData(
                new IdentityRole("member") { Id = Guid.NewGuid().ToString() },
                new IdentityRole("admin") { Id = Guid.NewGuid().ToString() }
         );

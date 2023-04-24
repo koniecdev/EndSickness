@@ -1,6 +1,4 @@
-﻿using EndSickness.Application.Common.Validation;
-using EndSickness.Domain.Entities;
-using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
+﻿using EndSickness.Domain.Entities;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 
 namespace EndSickness.Application.MedicineLogs.Commands.UpdateMedicineLog;

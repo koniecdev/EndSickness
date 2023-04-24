@@ -1,5 +1,4 @@
-﻿using EndSickness.Domain.Entities;
-using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
+﻿using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 
 namespace EndSickness.Application.MedicineLogs.Commands.UpdateMedicineLog;
 

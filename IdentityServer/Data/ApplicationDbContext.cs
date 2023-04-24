@@ -11,11 +11,22 @@ namespace IdentityServer.Data
 			: base(options)
 		{
 		}
-		//public DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
+		public DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder builder)
+		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			base.OnModelCreating(builder);
+            builder.Entity<PersistedGrant>(entity =>
+            {
+                entity.HasKey(x => x.Key);
+                entity.Property(x => x.Key).HasMaxLength(200);
+                entity.Property(x => x.Type).HasMaxLength(50);
+                entity.Property(x => x.SubjectId).HasMaxLength(200);
+                entity.Property(x => x.ClientId).HasMaxLength(200).IsRequired();
+                entity.Property(x => x.CreationTime).IsRequired();
+                entity.Property(x => x.Expiration).IsRequired();
+                entity.Property(x => x.Data).HasMaxLength(50000).IsRequired();
+            });
+            base.OnModelCreating(builder);
         }
 	}
 }

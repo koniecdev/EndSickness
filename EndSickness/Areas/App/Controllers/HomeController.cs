@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EndSickness.Services;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Authentication;
 using EndSickness.Shared.Medicines.Queries.GetDosages;
-using Newtonsoft.Json;
-using IdentityModel.Client;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 using EndSickness.Models.ViewModels;
 
@@ -50,5 +46,20 @@ public class HomeController : Controller
         return SignOut("Cookies", "oidc");
     }
 
+    [HttpGet]
+    [Route("/Medicine/Create")]
+    public async Task<IActionResult> CreateMedicine()
+    {
+        CreateMedicineViewModel vm = new();
+        return View(model: vm);
+    }
+
+    //[HttpPost]
+    //[Route("/Medicine/Create")]
+    //public async Task<IActionResult> CreateMedicine(CreateMedicineViewModel vm)
+    //{
+    //    var command = new HttpRequestMessage(HttpMethod.Post, $"v1/medicines");
+        
+    //}
 }
 

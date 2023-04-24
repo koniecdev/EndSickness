@@ -1,9 +1,5 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
-using IdentityModel.Client;
-using MediatR;
+﻿using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
 
 namespace EndSickness.Services;
 

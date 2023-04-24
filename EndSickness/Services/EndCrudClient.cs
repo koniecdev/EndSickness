@@ -1,10 +1,6 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
-using IdentityModel;
-using MediatR;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Security.Claims;
 
 namespace EndSickness.Services;
 public class EndCrudClient<TResponse> : IEndCrudClient<TResponse>
@@ -12,6 +8,7 @@ public class EndCrudClient<TResponse> : IEndCrudClient<TResponse>
     private readonly IHttpClientFactory _clientFactory;
     private readonly IHttpContextAccessor _accessor;
     private readonly IRefreshTokenService _refreshTokenService;
+    private HttpClient? _client;
 
     public EndCrudClient(IHttpClientFactory clientFactory, IHttpContextAccessor accessor, IRefreshTokenService refreshTokenService)
     {
@@ -26,24 +23,25 @@ public class EndCrudClient<TResponse> : IEndCrudClient<TResponse>
         {
             throw new NullReferenceException();
         }
+        _client = _clientFactory.CreateClient("EndSickness");
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await _accessor.HttpContext.GetTokenAsync("access_token"));
-        var client = _clientFactory.CreateClient("EndSickness");
         try
         {
-            return await TrySendRequest(client, request);
+            return await TrySendRequest(request);
         }
         catch (UnauthorizedAccessException)
         {
             var newTokens = await _refreshTokenService.Execute();
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newTokens.AccessToken);
-            await TrySendRequest(client, request);
+            var newRequest = new HttpRequestMessage(request.Method, request.RequestUri);
+            newRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newTokens.AccessToken);
+            return await TrySendRequest(newRequest);
         }
         throw new UnauthorizedAccessException();
     }
 
-    private async Task<TResponse> TrySendRequest(HttpClient client, HttpRequestMessage request)
+    private async Task<TResponse> TrySendRequest(HttpRequestMessage request)
     {
-        var response = await client.SendAsync(request);
+        var response = await _client?.SendAsync(request)!;
         if (response.IsSuccessStatusCode)
         {
             var stringvm = await response.Content.ReadAsStringAsync();
