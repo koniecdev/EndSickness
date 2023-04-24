@@ -4897,3 +4897,275 @@ INF - 04/23/2023 11:04:38 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responde
 INF - 04/23/2023 11:05:12 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
 WRN - 04/23/2023 11:05:17 +02:00 EndSickness long running request "GetDosagesQuery" : 5741ms "GetDosagesQuery { }"
 INF - 04/23/2023 11:05:17 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 7556.2000 ms
+INF - 04/23/2023 12:46:14 +02:00 Application is starting up
+INF - 04/23/2023 12:46:25 +02:00 Application is running
+INF - 04/23/2023 12:59:31 +02:00 Application is starting up
+INF - 04/23/2023 12:59:36 +02:00 Application is running
+INF - 04/23/2023 13:33:38 +02:00 Application is starting up
+INF - 04/23/2023 13:33:42 +02:00 Application is running
+INF - 04/23/2023 13:36:16 +02:00 Application is starting up
+INF - 04/23/2023 13:36:21 +02:00 Application is running
+INF - 04/23/2023 13:54:41 +02:00 Application is starting up
+INF - 04/23/2023 13:54:48 +02:00 Application is running
+INF - 04/23/2023 13:57:03 +02:00 Application is starting up
+INF - 04/23/2023 13:57:07 +02:00 Application is running
+INF - 04/23/2023 13:58:40 +02:00 Application is starting up
+INF - 04/23/2023 13:58:45 +02:00 Application is running
+INF - 04/23/2023 13:59:40 +02:00 Application is starting up
+INF - 04/23/2023 13:59:45 +02:00 Application is running
+INF - 04/23/2023 14:00:46 +02:00 Application is starting up
+INF - 04/23/2023 14:00:51 +02:00 Application is running
+INF - 04/23/2023 14:06:03 +02:00 Application is starting up
+INF - 04/23/2023 14:06:08 +02:00 Application is running
+INF - 04/23/2023 14:13:42 +02:00 Application is starting up
+INF - 04/23/2023 14:13:47 +02:00 Application is running
+INF - 04/23/2023 14:15:42 +02:00 Application is starting up
+INF - 04/23/2023 14:15:45 +02:00 Application is running
+INF - 04/23/2023 14:24:23 +02:00 Application is starting up
+INF - 04/23/2023 14:24:26 +02:00 Application is running
+INF - 04/23/2023 14:54:29 +02:00 Application is starting up
+INF - 04/23/2023 14:54:37 +02:00 Application is running
+INF - 04/23/2023 14:54:42 +02:00 EndSickness Request: "GetMedicinesQuery" "GetMedicinesQuery { }"
+WRN - 04/23/2023 14:54:48 +02:00 EndSickness long running request "GetMedicinesQuery" : 5434ms "GetMedicinesQuery { }"
+INF - 04/23/2023 14:54:48 +02:00 HTTP "GET" "/api/v1/medicines" responded 200 in 9517.6538 ms
+INF - 04/23/2023 14:55:50 +02:00 Application is starting up
+INF - 04/23/2023 14:55:53 +02:00 Application is running
+INF - 04/23/2023 14:55:55 +02:00 HTTP "GET" "/api/v1/medicines" responded 401 in 256.5969 ms
+INF - 04/23/2023 14:56:35 +02:00 Application is starting up
+INF - 04/23/2023 14:56:38 +02:00 Application is running
+INF - 04/23/2023 14:56:39 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 245.8065 ms
+INF - 04/23/2023 14:57:07 +02:00 Application is starting up
+INF - 04/23/2023 14:57:09 +02:00 Application is running
+INF - 04/23/2023 14:57:13 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 14:57:18 +02:00 EndSickness long running request "GetDosagesQuery" : 4316ms "GetDosagesQuery { }"
+INF - 04/23/2023 14:57:18 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 6856.9014 ms
+INF - 04/23/2023 14:59:38 +02:00 Application is starting up
+INF - 04/23/2023 14:59:41 +02:00 Application is running
+INF - 04/23/2023 14:59:44 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 14:59:49 +02:00 EndSickness long running request "GetDosagesQuery" : 4544ms "GetDosagesQuery { }"
+INF - 04/23/2023 14:59:49 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 6985.6726 ms
+INF - 04/23/2023 15:04:11 +02:00 Application is starting up
+INF - 04/23/2023 15:04:15 +02:00 Application is running
+INF - 04/23/2023 15:04:18 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:04:23 +02:00 EndSickness long running request "GetDosagesQuery" : 4552ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:04:23 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 7122.8132 ms
+INF - 04/23/2023 15:05:26 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:05:26 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 164.9305 ms
+INF - 04/23/2023 15:11:59 +02:00 Application is starting up
+INF - 04/23/2023 15:12:02 +02:00 Application is running
+INF - 04/23/2023 15:12:07 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:12:14 +02:00 EndSickness long running request "GetDosagesQuery" : 7242ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:12:14 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 9682.7405 ms
+INF - 04/23/2023 15:13:52 +02:00 Application is starting up
+INF - 04/23/2023 15:13:58 +02:00 Application is running
+INF - 04/23/2023 15:14:02 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:14:08 +02:00 EndSickness long running request "GetDosagesQuery" : 5898ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:14:08 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8852.1642 ms
+INF - 04/23/2023 15:14:18 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:14:18 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 110.9318 ms
+INF - 04/23/2023 15:14:30 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:14:30 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 58.4288 ms
+INF - 04/23/2023 15:26:16 +02:00 Application is starting up
+INF - 04/23/2023 15:26:20 +02:00 Application is running
+INF - 04/23/2023 15:26:23 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 2519.9839 ms
+INF - 04/23/2023 15:26:37 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 26.6711 ms
+INF - 04/23/2023 15:27:00 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 4.9308 ms
+INF - 04/23/2023 15:27:29 +02:00 Application is starting up
+INF - 04/23/2023 15:27:32 +02:00 Application is running
+INF - 04/23/2023 15:27:36 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 3344.3110 ms
+INF - 04/23/2023 15:28:17 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:28:23 +02:00 EndSickness long running request "GetDosagesQuery" : 5439ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:28:23 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 5721.5514 ms
+INF - 04/23/2023 15:31:10 +02:00 Application is starting up
+INF - 04/23/2023 15:31:13 +02:00 Application is running
+INF - 04/23/2023 15:31:18 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:31:23 +02:00 EndSickness long running request "GetDosagesQuery" : 5199ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:31:23 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8709.5392 ms
+INF - 04/23/2023 15:34:36 +02:00 Application is starting up
+INF - 04/23/2023 15:34:39 +02:00 Application is running
+INF - 04/23/2023 15:34:45 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 15:34:50 +02:00 EndSickness long running request "GetDosagesQuery" : 5659ms "GetDosagesQuery { }"
+INF - 04/23/2023 15:34:51 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8224.8186 ms
+INF - 04/23/2023 15:35:15 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:35:16 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 170.6699 ms
+INF - 04/23/2023 15:36:16 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:36:16 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 97.0446 ms
+INF - 04/23/2023 15:36:29 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:36:29 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 64.2616 ms
+INF - 04/23/2023 15:38:13 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 15:40:33 +02:00 Application is starting up
+INF - 04/23/2023 15:40:36 +02:00 Application is running
+INF - 04/23/2023 15:40:40 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/23/2023 15:40:48 +02:00 EndSickness long running request "GetDosageByIdQuery" : 8144ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:40:48 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 11180.3264 ms
+INF - 04/23/2023 15:41:57 +02:00 Application is starting up
+INF - 04/23/2023 15:42:01 +02:00 Application is running
+INF - 04/23/2023 15:42:05 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/23/2023 15:42:10 +02:00 EndSickness long running request "GetDosageByIdQuery" : 4397ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:42:10 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 7878.8294 ms
+INF - 04/23/2023 15:44:19 +02:00 Application is starting up
+INF - 04/23/2023 15:44:24 +02:00 Application is running
+INF - 04/23/2023 15:44:28 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/23/2023 15:44:33 +02:00 EndSickness long running request "GetDosageByIdQuery" : 5265ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:44:34 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 8708.1444 ms
+INF - 04/23/2023 15:46:45 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 401 in 46.8332 ms
+INF - 04/23/2023 15:46:54 +02:00 HTTP "GET" "/favicon.ico" responded 404 in 2.6813 ms
+INF - 04/23/2023 15:46:57 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:46:57 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 282.0430 ms
+INF - 04/23/2023 15:47:48 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:47:48 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 102.0463 ms
+INF - 04/23/2023 15:48:26 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:48:45 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 19781.5341 ms
+INF - 04/23/2023 15:55:06 +02:00 Application is starting up
+INF - 04/23/2023 15:55:10 +02:00 Application is running
+INF - 04/23/2023 15:55:15 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/23/2023 15:55:21 +02:00 EndSickness long running request "GetDosageByIdQuery" : 6008ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:55:36 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 24986.3345 ms
+INF - 04/23/2023 15:55:54 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 15:55:59 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 5350.3514 ms
+INF - 04/23/2023 16:03:41 +02:00 Application is starting up
+INF - 04/23/2023 16:03:45 +02:00 Application is running
+INF - 04/23/2023 16:03:49 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+WRN - 04/23/2023 16:03:55 +02:00 EndSickness long running request "GetDosageByIdQuery" : 5666ms "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 16:03:55 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 9714.0008 ms
+INF - 04/23/2023 16:04:14 +02:00 EndSickness Request: "GetDosageByIdQuery" "GetDosageByIdQuery { MedicineId = 1 }"
+INF - 04/23/2023 16:04:14 +02:00 HTTP "GET" "/api/v1/medicines/1/dosages" responded 200 in 248.0414 ms
+INF - 04/23/2023 16:05:56 +02:00 Application is starting up
+INF - 04/23/2023 16:05:59 +02:00 Application is running
+INF - 04/23/2023 16:06:03 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 16:06:09 +02:00 EndSickness long running request "GetDosagesQuery" : 5282ms "GetDosagesQuery { }"
+INF - 04/23/2023 16:06:09 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8447.3974 ms
+INF - 04/23/2023 16:41:24 +02:00 Application is starting up
+INF - 04/23/2023 16:41:28 +02:00 Application is running
+INF - 04/23/2023 16:42:36 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 1466.0870 ms
+INF - 04/23/2023 16:42:54 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 6.2719 ms
+INF - 04/23/2023 17:00:46 +02:00 Application is starting up
+INF - 04/23/2023 17:04:18 +02:00 Application is starting up
+INF - 04/23/2023 17:04:22 +02:00 Application is running
+INF - 04/23/2023 17:04:25 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 2515.2258 ms
+INF - 04/23/2023 17:04:44 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 12.1416 ms
+INF - 04/23/2023 17:26:56 +02:00 Application is starting up
+INF - 04/23/2023 17:26:59 +02:00 Application is running
+INF - 04/23/2023 17:27:04 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 3444.9505 ms
+INF - 04/23/2023 17:27:28 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 35.5673 ms
+INF - 04/23/2023 17:27:48 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 19.0502 ms
+INF - 04/23/2023 17:28:54 +02:00 Application is starting up
+INF - 04/23/2023 17:28:57 +02:00 Application is running
+INF - 04/23/2023 17:29:01 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 3294.7336 ms
+INF - 04/23/2023 17:34:18 +02:00 Application is starting up
+INF - 04/23/2023 17:34:22 +02:00 Application is running
+INF - 04/23/2023 17:34:25 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 2761.8890 ms
+INF - 04/23/2023 17:35:30 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 17:35:36 +02:00 EndSickness long running request "GetDosagesQuery" : 5811ms "GetDosagesQuery { }"
+INF - 04/23/2023 17:35:36 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 6115.3322 ms
+INF - 04/23/2023 18:06:48 +02:00 Application is starting up
+INF - 04/23/2023 18:06:50 +02:00 Application is running
+INF - 04/23/2023 18:06:54 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 18:07:01 +02:00 EndSickness long running request "GetDosagesQuery" : 7051ms "GetDosagesQuery { }"
+INF - 04/23/2023 18:07:01 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 9828.7114 ms
+INF - 04/23/2023 18:14:41 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:14:41 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 277.2690 ms
+INF - 04/23/2023 18:22:16 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:22:16 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 192.0533 ms
+INF - 04/23/2023 18:25:16 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:25:16 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 53.5477 ms
+INF - 04/23/2023 18:27:19 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:27:19 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 59.8285 ms
+INF - 04/23/2023 18:27:28 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:27:28 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 37.4814 ms
+INF - 04/23/2023 18:32:58 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:32:58 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 112.8009 ms
+INF - 04/23/2023 18:33:49 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:33:49 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 57.7596 ms
+INF - 04/23/2023 18:34:05 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:34:05 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 50.0805 ms
+INF - 04/23/2023 18:34:13 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:34:13 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 37.4706 ms
+INF - 04/23/2023 18:34:28 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:34:28 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 54.0139 ms
+INF - 04/23/2023 18:35:14 +02:00 Application is starting up
+INF - 04/23/2023 18:35:17 +02:00 Application is running
+INF - 04/23/2023 18:35:21 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 18:35:30 +02:00 EndSickness long running request "GetDosagesQuery" : 8676ms "GetDosagesQuery { }"
+INF - 04/23/2023 18:35:30 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 11543.5971 ms
+INF - 04/23/2023 18:37:15 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:37:15 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 260.8014 ms
+INF - 04/23/2023 18:38:48 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:38:48 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 92.5343 ms
+INF - 04/23/2023 18:38:57 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:38:57 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 73.6870 ms
+INF - 04/23/2023 18:40:44 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 43.2199 ms
+INF - 04/23/2023 18:40:47 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 2.0483 ms
+INF - 04/23/2023 18:41:06 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 6.2546 ms
+INF - 04/23/2023 18:50:39 +02:00 Application is starting up
+INF - 04/23/2023 18:50:43 +02:00 Application is running
+INF - 04/23/2023 18:50:47 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 2562.7524 ms
+INF - 04/23/2023 18:52:28 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 70.0858 ms
+INF - 04/23/2023 18:53:25 +02:00 Application is starting up
+INF - 04/23/2023 18:53:28 +02:00 Application is running
+INF - 04/23/2023 18:53:32 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 3180.9308 ms
+INF - 04/23/2023 18:53:49 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 18:53:54 +02:00 EndSickness long running request "GetDosagesQuery" : 4464ms "GetDosagesQuery { }"
+INF - 04/23/2023 18:53:54 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 4680.3324 ms
+INF - 04/23/2023 18:57:38 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:57:38 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 173.2906 ms
+INF - 04/23/2023 18:58:24 +02:00 Application is starting up
+INF - 04/23/2023 18:58:28 +02:00 Application is running
+INF - 04/23/2023 18:58:32 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 18:58:37 +02:00 EndSickness long running request "GetDosagesQuery" : 5396ms "GetDosagesQuery { }"
+INF - 04/23/2023 18:58:37 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 8289.8703 ms
+INF - 04/23/2023 18:59:11 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 18:59:11 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 325.4007 ms
+INF - 04/23/2023 19:07:34 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 19:07:35 +02:00 EndSickness long running request "GetDosagesQuery" : 716ms "GetDosagesQuery { }"
+INF - 04/23/2023 19:07:35 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 817.5158 ms
+INF - 04/23/2023 19:07:43 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:07:43 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 30.6225 ms
+INF - 04/23/2023 19:07:55 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:07:55 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 53.9606 ms
+INF - 04/23/2023 19:08:14 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:08:15 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 330.1839 ms
+INF - 04/23/2023 19:08:17 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:08:17 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 148.3506 ms
+INF - 04/23/2023 19:11:03 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:11:03 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 71.5932 ms
+INF - 04/23/2023 19:11:10 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:11:10 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 64.1065 ms
+INF - 04/23/2023 19:11:48 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:11:48 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 56.4530 ms
+INF - 04/23/2023 19:12:05 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:12:05 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 55.5254 ms
+INF - 04/23/2023 19:12:25 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:12:25 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 45.5519 ms
+INF - 04/23/2023 19:12:30 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:12:30 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 30.4031 ms
+INF - 04/23/2023 19:13:15 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/23/2023 19:13:15 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 95.0374 ms
+INF - 04/23/2023 19:13:59 +02:00 Application is starting up
+INF - 04/23/2023 19:14:04 +02:00 Application is running
+INF - 04/23/2023 19:14:09 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 19:14:19 +02:00 EndSickness long running request "GetDosagesQuery" : 9875ms "GetDosagesQuery { }"
+INF - 04/23/2023 19:14:19 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 13923.0900 ms
+INF - 04/23/2023 19:27:05 +02:00 Application is starting up
+INF - 04/23/2023 19:27:09 +02:00 Application is running
+INF - 04/23/2023 19:27:14 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/23/2023 19:27:23 +02:00 EndSickness long running request "GetDosagesQuery" : 9095ms "GetDosagesQuery { }"
+INF - 04/23/2023 19:27:23 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 12123.5771 ms
+INF - 04/24/2023 09:10:23 +02:00 Application is starting up
+INF - 04/24/2023 09:10:31 +02:00 Application is running
+INF - 04/24/2023 09:11:49 +02:00 Application is starting up
+INF - 04/24/2023 09:11:53 +02:00 Application is running
+INF - 04/24/2023 09:11:57 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/24/2023 09:12:02 +02:00 EndSickness long running request "GetDosagesQuery" : 4944ms "GetDosagesQuery { }"
+INF - 04/24/2023 09:12:02 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 7508.4633 ms
+INF - 04/24/2023 09:14:38 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+INF - 04/24/2023 09:14:39 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 156.3993 ms
+INF - 04/24/2023 09:22:28 +02:00 Application is starting up
+INF - 04/24/2023 09:22:31 +02:00 Application is running
+INF - 04/24/2023 09:22:37 +02:00 EndSickness Request: "GetDosagesQuery" "GetDosagesQuery { }"
+WRN - 04/24/2023 09:22:44 +02:00 EndSickness long running request "GetDosagesQuery" : 6549ms "GetDosagesQuery { }"
+INF - 04/24/2023 09:22:44 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 200 in 9553.4879 ms
+INF - 04/24/2023 09:22:45 +02:00 EndSickness Request: "GetMedicinesQuery" "GetMedicinesQuery { }"
+WRN - 04/24/2023 09:22:45 +02:00 EndSickness long running request "GetMedicinesQuery" : 579ms "GetMedicinesQuery { }"
+INF - 04/24/2023 09:22:45 +02:00 HTTP "GET" "/api/v1/medicines" responded 200 in 614.7154 ms
+INF - 04/24/2023 10:16:44 +02:00 HTTP "GET" "/api/v1/medicines/dosages" responded 401 in 81.1267 ms

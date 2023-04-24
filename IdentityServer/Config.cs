@@ -9,7 +9,7 @@ namespace IdentityServer;
 public static class Config
 {
 	public const string APIURL = "https://localhost:44329";
-	public const string FRONTENDURL = "https://localhost";
+	public const string FRONTENDURL = "https://localhost:7284";
 
     public static IEnumerable<IdentityResource> IdentityResources =>
 	new List<IdentityResource>
@@ -60,15 +60,16 @@ public static class Config
 				ClientName = "MVC Client app",
 				AllowedGrantTypes = GrantTypes.Code,
 				ClientSecrets = { new Secret("secret".Sha256()) },
+				PostLogoutRedirectUris = { $"{FRONTENDURL}/signout-callback-oidc" },
+                AllowedCorsOrigins = { FRONTENDURL },
+				AllowOfflineAccess = true,
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
-                    "api1"
+                    "api1",
                 },
                 RedirectUris = { $"{FRONTENDURL}/signin-oidc" },
-				PostLogoutRedirectUris = { $"{FRONTENDURL}/signout-callback-oidc" },
-                AllowedCorsOrigins = { FRONTENDURL }
             }
         };
 }

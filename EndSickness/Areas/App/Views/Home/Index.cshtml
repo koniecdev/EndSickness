@@ -1,0 +1,70 @@
+﻿@model EndSickness.Models.ViewModels.IndexViewModel;
+
+<div class="container">
+    <header>
+        <div>
+            <h1>EndSickness</h1>
+        </div>
+        <div>
+            <span>@Model.Username - <a href="/Home/Logout">Logout</a></span>
+        </div>
+    </header>
+    <div>
+        <section class="user_medicines">
+            <h3>Your medicines</h3>
+            @foreach(var item in Model.MedicineList.Medicines)
+            {
+                <div class="user_medicine">
+                    <div class="user_medicine_title">
+                        @item.Name
+                    </div>
+                    <div class="user_medicine_actions">
+                        <a href="/Medicine/Update/@item.Id" class="btn_update">
+                            Edit
+                        </a>
+                        <a href="/Medicine/Delete/@item.Id" class="btn_delete">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            }
+            <a href="/Medicine/Create" class="btn_add">Add new medicine</a>
+        </section>
+        <main class="user_dosages">
+            <header>
+                <h3>Your schedule</h3>
+                <a href="/Dosage/Note" class="btn_add">
+                    Note a dose
+                </a>
+            </header>
+            <div class="user_dosages_list">
+                @foreach(var item in Model.DosageList.Dosages)
+                {
+                    <div class="user_dosage">
+                        <div class="user_dosage_column">
+                            <span>Name</span>
+                            <span>@item.MedicineName</span>
+                        </div>
+                        <div class="user_dosage_column">
+                            <span>Last dose</span>
+                            <span>@item.LastDose</span>
+                        </div>
+                        <div class="user_dosage_column">
+                            <span>Next dose</span>
+                            <span>@item.NextDose</span>
+                        </div>
+                        <div class="user_dosage_column">
+                            <span>Max. dosage time</span>
+                            <span>@(Model.MedicineList.Medicines.Single(m=>m.Id == item.MedicineId).MaxDaysOfTreatment == 1 ? "day" : "days")</span>
+                        </div>
+                        <div class="user_dosage_column">
+                            <a href="/Medicine/Delete/Dosages/@item.MedicineId" class="btn_delete">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+    </div>
+</div>
