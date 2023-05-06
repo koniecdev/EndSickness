@@ -51,7 +51,9 @@ public static class Config
 				AlwaysSendClientClaims = true,
 				AlwaysIncludeUserClaimsInIdToken = true,
 				AllowAccessTokensViaBrowser=true,
-				RedirectUris = { $"{APIURL}/swagger/oauth2-redirect.html" },
+                AccessTokenLifetime = 60 * 60 * 24 * 25,
+                IdentityTokenLifetime = 60 * 60 * 24 * 25,
+                RedirectUris = { $"{APIURL}/swagger/oauth2-redirect.html" },
 				AllowedCorsOrigins = { APIURL }
 		   },
 			new Client
@@ -63,6 +65,8 @@ public static class Config
 				PostLogoutRedirectUris = { $"{FRONTENDURL}/signout-callback-oidc" },
                 AllowedCorsOrigins = { FRONTENDURL },
 				AllowOfflineAccess = true,
+                AccessTokenLifetime = 60 * 60 * 24 * 25,
+                IdentityTokenLifetime = 60 * 60 * 24 * 25,
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,

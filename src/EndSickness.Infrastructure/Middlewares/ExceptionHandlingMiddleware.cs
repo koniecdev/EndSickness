@@ -50,6 +50,7 @@ public class ExceptionHandlingMiddleware
         }
 
         (response.StatusCode, _errorResponse.Message) = errorHandler.Handle();
+        _errorResponse.ErrorCode = response.StatusCode;
 
         _logger.LogError(exception, "There was an error in {Layer}: {ErrorMessage}", exception.Source, _errorResponse.Message);
         

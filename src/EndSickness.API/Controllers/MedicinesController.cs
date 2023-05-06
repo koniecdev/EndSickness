@@ -5,6 +5,8 @@ using EndSickness.Shared.Medicines.Queries.GetDosageById;
 using EndSickness.Shared.Medicines.Queries.GetDosages;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EndSickness.API.Controllers;
 
@@ -16,46 +18,48 @@ public class MedicinesController : BaseApiController
     public async Task<ActionResult<GetMedicinesVm>> Get()
     {
         var result = await Mediator.Send(new GetMedicinesQuery());
-        return result;
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<GetMedicineByIdVm>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineByIdQuery(id));
-        return result;
+        return Ok(result);
     }
 
     [HttpGet("dosages")]
     public async Task<ActionResult<GetDosagesVm>> Dosages()
     {
         var result = await Mediator.Send(new GetDosagesQuery());
-        return result;
+        return Ok(result);
     }
 
     [HttpGet("{id}/dosages")]
     public async Task<ActionResult<GetDosageByIdVm>> Dosages(int id)
     {
         var result = await Mediator.Send(new GetDosageByIdQuery(id));
-        return result;
+        return Ok(result);
     }
 
     [HttpPost]
     public async Task<ActionResult<int>> Create(CreateMedicineCommand command)
     {
         var result = await Mediator.Send(command);
-        return result;
+        return Ok(result);
     }
 
     [HttpPatch]
-    public async Task Update(UpdateMedicineCommand command)
+    public async Task<ActionResult> Update(UpdateMedicineCommand command)
     {
         await Mediator.Send(command);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public async Task Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         await Mediator.Send(new DeleteMedicineCommand(id));
+        return NoContent();
     }
 }

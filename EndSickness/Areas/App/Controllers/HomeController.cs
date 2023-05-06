@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EndSickness.Services;
-using EndSickness.Shared.Medicines.Queries.GetDosages;
-using EndSickness.Shared.Medicines.Queries.GetMedicines;
 using EndSickness.Models.ViewModels;
 
 namespace EndSickness.Area.App.Controllers;
@@ -11,28 +9,20 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ICurrentUserService _currentUserService;
+    private readonly IEndSicknessClient _client;
 
-    public HomeController(ILogger<HomeController> logger, ICurrentUserService currentUserService)
+    public HomeController(ILogger<HomeController> logger, ICurrentUserService currentUserService, IEndSicknessClient client)
     {
         _logger = logger;
         _currentUserService = currentUserService;
+        _client = client;
     }
 
     public async Task<IActionResult> Index()
     {
-        List<HttpRequestMessage> requests = new()
-        {
-            new HttpRequestMessage(HttpMethod.Get, $"v1/medicines/dosages"),
-            new HttpRequestMessage(HttpMethod.Get, $"v1/medicines"),
-        };
         try
         {
-            var dosagesClient = HttpContext.RequestServices.GetRequiredService<IEndCrudClient<GetDosagesVm>>();
-            var dosagesVm = await dosagesClient.Send(requests[0]);
-            var medicinesClient = HttpContext.RequestServices.GetRequiredService<IEndCrudClient<GetMedicinesVm>>();
-            var medicinesVm = await medicinesClient.Send(requests[1]);
-
-            IndexViewModel indexViewModel = new(dosagesVm, medicinesVm, _currentUserService.Username);
+            IndexViewModel indexViewModel = new(await _client.GetDosages(), await _client.GetAllMedicines(), _currentUserService.Username);
             return View(model: indexViewModel);
         }
         catch (UnauthorizedAccessException)
@@ -48,18 +38,50 @@ public class HomeController : Controller
 
     [HttpGet]
     [Route("/Medicine/Create")]
-    public async Task<IActionResult> CreateMedicine()
+    public IActionResult CreateMedicine()
     {
         CreateMedicineViewModel vm = new();
         return View(model: vm);
     }
 
-    //[HttpPost]
-    //[Route("/Medicine/Create")]
-    //public async Task<IActionResult> CreateMedicine(CreateMedicineViewModel vm)
-    //{
-    //    var command = new HttpRequestMessage(HttpMethod.Post, $"v1/medicines");
-        
-    //}
+    [HttpPost]
+    [Route("/Medicine/Create")]
+    public async Task<IActionResult> CreateMedicine(CreateMedicineViewModel vm)
+    {
+        var result = await _client.CreateMedicine(vm.ToCommand());
+        return result > 0 ? RedirectToAction(nameof(Index)) : throw new Exception("Could not create new medicine");
+    }
+
+    [HttpGet]
+    [Route("/Medicine/Update/{id}")]
+    public async Task<IActionResult> UpdateMedicine(int id)
+    {
+        var fromApi = await _client.GetMedicineById(new(id));
+        UpdateMedicineViewModel vm = new()
+        {
+            Id = fromApi.Id,
+            Name = fromApi.Name,
+            HourlyCooldown = fromApi.HourlyCooldown,
+            MaxDailyAmount = fromApi.MaxDailyAmount,
+            MaxDaysOfTreatment = fromApi.MaxDaysOfTreatment
+        };
+        return View(model: vm);
+    }
+
+    [HttpPost]
+    [Route("/Medicine/Update/{id}")]
+    public async Task<IActionResult> UpdateMedicine(UpdateMedicineViewModel vm)
+    {
+        await _client.UpdateMedicine(vm.ToCommand());
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("/Medicine/Delete/{id}")]
+    public async Task<IActionResult> DeleteMedicine(int id)
+    {
+        await _client.DeleteMedicine(new(id));
+        return RedirectToAction(nameof(Index));
+    }
 }
 

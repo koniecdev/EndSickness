@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EndSickness</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css" asp-append-version="true">
 </head>
 <body>
-    @RenderBody()
+    <div class="container">
+        <header>
+            <div>
+                <h1>EndSickness</h1>
+            </div>
+            <div>
+                @await Component.InvokeAsync("UsernameViewComponents")
+            </div>
+        </header>
+        @RenderBody()
+    </div>
 </body>
 </html>

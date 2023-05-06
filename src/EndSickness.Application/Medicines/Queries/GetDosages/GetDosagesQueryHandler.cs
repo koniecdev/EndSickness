@@ -17,7 +17,8 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
 
     public async Task<GetDosagesVm> Handle(GetDosagesQuery request, CancellationToken cancellationToken)
     {
-        var listOfMedicineIdThatUserTake = await _db.MedicineLogs.Where(m => m.OwnerId == _currentUser.AppUserId && m.StatusId != 0)
+        var listOfMedicineIdThatUserTake = await _db.MedicineLogs.Include(m=>m.Medicine)
+            .Where(m => m.OwnerId == _currentUser.AppUserId && m.StatusId != 0 && m.Medicine.StatusId != 0)
             .Select(m => m.MedicineId).Distinct().ToListAsync(cancellationToken);
         if(listOfMedicineIdThatUserTake.Count == 0)
         {

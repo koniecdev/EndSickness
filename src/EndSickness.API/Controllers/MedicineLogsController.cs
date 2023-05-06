@@ -15,39 +15,41 @@ public class MedicineLogsController : BaseApiController
     public async Task<ActionResult<GetMedicineLogsVm>> Get()
     {
         var result = await Mediator.Send(new GetMedicineLogsQuery());
-        return result;
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<GetMedicineLogByIdVm>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineLogByIdQuery(id));
-        return result;
+        return Ok(result);
     }
 
     [HttpGet("medicine/{id}")]
     public async Task<ActionResult<GetMedicineLogsByMedicineIdVm>> GetByMedicineId(int id)
     {
         var result = await Mediator.Send(new GetMedicineLogsByMedicineIdQuery(id));
-        return result;
+        return Ok(result);
     }
 
     [HttpPost]
     public async Task<ActionResult<int>> Create(CreateMedicineLogCommand command)
     {
         var result = await Mediator.Send(command);
-        return result;
+        return Ok(result);
     }
 
     [HttpPatch]
-    public async Task Update(UpdateMedicineLogCommand command)
+    public async Task<ActionResult> Update(UpdateMedicineLogCommand command)
     {
         await Mediator.Send(command);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public async Task Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         await Mediator.Send(new DeleteMedicineLogCommand(id));
+        return NoContent();
     }
 }

@@ -1,5 +1,4 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
-using EndSickness.Shared.Medicines.Queries.GetMedicines;
+﻿using EndSickness.Shared.Medicines.Commands.CreateMedicine;
 
 namespace EndSickness.Models.ViewModels;
 public class CreateMedicineViewModel
@@ -12,4 +11,8 @@ public class CreateMedicineViewModel
     public int HourlyCooldown { get; set; }
     public int MaxDailyAmount { get; set; }
     public int MaxDaysOfTreatment { get; set; }
+    public CreateMedicineCommand ToCommand()
+    {
+        return new CreateMedicineCommand(Name, HourlyCooldown, MaxDailyAmount, MaxDaysOfTreatment);
+    }
 }

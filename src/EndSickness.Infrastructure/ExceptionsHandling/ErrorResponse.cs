@@ -7,4 +7,5 @@ public class ErrorResponse : IErrorResponse
         Message = string.Empty;
     }
     public string Message { get; set; }
+    public int ErrorCode { get; set; }
 }

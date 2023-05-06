@@ -1,0 +1,25 @@
+﻿@model EndSickness.Models.ViewModels.UpdateMedicineViewModel;
+
+<form method="post" class="_form">
+    <h2>Edit @Model.Name Medicine</h2>
+    <div>
+        <label asp-for="@Model.Name">Name of medicine</label>
+        <input type="text" asp-for="@Model.Name">
+    </div>
+    <div>
+        <label asp-for="@Model.HourlyCooldown">Hourly Cooldown between doses</label>
+        <input type="number" asp-for="@Model.HourlyCooldown">
+    </div>
+    <div>
+        <label asp-for="@Model.HourlyCooldown">How many times can You take it in 24h?</label>
+        <input type="number" asp-for="@Model.MaxDailyAmount">
+    </div>
+    <div>
+        <label asp-for="@Model.HourlyCooldown">For how long should You take this medicine?</label>
+        <input type="number" asp-for="@Model.MaxDaysOfTreatment">
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+    <input type="hidden" asp-for="@Model.Id">
+</form>

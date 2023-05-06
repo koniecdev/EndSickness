@@ -140,3 +140,26 @@ h1{
 .user_dosage_column_actions{
   width: max-content;
 }
+._form{
+  display: grid;
+  width: 400px;
+  padding: 2rem;
+  grid-gap: 1rem;
+}
+._form div{
+  display: grid;
+  grid-gap: .5rem;
+}
+._form input{
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  border: unset;
+  background-color: var(--app-lightgrey);
+  color: #fff;
+}
+._form input[type="submit"]{
+  background-color: var(--app-add);
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+}

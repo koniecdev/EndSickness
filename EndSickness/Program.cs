@@ -5,6 +5,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
 using System.Globalization;
+using EndSickness.Middlewares;
+using EndSickness.Exceptions;
+using EndSickness.Exceptions.Interfaces;
+using EndSickness.ExceptionsHandling.ExceptionHandlingStrategy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,18 +56,20 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.MapUniqueJsonKey("Email", "Email");
         options.ClaimActions.MapUniqueJsonKey("Name", "Name");
         options.ClaimActions.MapUniqueJsonKey("Username", "Username");
-    });
+    }); 
 
+builder.Services.AddTransient<IExceptionResponse, ExceptionResponse>();
+builder.Services.AddTransient<IExceptionHandlingStrategy, DefaultExceptionHandlingStrategy>();
 builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
-builder.Services.AddTransient<IRefreshTokenService, RefreshTokenService>();
-builder.Services.AddTransient(typeof(IEndCrudClient<>), typeof(EndCrudClient<>));
+builder.Services.AddTransient<IEndSicknessClient, EndSicknessClient>();
+
+
 var app = builder.Build();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
