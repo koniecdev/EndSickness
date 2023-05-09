@@ -1,0 +1,17 @@
+﻿@model EndSickness.Models.ViewModels.CreateMedicineLogViewModel;
+
+<form method="post" class="_form">
+    <h2>Add new Medicine</h2>
+    <div>
+        <label asp-for="@Model.MedicineId">What medicine did you take*</label>
+        <select asp-for="@Model.MedicineId" asp-items="@Model.Medicines">
+        </select>
+    </div>
+    <div>
+        <label asp-for="@Model.LastlyTaken">Hourly Cooldown between doses*</label>
+        <input type="datetime-local" asp-for="@Model.LastlyTaken">
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>

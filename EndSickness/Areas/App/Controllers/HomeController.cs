@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EndSickness.Services;
 using EndSickness.Models.ViewModels;
+using EndSickness.Extensions;
 
 namespace EndSickness.Area.App.Controllers;
 
@@ -82,6 +83,17 @@ public class HomeController : Controller
     {
         await _client.DeleteMedicine(new(id));
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("/Dosage/Note")]
+    public async Task<IActionResult> CreateMedicineLog()
+    {
+        var medicinesVm = await _client.GetAllMedicines();
+        CreateMedicineLogViewModel vm = new() {
+            Medicines = medicinesVm.Medicines.ToSelectListItem(1)
+        };
+        return View(model: vm);
     }
 }
 

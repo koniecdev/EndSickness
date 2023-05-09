@@ -47,8 +47,8 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
             {
                 MedicineId = medicine.Id,
                 MedicineName = medicine.Name,
-                LastDose = TimeOnly.FromDateTime(vmLastDose),
-                NextDose = TimeOnly.FromDateTime(vmNextDose)
+                LastDose = vmLastDose,
+                NextDose = vmNextDose
             });
         }
         return vm;

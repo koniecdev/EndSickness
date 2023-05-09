@@ -43,7 +43,7 @@ public class ExceptionHandlingMiddleware
             var exceptionName = exception.GetType().Name;
             var thrownExceptionStrategy = exceptionStrategiesList.First(m => m.Name.Contains(exceptionName)) ?? typeof(DefaultExceptionHandlingStrategy);
             exceptionHandler =
-                new(Activator.CreateInstance(thrownExceptionStrategy) as IExceptionHandlingStrategy ?? _defaultStrategy,
+                new(Activator.CreateInstance(thrownExceptionStrategy, _errorResponse) as IExceptionHandlingStrategy ?? _defaultStrategy,
                 exception);
         }
         else
