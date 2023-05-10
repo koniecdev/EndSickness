@@ -1,18 +1,18 @@
 ﻿using EndSickness.Application.Common.Exceptions;
-using EndSickness.Application.MedicineLogs.Commands.DeleteMedicineLog;
-using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
+using EndSickness.Application.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
+using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 using FluentValidation;
 
-namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.DeleteMedicineLog;
+namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 
-public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
+public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
 {
-    private readonly DeleteMedicineLogCommandHandler _handler;
-    private readonly DeleteMedicineLogCommandValidator _validator;
-    private readonly DeleteMedicineLogCommandValidator _validatorUnauthorized;
-    private readonly DeleteMedicineLogCommandValidator _validatorForbidden;
+    private readonly DeleteMedicineLogsByMedicineIdCommandHandler _handler;
+    private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validator;
+    private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validatorUnauthorized;
+    private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validatorForbidden;
 
-    public DeleteMedicineLogCommandHandlerTest()
+    public DeleteMedicineLogsByMedicineIdCommandHandlerTest()
     {
         _handler = new(_context);
         _validator = new(_context, _resourceOwnershipValidUser);
@@ -21,18 +21,18 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
-    public async Task DeleteMedicineLog_ValidUser_ShouldDelete()
+    public async Task DeleteMedicineLogsByMedicineId_ValidUser_ShouldDelete()
     {
-        var id = 4;
-        var command = new DeleteMedicineLogCommand(id);
+        var medicineId = 4;
+        var command = new DeleteMedicineLogsByMedicineIdCommand(medicineId);
         await ValidateAndHandleRequest(command, _validator);
-        _context.MedicineLogs.Where(m => m.StatusId != 0 && m.Id == id).Count().Should().Be(0);
+        _context.MedicineLogs.Where(m => m.StatusId != 0 && m.MedicineId == medicineId).Count().Should().Be(0);
     }
 
     [Fact]
-    public async Task DeleteMedicineLog_UnauthorizedUser_ShouldNotDelete()
+    public async Task DeleteMedicineLogsByMedicineId_UnauthorizedUser_ShouldNotDelete()
     {
-        var command = new DeleteMedicineLogCommand(4);
+        var command = new DeleteMedicineLogsByMedicineIdCommand(4);
         try
         {
             await ValidateAndHandleRequest(command, _validatorUnauthorized);
@@ -45,9 +45,9 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
-    public async Task DeleteMedicineLog_ForbiddenUser_ShouldNotDelete()
+    public async Task DeleteMedicineLogsByMedicineId_ForbiddenUser_ShouldNotDelete()
     {
-        var command = new DeleteMedicineLogCommand(4);
+        var command = new DeleteMedicineLogsByMedicineIdCommand(4);
         try
         {
             await ValidateAndHandleRequest(command, _validatorForbidden);
@@ -60,9 +60,9 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
     }
 
     [Fact]
-    public async Task DeleteMedicineLog_ValidUser_ShouldBeNotFound()
+    public async Task DeleteMedicineLogsByMedicineId_ValidUser_ShouldBeNotFound()
     {
-        var command = new DeleteMedicineLogCommand(124214);
+        var command = new DeleteMedicineLogsByMedicineIdCommand(124214);
         try
         {
             await ValidateAndHandleRequest(command, _validator);
@@ -74,7 +74,7 @@ public class DeleteMedicineLogCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task ValidateAndHandleRequest(DeleteMedicineLogCommand command, DeleteMedicineLogCommandValidator validator)
+    private async Task ValidateAndHandleRequest(DeleteMedicineLogsByMedicineIdCommand command, DeleteMedicineLogsByMedicineIdCommandValidator validator)
     {
         var validationResult = await validator.ValidateAsync(command);
         if (validationResult.IsValid)

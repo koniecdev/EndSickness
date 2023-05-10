@@ -1,4 +1,5 @@
-﻿@model EndSickness.Models.ViewModels.IndexViewModel;
+﻿@model EndSickness.Models.ViewModels.MedicineDosagesViewModel;
+
 <div class="main_container">
     <section class="user_medicines">
         <h2>Your medicines</h2>
@@ -25,43 +26,21 @@
     </section>
     <main class="user_dosages">
         <header>
-            <h2>Your schedule</h2>
-            <a href="/Dosage/Note" class="btn_add">
-                <img src="/img/icons8-plus-24.png">
-                <span>Note a dose</span>
-            </a>
+            <h2>@Model.Medicine.Name dosage history</h2>
         </header>
         <div class="user_dosages_list">
-            @foreach (var item in Model.DosageList.Dosages)
+            @foreach (var item in Model.MedicineLogsList.MedicineLogs)
             {
                 <div class="user_dosage">
                     <div class="user_dosage_column">
-                        <span>Name</span>
-                        <span>@item.MedicineName</span>
-                    </div>
-                    <div class="user_dosage_column">
-                        <span>Last dose</span>
-                        <span>@item.LastDose.ToString("d MMM yy HH:mm")</span>
-                    </div>
-                    <div class="user_dosage_column">
-                        <span>Next dose</span>
-                        <span>@item.NextDose.ToString("d MMM yy HH:mm")</span>
-                    </div>
-                    <div class="user_dosage_column">
-                        <span>Max. dosage time</span>
-                        <span>
-                            @{
-                                var x = Model.MedicineList.Medicines.Single(m => m.Id == item.MedicineId).MaxDaysOfTreatment;
-                            }
-                            @x
-                            @(x == 1 ? "day" : "days")
-                        </span>
+                        <span>Taken at</span>
+                        <span>@item.LastlyTaken</span>
                     </div>
                     <div class="user_dosage_column user_dosage_column_actions">
-                        <a href="/Medicine/@item.MedicineId/Dosages" class="btn_update">
+                        <a href="/" class="btn_update">
                             <img src="/img/icons8-edit-24.png">
                         </a>
-                        <a href="/Dosage/Delete/@item.MedicineId" class="btn_delete">
+                        <a href="/" class="btn_delete">
                             <img src="/img/icons8-remove-24.png">
                         </a>
                     </div>

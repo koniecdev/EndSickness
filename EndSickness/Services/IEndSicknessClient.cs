@@ -1,5 +1,6 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
+using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
@@ -27,8 +28,9 @@ namespace EndSickness.Services
         public Task<int> CreateMedicineLog(CreateMedicineLogCommand command);
         public Task UpdateMedicineLog(UpdateMedicineLogCommand command);
         public Task DeleteMedicineLog(DeleteMedicineLogCommand command);
+        public Task DeleteMedicineLogsByMedicineId(DeleteMedicineLogsByMedicineIdCommand command);
         public Task<GetMedicineLogsVm> GetAllMedicineLogs();
         public Task<GetMedicineLogByIdVm> GetMedicineLogById(GetMedicineLogByIdQuery query);
-        public Task<GetMedicineLogsByMedicineIdVm> GetMedicineLogByMedicineId(GetMedicineLogsByMedicineIdQuery query);
+        public Task<GetMedicineLogsByMedicineIdVm> GetMedicineLogsByMedicineId(GetMedicineLogsByMedicineIdQuery query);
     }
 }

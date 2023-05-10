@@ -1,6 +1,4 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
-using EndSickness.Shared.Medicines.Commands.CreateMedicine;
-using EndSickness.Shared.Medicines.Queries.GetMedicines;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EndSickness.Models.ViewModels;

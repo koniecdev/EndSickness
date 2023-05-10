@@ -3,6 +3,7 @@ using EndSickness.Exceptions.ApplicationExceptions;
 using EndSickness.Exceptions.Interfaces;
 using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
+using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
@@ -193,7 +194,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResults));
         }
     }
-    public async Task<GetMedicineLogsByMedicineIdVm> GetMedicineLogByMedicineId(GetMedicineLogsByMedicineIdQuery query)
+    public async Task<GetMedicineLogsByMedicineIdVm> GetMedicineLogsByMedicineId(GetMedicineLogsByMedicineIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
         var result = await _client
@@ -206,6 +207,16 @@ public class EndSicknessClient : IEndSicknessClient
         else
         {
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResults));
+        }
+    }
+    public async Task DeleteMedicineLogsByMedicineId(DeleteMedicineLogsByMedicineIdCommand command)
+    {
+        await AddAuthorizationHeaderAsync();
+        var result = await _client
+            .DeleteAsync($"{_client.BaseAddress}v1/medicine-logs/medicine/{command.MedicineId}");
+        if (result.StatusCode != System.Net.HttpStatusCode.NoContent)
+        {
+            throw new ApiUnsuccessfullResultException(DeserializeApiException(await result.Content.ReadAsStringAsync()));
         }
     }
 

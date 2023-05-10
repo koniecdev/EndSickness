@@ -39,7 +39,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
         {
             var id = 4;
             var newData = new DateTime(2022, 6, 6, 6, 6, 6);
-            var command = new UpdateMedicineLogCommand() { Id = id, LastlyTaken = newData };
+            var command = new UpdateMedicineLogCommand { Id = id, LastlyTaken = newData };
             await ValidateRequestAsync(command, _validator);
         }
         catch (Exception ex)

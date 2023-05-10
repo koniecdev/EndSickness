@@ -5,8 +5,6 @@ using EndSickness.Shared.Medicines.Queries.GetDosageById;
 using EndSickness.Shared.Medicines.Queries.GetDosages;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EndSickness.API.Controllers;
 

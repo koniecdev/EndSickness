@@ -1,5 +1,6 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
+using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
 using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
@@ -50,6 +51,13 @@ public class MedicineLogsController : BaseApiController
     public async Task<ActionResult> Delete(int id)
     {
         await Mediator.Send(new DeleteMedicineLogCommand(id));
+        return NoContent();
+    }
+
+    [HttpDelete("medicine/{id}")]
+    public async Task<ActionResult> DeleteByMedicineId(int id)
+    {
+        await Mediator.Send(new DeleteMedicineLogsByMedicineIdCommand(id));
         return NoContent();
     }
 }

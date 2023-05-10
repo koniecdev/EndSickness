@@ -86,6 +86,14 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Route("/Dosage/Delete/{id}")]
+    public async Task<IActionResult> DeleteMedicineLogs(int id)
+    {
+        await _client.DeleteMedicineLogsByMedicineId(new(id));
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
     [Route("/Dosage/Note")]
     public async Task<IActionResult> CreateMedicineLog()
     {
@@ -94,6 +102,35 @@ public class HomeController : Controller
             Medicines = medicinesVm.Medicines.ToSelectListItem(1)
         };
         return View(model: vm);
+    }
+    
+    [HttpPost]
+    [Route("/Dosage/Note")]
+    public async Task<IActionResult> CreateMedicineLog(CreateMedicineLogViewModel vm)
+    {
+        try
+        {
+            _ = await _client.CreateMedicineLog(vm.ToCommand());
+            return RedirectToAction(nameof(Index));
+        }
+        catch(Exception ex)
+        {
+            var medicinesList = await _client.GetAllMedicines();
+            vm.Medicines = medicinesList.Medicines.ToSelectListItem(1);
+            ViewBag.Errors = ex.Message;
+            return View(vm);
+        }
+    }
+
+    [HttpGet]
+    [Route("/Medicine/{id}/Dosages")]
+    public async Task<IActionResult> MedicineDosages(int id)
+    {
+        var medicineLogList = await _client.GetMedicineLogsByMedicineId(new(id));
+        var medicineLogListFormetted = medicineLogList with { MedicineLogs = medicineLogList.MedicineLogs.OrderByDescending(m=>m.LastlyTaken).ToList()};
+        var medicine = await _client.GetMedicineById(new(id));
+        var medicineList = await _client.GetAllMedicines();
+        return View(new MedicineDosagesViewModel(medicineLogListFormetted, medicineList, medicine));
     }
 }
 
