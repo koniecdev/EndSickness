@@ -9,6 +9,6 @@ public class CurrentUserService : ICurrentUserService
     {
         AppUserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(JwtClaimTypes.Id) ?? string.Empty;
     }
-    public string AppUserId { get; set; }
+    public string AppUserId { get; private set; }
     public bool IsAuthorized => !string.IsNullOrWhiteSpace(AppUserId);
 }

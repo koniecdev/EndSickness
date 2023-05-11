@@ -16,7 +16,8 @@ public class ResourceOwnershipService : IResourceOwnershipService
         {
             throw new UnauthorizedAccessException("Please log in first");
         }
-        else if (ownerId != _currentUserService.AppUserId)
+
+        if (ownerId != _currentUserService.AppUserId)
         {
             throw new ForbiddenAccessException();
         }

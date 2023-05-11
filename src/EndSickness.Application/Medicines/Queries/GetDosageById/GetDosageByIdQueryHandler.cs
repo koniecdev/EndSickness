@@ -7,16 +7,21 @@ public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, Get
 {
     private readonly IEndSicknessContext _db;
     private readonly ICalculateNeariestDosageService _calculateNeariestDosageService;
+    private readonly IResourceOwnershipService _ownershipService;
 
-    public GetDosageByIdQueryHandler(IEndSicknessContext db, ICalculateNeariestDosageService calculateNeariestDosageService)
+    public GetDosageByIdQueryHandler(IEndSicknessContext db, ICalculateNeariestDosageService calculateNeariestDosageService, IResourceOwnershipService ownershipService)
     {
         _db = db;
         _calculateNeariestDosageService = calculateNeariestDosageService;
+        _ownershipService = ownershipService;
     }
 
     public async Task<GetDosageByIdVm> Handle(GetDosageByIdQuery request, CancellationToken cancellationToken)
     {
-        var medicine = await _db.Medicines.SingleAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken);
+        var medicine =  await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.MedicineId).SingleOrDefaultAsync(cancellationToken)
+            ?? throw new ResourceNotFoundException();
+        _ownershipService.CheckOwnership(medicine.OwnerId);
+
         var medicineLogs = await _db.MedicineLogs
             .OrderByDescending(m=>m.LastlyTaken)
             .Where(m => m.MedicineId == medicine.Id && m.StatusId != 0)
@@ -24,7 +29,7 @@ public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, Get
 
         if(medicineLogs.Count == 0)
         {
-            throw new EmptyResultException();
+            throw new EmptyResultException(); //Exception handling middleware will translate this exception to 204 No Content result.
         }
 
         return VmFactory(medicine, medicineLogs);

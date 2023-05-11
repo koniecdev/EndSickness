@@ -7,7 +7,7 @@ public class UpdateMedicineLogCommandHandler : IRequestHandler<UpdateMedicineLog
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
 
-    public UpdateMedicineLogCommandHandler(IEndSicknessContext db, IMapper mapper)
+    public UpdateMedicineLogCommandHandler(IEndSicknessContext db, IMapper mapper, IResourceOwnershipService ownershipService)
     {
         _db = db;
         _mapper = mapper;
