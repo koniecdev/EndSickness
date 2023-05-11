@@ -86,10 +86,18 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    [Route("/Dosage/Delete/{id}")]
-    public async Task<IActionResult> DeleteMedicineLogs(int id)
+    [Route("/Dosages/Delete/{medicineId}")]
+    public async Task<IActionResult> DeleteMedicineLogs(int medicineId)
     {
-        await _client.DeleteMedicineLogsByMedicineId(new(id));
+        await _client.DeleteMedicineLogsByMedicineId(new(medicineId));
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("/Dosage/Delete/{id}")]
+    public async Task<IActionResult> DeleteMedicineLog(int id)
+    {
+        await _client.DeleteMedicineLog(new(id));
         return RedirectToAction(nameof(Index));
     }
 

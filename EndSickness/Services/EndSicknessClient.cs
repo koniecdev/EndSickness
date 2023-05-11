@@ -154,6 +154,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(await result.Content.ReadAsStringAsync()));
         }
     }
+
     public async Task DeleteMedicineLog(DeleteMedicineLogCommand command)
     {
         await AddAuthorizationHeaderAsync();
@@ -164,6 +165,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(await result.Content.ReadAsStringAsync()));
         }
     }
+
     public async Task<GetMedicineLogsVm> GetAllMedicineLogs()
     {
         await AddAuthorizationHeaderAsync();
@@ -179,6 +181,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResult));
         }
     }
+
     public async Task<GetMedicineLogByIdVm> GetMedicineLogById(GetMedicineLogByIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
@@ -194,6 +197,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResults));
         }
     }
+
     public async Task<GetMedicineLogsByMedicineIdVm> GetMedicineLogsByMedicineId(GetMedicineLogsByMedicineIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
@@ -209,6 +213,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResults));
         }
     }
+    
     public async Task DeleteMedicineLogsByMedicineId(DeleteMedicineLogsByMedicineIdCommand command)
     {
         await AddAuthorizationHeaderAsync();
