@@ -38,14 +38,13 @@ public class GetDosageByIdQueryHandler : IRequestHandler<GetDosageByIdQuery, Get
     private GetDosageByIdVm VmFactory(Medicine medicine, ICollection<MedicineLog> medicineLogs)
     {
         DateTime vmLastDose = medicineLogs.First().LastlyTaken;
-        DateTime vmNextDose = _calculateNeariestDosageService.Calculate(vmLastDose, medicine, medicineLogs);
 
         return new GetDosageByIdVm()
         {
             MedicineId = medicine.Id,
             MedicineName = medicine.Name,
             LastDose = vmLastDose,
-            NextDose = vmNextDose,
+            NextDose = _calculateNeariestDosageService.Calculate(vmLastDose, medicine, medicineLogs),
         };
     }
 }

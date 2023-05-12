@@ -7,19 +7,26 @@ public class CreateMedicineLogCommandHandler : IRequestHandler<CreateMedicineLog
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
+    private readonly IPreventOverdosingService _preventOverdosingService;
 
-    public CreateMedicineLogCommandHandler(IEndSicknessContext db, IMapper mapper)
+    public CreateMedicineLogCommandHandler(IEndSicknessContext db, IMapper mapper, IPreventOverdosingService preventOverdosingService)
     {
         _db = db;
         _mapper = mapper;
+        _preventOverdosingService = preventOverdosingService;
     }
 
     public async Task<int> Handle(CreateMedicineLogCommand request, CancellationToken cancellationToken)
     {
-        var mapped = _mapper.Map<MedicineLog>(request);
-        var medFromDb = await _db.Medicines.SingleAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken);
-        _db.MedicineLogs.Add(mapped);
+        var mappedMedicineLog = _mapper.Map<MedicineLog>(request);
+        await _preventOverdosingService.HandleAsync(request.MedicineId, request.LastlyTaken, cancellationToken);
+        await AddNewMedicineLogToDbAsync(mappedMedicineLog, cancellationToken);
+        return mappedMedicineLog.Id;
+    }
+
+    private async Task AddNewMedicineLogToDbAsync(MedicineLog medicineLog, CancellationToken cancellationToken)
+    {
+        _db.MedicineLogs.Add(medicineLog);
         await _db.SaveChangesAsync(cancellationToken);
-        return mapped.Id;
     }
 }

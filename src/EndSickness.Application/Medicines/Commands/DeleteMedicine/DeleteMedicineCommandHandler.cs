@@ -1,6 +1,4 @@
-﻿using EndSickness.Domain.Entities;
-using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
-using System.Threading;
+﻿using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
 
 namespace EndSickness.Application.Medicines.Commands.DeleteMedicine;
 
@@ -19,11 +17,6 @@ public class DeleteMedicineCommandHandler : IRequestHandler<DeleteMedicineComman
         var fromDb = await _db.Medicines.SingleOrDefaultAsync(m => m.StatusId != 0 && m.Id == request.Id, cancellationToken)
             ?? throw new ResourceNotFoundException();
         _ownershipService.CheckOwnership(fromDb.OwnerId);
-        await DeleteMedicineAsync(fromDb, cancellationToken);
-    }
-
-    private async Task DeleteMedicineAsync(Medicine fromDb, CancellationToken cancellationToken)
-    {
         _db.Medicines.Remove(fromDb);
         await _db.SaveChangesAsync(cancellationToken);
     }

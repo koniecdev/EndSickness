@@ -1,5 +1,4 @@
 ﻿using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogsByMedicineId;
-using EndSickness.Shared.Medicines.Queries.GetDosages;
 using EndSickness.Shared.Medicines.Queries.GetMedicineById;
 using EndSickness.Shared.Medicines.Queries.GetMedicines;
 

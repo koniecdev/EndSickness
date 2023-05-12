@@ -6,5 +6,4 @@ global using Microsoft.EntityFrameworkCore;
 global using AutoMapper.QueryableExtensions;
 global using EndSickness.Application.Common.Exceptions;
 global using EndSickness.Application.Common.Interfaces;
-global using EndSickness.Application.Common.Validation;
 global using AutoMapper;

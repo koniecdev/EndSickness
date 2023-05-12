@@ -1,4 +1,5 @@
 ﻿using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
+using MediatR;
 
 namespace EndSickness.Application.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 
@@ -14,12 +15,17 @@ public class DeleteMedicineLogsByMedicineIdCommandHandler : IRequestHandler<Dele
     }
     public async Task Handle(DeleteMedicineLogsByMedicineIdCommand request, CancellationToken cancellationToken)
     {
-        var medicine = await _db.Medicines.SingleOrDefaultAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken)
+        var requestedMedicineFromDb = await _db.Medicines.SingleOrDefaultAsync(m => m.Id == request.MedicineId && m.StatusId != 0, cancellationToken)
             ?? throw new ResourceNotFoundException();
-        _ownershipService.CheckOwnership(medicine.OwnerId);
+        _ownershipService.CheckOwnership(requestedMedicineFromDb.OwnerId);
 
-        var fromDb = await _db.MedicineLogs.Where(m => m.MedicineId == request.MedicineId && m.StatusId != 0).ToListAsync(cancellationToken);
-        _db.MedicineLogs.RemoveRange(fromDb);
+        await RemoveMedicineLogsAssociatedToGivenMedicine(requestedMedicineFromDb.Id, cancellationToken);
+    }
+
+    public async Task RemoveMedicineLogsAssociatedToGivenMedicine(int medicineId, CancellationToken cancellationToken)
+    {
+        var medicineLogsOfRequestedMedicineList = await _db.MedicineLogs.Where(m => m.MedicineId == medicineId && m.StatusId != 0).ToListAsync(cancellationToken);
+        _db.MedicineLogs.RemoveRange(medicineLogsOfRequestedMedicineList);
         await _db.SaveChangesAsync(cancellationToken);
     }
 }

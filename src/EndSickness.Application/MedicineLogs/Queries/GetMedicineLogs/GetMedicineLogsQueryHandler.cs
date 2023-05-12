@@ -17,13 +17,12 @@ public class GetMedicineLogsQueryHandler : IRequestHandler<GetMedicineLogsQuery,
 
     public async Task<GetMedicineLogsVm> Handle(GetMedicineLogsQuery request, CancellationToken cancellationToken)
     {
-        var fromDb = await _db.MedicineLogs.Include(m => m.Medicine).Where(m => m.StatusId != 0 && m.OwnerId == _currentUser.AppUserId)
+        var medicineLogsFromDbList = await _db.MedicineLogs.Include(m => m.Medicine).Where(m => m.StatusId != 0 && m.OwnerId == _currentUser.AppUserId)
             .ProjectTo<GetMedicineLogsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-        if(fromDb.Count == 0)
+        if(medicineLogsFromDbList.Count == 0)
         {
             throw new EmptyResultException();
         }
-        var vm = new GetMedicineLogsVm(fromDb);
-        return vm;
+        return new GetMedicineLogsVm(medicineLogsFromDbList);
     }
 }
