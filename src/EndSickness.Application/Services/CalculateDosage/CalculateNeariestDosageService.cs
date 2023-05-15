@@ -16,10 +16,7 @@ public class CalculateNeariestDosageService : ICalculateNeariestDosageService
             {
                 return theoreticalNextDoseDateIfWeDontIncludeDailyLimit;
             }
-            else
-            {
-                return nextDoseWithDailyMax;
-            }
+            return nextDoseWithDailyMax;
         }
         return theoreticalNextDoseDateIfWeDontIncludeDailyLimit;
     }

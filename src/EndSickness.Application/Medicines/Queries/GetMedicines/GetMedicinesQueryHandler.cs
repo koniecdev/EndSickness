@@ -18,7 +18,7 @@ public class GetMedicinesQueryHandler : IRequestHandler<GetMedicinesQuery, GetMe
     public async Task<GetMedicinesVm> Handle(GetMedicinesQuery request, CancellationToken cancellationToken)
     {
         var result = await _db.Medicines.Where(m => m.StatusId != 0 && m.OwnerId == _currentUser.AppUserId)
-            .ProjectTo<GetMedicinesDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+            .ProjectTo<MedicineDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
         if(result.Count == 0)
         {
             throw new EmptyResultException();

@@ -7,3 +7,4 @@ global using AutoMapper.QueryableExtensions;
 global using EndSickness.Application.Common.Exceptions;
 global using EndSickness.Application.Common.Interfaces;
 global using AutoMapper;
+global using EndSickness.Shared.Dtos;

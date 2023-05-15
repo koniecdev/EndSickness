@@ -2,7 +2,7 @@
 
 namespace EndSickness.Application.Medicines.Queries.GetMedicineById;
 
-public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery, GetMedicineByIdVm>
+public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery, MedicineDto>
 {
     private readonly IEndSicknessContext _db;
     private readonly IMapper _mapper;
@@ -15,11 +15,11 @@ public class GetMedicineByIdQueryHandler : IRequestHandler<GetMedicineByIdQuery,
         _ownershipService = ownershipService;
     }
 
-    public async Task<GetMedicineByIdVm> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
+    public async Task<MedicineDto> Handle(GetMedicineByIdQuery request, CancellationToken cancellationToken)
     {
         var fromDb = await _db.Medicines.Where(m => m.StatusId != 0 && m.Id == request.Id).SingleOrDefaultAsync(cancellationToken)
             ?? throw new ResourceNotFoundException();
         _ownershipService.CheckOwnership(fromDb.OwnerId);
-        return _mapper.Map<GetMedicineByIdVm>(fromDb);
+        return _mapper.Map<MedicineDto>(fromDb);
     }
 }

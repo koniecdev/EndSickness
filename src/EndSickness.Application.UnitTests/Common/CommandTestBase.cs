@@ -1,4 +1,5 @@
-﻿using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
+﻿using EndSickness.Application.Services.CalculateDosage;
+using EndSickness.Application.UnitTests.Common.CurrentUserServiceFactories;
 using EndSickness.Shared.Common.Mappings;
 
 namespace EndSickness.Application.UnitTests.Common;
@@ -13,6 +14,8 @@ public class CommandTestBase : IDisposable
     protected readonly EndSicknessContext _context;
     protected readonly IMapper _mapper;
     protected readonly IDateTime _time;
+    protected readonly IPreventOverdosingService _overdosingService;
+
     protected readonly ICurrentUserService _currentUser;
     protected readonly ICurrentUserService _unauthorizedCurrentUser;
     protected readonly ICurrentUserService _forbiddenCurrentUser;
@@ -25,9 +28,11 @@ public class CommandTestBase : IDisposable
 
     public CommandTestBase()
     {
+
         _dbContextMockFactory = new EndSicknessContextMockFactory();
         _context = _dbContextMockFactory.Create().Object;
         _mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); }).CreateMapper();
+        _overdosingService = new PreventOverdosingService(_context);
 
         var dateTimeMock = new Mock<IDateTime>();
         dateTimeMock.Setup(m => m.Now).Returns(new DateTime(2023, 12, 4, 4, 4, 4));

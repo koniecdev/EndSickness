@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
+﻿using EndSickness.Shared.Dtos;
+using EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
 
 namespace EndSickness.Application.MedicineLogs.Queries.GetMedicineLogs;
 
@@ -18,7 +19,7 @@ public class GetMedicineLogsQueryHandler : IRequestHandler<GetMedicineLogsQuery,
     public async Task<GetMedicineLogsVm> Handle(GetMedicineLogsQuery request, CancellationToken cancellationToken)
     {
         var medicineLogsFromDbList = await _db.MedicineLogs.Include(m => m.Medicine).Where(m => m.StatusId != 0 && m.OwnerId == _currentUser.AppUserId)
-            .ProjectTo<GetMedicineLogsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+            .ProjectTo<MedicineLogDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
         if(medicineLogsFromDbList.Count == 0)
         {
             throw new EmptyResultException();

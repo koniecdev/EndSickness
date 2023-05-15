@@ -7,24 +7,24 @@ namespace EndSickness.Application.UnitTests.Tests.Medicines.Queries.GetMedicineB
 [Collection("QueryCollection")]
 public class GetMedicineByIdQueryHandlerTest : QueryTestBase
 {
-    private readonly GetMedicineByIdQueryHandler _handler;
     private readonly GetMedicineByIdQueryValidator _validate;
-    private readonly GetMedicineByIdQueryValidator _validateUnauthorized;
-    private readonly GetMedicineByIdQueryValidator _validateForbidden;
+    private readonly GetMedicineByIdQueryHandler _handler;
+    private readonly GetMedicineByIdQueryHandler _handlerUnauthorized;
+    private readonly GetMedicineByIdQueryHandler _handlerForbidden;
 
     public GetMedicineByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _mapper);
-        _validate = new(_context, _resourceOwnershipValidUser);
-        _validateUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
-        _validateForbidden = new(_context, _resourceOwnershipInvalidUser);
+        _validate = new();
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
+        _handlerUnauthorized = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
+        _handlerForbidden = new(_context, _mapper, _resourceOwnershipInvalidUser);
     }
 
     [Fact]
     public async Task GetMedicineByIdQueryTest_ShouldBeValid()
     {
         var query = new GetMedicineByIdQuery(1);
-        await _validate.ValidateAsync(query);
+        _validate.Validate(query);
         var result = await _handler.Handle(query, CancellationToken.None);
         result.Id.Should().Be(1);
     }
@@ -33,7 +33,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
     public async Task GetMedicineByIdQueryTest_ShouldAllProperiesBePopulated()
     {
         var query = new GetMedicineByIdQuery(1);
-        await _validate.ValidateAsync(query);
+        _validate.Validate(query);
         var result = await _handler.Handle(query, CancellationToken.None);
         (result.Id == 1 && result.Name == "Nurofen" && result.HourlyCooldown == 4
             && result.MaxDailyAmount == 3
@@ -47,7 +47,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var query = new GetMedicineByIdQuery(3);
-            await _validate.ValidateAsync(query);
+            _validate.Validate(query);
             var result = await _handler.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
@@ -63,7 +63,7 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var query = new GetMedicineByIdQuery(3);
-            await _validate.ValidateAsync(query);
+            _validate.Validate(query);
             var result = await _handler.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
@@ -79,8 +79,8 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var query = new GetMedicineByIdQuery(1);
-            await _validateUnauthorized.ValidateAsync(query);
-            var result = await _handler.Handle(query, CancellationToken.None);
+            _validate.Validate(query);
+            var result = await _handlerUnauthorized.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -95,8 +95,8 @@ public class GetMedicineByIdQueryHandlerTest : QueryTestBase
         try
         {
             var query = new GetMedicineByIdQuery(1);
-            await _validateForbidden.ValidateAsync(query);
-            var result = await _handler.Handle(query, CancellationToken.None);
+            _validate.Validate(query);
+            var result = await _handlerForbidden.Handle(query, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)

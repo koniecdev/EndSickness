@@ -13,7 +13,8 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-        services.AddTransient<ICalculateNeariestDosageService, CalculateNeariestDosageService>();
+        services.AddScoped<ICalculateNeariestDosageService, CalculateNeariestDosageService>();
+        services.AddScoped<IPreventOverdosingService, PreventOverdosingService>();
         return services;
     }
 }

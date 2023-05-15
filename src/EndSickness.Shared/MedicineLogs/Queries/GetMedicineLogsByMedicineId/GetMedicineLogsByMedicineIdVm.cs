@@ -11,6 +11,6 @@ public record GetMedicineLogsByMedicineIdVm : IMapQuery<MedicineLog>
         MedicineLogs = medicineLogs;
         MedicineId = medicineId;
     }
-    public int MedicineId { get; set; }
+    public int MedicineId { get; init; }
     public ICollection<GetMedicineLogsByMedicineIdDto> MedicineLogs { get; init; }
 }

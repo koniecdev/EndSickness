@@ -7,24 +7,24 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.CreateMe
 
 public class CreateMedicineLogCommandHandlerTest : CommandTestBase
 {
-    private readonly CreateMedicineLogCommandHandler _handler;
     private readonly CreateMedicineLogCommandValidator _validator;
-    private readonly CreateMedicineLogCommandValidator _validatorUnauthorized;
-    private readonly CreateMedicineLogCommandValidator _validatorForbidden;
+    private readonly CreateMedicineLogCommandHandler _handler;
+    private readonly CreateMedicineLogCommandHandler _handlerUnauthorized;
+    private readonly CreateMedicineLogCommandHandler _handlerForbidden;
 
     public CreateMedicineLogCommandHandlerTest()
     {
-        _handler = new(_context, _mapper);
-        _validator = new(_time, _context, _resourceOwnershipValidUser);
-        _validatorUnauthorized = new(_time, _context, _resourceOwnershipUnauthorizedUser);
-        _validatorForbidden = new(_time, _context, _resourceOwnershipForbiddenUser);
+        _validator = new(_time);
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser, _overdosingService);
+        _handlerUnauthorized = new(_context, _mapper, _resourceOwnershipUnauthorizedUser, _overdosingService);
+        _handlerForbidden = new(_context, _mapper, _resourceOwnershipForbiddenUser, _overdosingService);
     }
 
     [Fact]
     public async Task MinimumDataRequestGiven_CreateMedicineLog_ValidUser_ShouldBeValid()
     {
         var command = new CreateMedicineLogCommand(1, _time.Now);
-        var response = await ValidateAndHandleRequest(command, _validator);
+        var response = await ValidateAndHandleRequest(command, _handler);
         response.Should().BeGreaterThan(0);
     }
 
@@ -34,7 +34,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1111, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _validator);
+            var response = await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
@@ -49,7 +49,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now - TimeSpan.FromDays(1000));
-            var response = await ValidateAndHandleRequest(command, _validator);
+            var response = await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -64,7 +64,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _validatorUnauthorized);
+            var response = await ValidateAndHandleRequest(command, _handlerUnauthorized);
         }
         catch(Exception ex)
         {
@@ -78,7 +78,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, _time.Now);
-            var response = await ValidateAndHandleRequest(command, _validatorForbidden);
+            var response = await ValidateAndHandleRequest(command, _handlerForbidden);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch(Exception ex)
@@ -93,7 +93,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(5, new DateTime(2023, 1, 2, 12, 30, 0));
-            var response = await ValidateAndHandleRequest(command, _validator);
+            var response = await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -108,7 +108,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 1, 14, 0, 0));
-            var response = await ValidateAndHandleRequest(command, _validator);
+            var response = await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -123,7 +123,7 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
         try
         {
             var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 2, 7, 0, 0));
-            var response = await ValidateAndHandleRequest(command, _validator);
+            var response = await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -136,16 +136,16 @@ public class CreateMedicineLogCommandHandlerTest : CommandTestBase
     public async Task ValidRequest_CreateMedicineLog_ValidUser_ShouldBeValid()
     {
         var command = new CreateMedicineLogCommand(1, new DateTime(2023, 1, 2, 15, 0, 0));
-        var response = await ValidateAndHandleRequest(command, _validator);
+        var response = await ValidateAndHandleRequest(command, _handler);
         response.Should().BeGreaterThan(0);
     }
 
-    private async Task<int> ValidateAndHandleRequest(CreateMedicineLogCommand command, CreateMedicineLogCommandValidator validator)
+    private async Task<int> ValidateAndHandleRequest(CreateMedicineLogCommand command, CreateMedicineLogCommandHandler handler)
     {
-        var validationResult = await validator.ValidateAsync(command);
+        var validationResult = await _validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            var response = await _handler.Handle(command, CancellationToken.None);
+            var response = await handler.Handle(command, CancellationToken.None);
             return response;
         }
         else

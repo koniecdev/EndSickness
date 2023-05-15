@@ -1,6 +1,8 @@
-﻿namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
+﻿using EndSickness.Shared.Dtos;
 
-public record GetMedicineLogByIdQuery : IRequest<GetMedicineLogByIdVm>
+namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogById;
+
+public record GetMedicineLogByIdQuery : IRequest<MedicineLogDto>
 {
     public GetMedicineLogByIdQuery(int id)
     {

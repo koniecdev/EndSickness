@@ -7,17 +7,17 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.DeleteMe
 
 public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
 {
-    private readonly DeleteMedicineLogsByMedicineIdCommandHandler _handler;
     private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validator;
-    private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validatorUnauthorized;
-    private readonly DeleteMedicineLogsByMedicineIdCommandValidator _validatorForbidden;
+    private readonly DeleteMedicineLogsByMedicineIdCommandHandler _handler;
+    private readonly DeleteMedicineLogsByMedicineIdCommandHandler _handlerUnauthorized;
+    private readonly DeleteMedicineLogsByMedicineIdCommandHandler _handlerForbidden;
 
     public DeleteMedicineLogsByMedicineIdCommandHandlerTest()
     {
-        _handler = new(_context);
-        _validator = new(_context, _resourceOwnershipValidUser);
-        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
-        _validatorForbidden = new(_context, _resourceOwnershipForbiddenUser);
+        _validator = new();
+        _handler = new(_context, _resourceOwnershipValidUser);
+        _handlerUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
+        _handlerForbidden = new(_context, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
     {
         var medicineId = 4;
         var command = new DeleteMedicineLogsByMedicineIdCommand(medicineId);
-        await ValidateAndHandleRequest(command, _validator);
+        await ValidateAndHandleRequest(command, _handler);
         _context.MedicineLogs.Where(m => m.StatusId != 0 && m.MedicineId == medicineId).Count().Should().Be(0);
     }
 
@@ -35,7 +35,7 @@ public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineLogsByMedicineIdCommand(4);
         try
         {
-            await ValidateAndHandleRequest(command, _validatorUnauthorized);
+            await ValidateAndHandleRequest(command, _handlerUnauthorized);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -50,7 +50,7 @@ public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineLogsByMedicineIdCommand(4);
         try
         {
-            await ValidateAndHandleRequest(command, _validatorForbidden);
+            await ValidateAndHandleRequest(command, _handlerForbidden);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -65,7 +65,7 @@ public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
         var command = new DeleteMedicineLogsByMedicineIdCommand(124214);
         try
         {
-            await ValidateAndHandleRequest(command, _validator);
+            await ValidateAndHandleRequest(command, _handler);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -74,12 +74,12 @@ public class DeleteMedicineLogsByMedicineIdCommandHandlerTest : CommandTestBase
         }
     }
 
-    private async Task ValidateAndHandleRequest(DeleteMedicineLogsByMedicineIdCommand command, DeleteMedicineLogsByMedicineIdCommandValidator validator)
+    private async Task ValidateAndHandleRequest(DeleteMedicineLogsByMedicineIdCommand command, DeleteMedicineLogsByMedicineIdCommandHandler handler)
     {
-        var validationResult = await validator.ValidateAsync(command);
+        var validationResult = _validator.Validate(command);
         if (validationResult.IsValid)
         {
-            await _handler.Handle(command, CancellationToken.None);
+            await handler.Handle(command, CancellationToken.None);
         }
         else
         {
