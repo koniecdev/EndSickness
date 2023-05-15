@@ -6,27 +6,18 @@ public class CalculateNeariestDosageService : ICalculateNeariestDosageService
 {
     public DateTime Calculate(DateTime lastDose, Medicine operatingMedicine, ICollection<MedicineLog> operatingMedicineLogs)
     {
-        DateTime? vmNextDose;
         var previousDayDoses = operatingMedicineLogs.OrderBy(m => m.LastlyTaken).Where(m => m.LastlyTaken >= lastDose - TimeSpan.FromHours(24)).ToList();
-        var theoreticalNextDoseIfWeDontIncludeDailyLimit = previousDayDoses.Last().LastlyTaken + TimeSpan.FromHours(operatingMedicine.HourlyCooldown);
+        DateTime theoreticalNextDoseDateIfWeDontIncludeDailyLimit = previousDayDoses.Last().LastlyTaken + TimeSpan.FromHours(operatingMedicine.HourlyCooldown);
 
         if (previousDayDoses.Count == operatingMedicine.MaxDailyAmount)
         {
             var nextDoseWithDailyMax = previousDayDoses.First().LastlyTaken + TimeSpan.FromHours(24);
-            if (nextDoseWithDailyMax < theoreticalNextDoseIfWeDontIncludeDailyLimit)
+            if (nextDoseWithDailyMax < theoreticalNextDoseDateIfWeDontIncludeDailyLimit)
             {
-                vmNextDose = theoreticalNextDoseIfWeDontIncludeDailyLimit;
+                return theoreticalNextDoseDateIfWeDontIncludeDailyLimit;
             }
-            else
-            {
-                vmNextDose = nextDoseWithDailyMax;
-            }
+            return nextDoseWithDailyMax;
         }
-        else //overdose is not possible
-        {
-            vmNextDose = theoreticalNextDoseIfWeDontIncludeDailyLimit;
-        }
-
-        return vmNextDose.Value;
+        return theoreticalNextDoseDateIfWeDontIncludeDailyLimit;
     }
 }

@@ -1,18 +1,20 @@
-﻿namespace EndSickness.Shared.MedicineLogs.Queries.GetMedicineLogs;
+﻿namespace EndSickness.Shared.Dtos;
 
-public record GetMedicineLogsMedicineDto : IMapQuery<Medicine>
+public record MedicineDto : IMapQuery<Medicine>
 {
-    public GetMedicineLogsMedicineDto()
+    public MedicineDto()
     {
         Name = string.Empty;
     }
-    public GetMedicineLogsMedicineDto(string name, int hourlyCooldown, int maxDailyAmount, int maxDaysOfTreatment)
+    public MedicineDto(int id, string name, int hourlyCooldown, int maxDailyAmount, int maxDaysOfTreatment)
     {
+        Id = id;
         Name = name;
         HourlyCooldown = hourlyCooldown;
         MaxDailyAmount = maxDailyAmount;
         MaxDaysOfTreatment = maxDaysOfTreatment;
     }
+    public int Id { get; init; }
     public string Name { get; init; }
     public int HourlyCooldown { get; init; }
     public int MaxDailyAmount { get; init; }

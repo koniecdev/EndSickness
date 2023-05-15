@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
+﻿using EndSickness.Shared.Dtos;
+using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
 using EndSickness.Shared.MedicineLogs.Commands.UpdateMedicineLog;
@@ -20,7 +21,7 @@ public class MedicineLogsController : BaseApiController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetMedicineLogByIdVm>> Get(int id)
+    public async Task<ActionResult<MedicineLogDto>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineLogByIdQuery(id));
         return Ok(result);

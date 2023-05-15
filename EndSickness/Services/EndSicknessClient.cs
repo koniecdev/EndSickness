@@ -1,6 +1,7 @@
 ﻿using EndSickness.Exceptions;
 using EndSickness.Exceptions.ApplicationExceptions;
 using EndSickness.Exceptions.Interfaces;
+using EndSickness.Shared.Dtos;
 using EndSickness.Shared.MedicineLogs.Commands.CreateMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLog;
 using EndSickness.Shared.MedicineLogs.Commands.DeleteMedicineLogsByMedicineId;
@@ -83,7 +84,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResult));
         }
     }
-    public async Task<GetMedicineByIdVm> GetMedicineById(GetMedicineByIdQuery query)
+    public async Task<MedicineDto> GetMedicineById(GetMedicineByIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
         var result = await _client
@@ -91,7 +92,7 @@ public class EndSicknessClient : IEndSicknessClient
         var stringResults = await result.Content.ReadAsStringAsync();
         if (result.IsSuccessStatusCode)
         {
-            return JsonConvert.DeserializeObject<GetMedicineByIdVm>(stringResults);
+            return JsonConvert.DeserializeObject<MedicineDto>(stringResults);
         }
         else
         {
@@ -114,7 +115,7 @@ public class EndSicknessClient : IEndSicknessClient
             throw new ApiUnsuccessfullResultException(DeserializeApiException(stringResults));
         }
     }
-    public async Task<GetDosageByIdVm> GetDosageById(GetDosageByIdQuery query)
+    public async Task<DosageDto> GetDosageById(GetDosageByIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
         var result = await _client
@@ -122,7 +123,7 @@ public class EndSicknessClient : IEndSicknessClient
         var stringResults = await result.Content.ReadAsStringAsync();
         if (result.IsSuccessStatusCode)
         {
-            return JsonConvert.DeserializeObject<GetDosageByIdVm>(stringResults);
+            return JsonConvert.DeserializeObject<DosageDto>(stringResults);
         }
         else
         {
@@ -182,7 +183,7 @@ public class EndSicknessClient : IEndSicknessClient
         }
     }
 
-    public async Task<GetMedicineLogByIdVm> GetMedicineLogById(GetMedicineLogByIdQuery query)
+    public async Task<MedicineLogDto> GetMedicineLogById(GetMedicineLogByIdQuery query)
     {
         await AddAuthorizationHeaderAsync();
         var result = await _client
@@ -190,7 +191,7 @@ public class EndSicknessClient : IEndSicknessClient
         var stringResults = await result.Content.ReadAsStringAsync();
         if (result.IsSuccessStatusCode)
         {
-            return JsonConvert.DeserializeObject<GetMedicineLogByIdVm>(stringResults);
+            return JsonConvert.DeserializeObject<MedicineLogDto>(stringResults);
         }
         else
         {

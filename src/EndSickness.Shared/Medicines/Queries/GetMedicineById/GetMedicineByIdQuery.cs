@@ -1,6 +1,8 @@
-﻿namespace EndSickness.Shared.Medicines.Queries.GetMedicineById;
+﻿using EndSickness.Shared.Dtos;
 
-public record GetMedicineByIdQuery : IRequest<GetMedicineByIdVm>
+namespace EndSickness.Shared.Medicines.Queries.GetMedicineById;
+
+public record GetMedicineByIdQuery : IRequest<MedicineDto>
 {
     public GetMedicineByIdQuery(int id)
     {

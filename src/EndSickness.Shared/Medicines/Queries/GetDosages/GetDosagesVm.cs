@@ -1,14 +1,5 @@
-﻿namespace EndSickness.Shared.Medicines.Queries.GetDosages;
+﻿using EndSickness.Shared.Dtos;
 
-public record GetDosagesVm
-{
-    public GetDosagesVm()
-    {
-        Dosages = new List<GetDosagesDto>();
-    }
-    public GetDosagesVm(ICollection<GetDosagesDto> medicines)
-    {
-        Dosages = medicines;
-    }
-    public ICollection<GetDosagesDto> Dosages { get; init; }
-}
+namespace EndSickness.Shared.Medicines.Queries.GetDosages;
+
+public record GetDosagesVm(ICollection<DosageDto> Dosages);

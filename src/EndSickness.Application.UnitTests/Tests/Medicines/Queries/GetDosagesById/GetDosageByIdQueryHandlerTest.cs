@@ -12,8 +12,8 @@ public class GetDosageByIdQueryHandlerTest : QueryTestBase
 
     public GetDosageByIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, new CalculateNeariestDosageService());
-        _validator = new(_context, _resourceOwnershipValidUser);
+        _handler = new(_context, new CalculateNeariestDosageService(), _resourceOwnershipValidUser);
+        _validator = new();
     }
 
     [Fact]

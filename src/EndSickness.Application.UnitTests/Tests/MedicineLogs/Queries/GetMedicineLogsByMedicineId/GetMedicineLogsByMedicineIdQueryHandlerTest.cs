@@ -9,15 +9,15 @@ public class GetMedicineLogsByMedicineIdQueryHandlerTest : QueryTestBase
 {
     private readonly GetMedicineLogsByMedicineIdQueryHandler _handler;
     private readonly GetMedicineLogsByMedicineIdQueryValidator _validator;
-    private readonly GetMedicineLogsByMedicineIdQueryValidator _validatorUnauthorized;
-    private readonly GetMedicineLogsByMedicineIdQueryValidator _validatorForbidden;
+    private readonly GetMedicineLogsByMedicineIdQueryHandler _handlerUnauthorized;
+    private readonly GetMedicineLogsByMedicineIdQueryHandler _handlerForbidden;
 
     public GetMedicineLogsByMedicineIdQueryHandlerTest() : base()
     {
-        _handler = new(_context, _mapper);
-        _validator = new(_context, _resourceOwnershipValidUser);
-        _validatorUnauthorized = new(_context, _resourceOwnershipUnauthorizedUser);
-        _validatorForbidden = new(_context, _resourceOwnershipInvalidUser);
+        _validator = new();
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
+        _handlerUnauthorized = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
+        _handlerForbidden = new(_context, _mapper, _resourceOwnershipInvalidUser);
     }
 
     [Fact]
@@ -39,8 +39,8 @@ public class GetMedicineLogsByMedicineIdQueryHandlerTest : QueryTestBase
         try
         {
             var request = new GetMedicineLogsByMedicineIdQuery(1);
-            await _validatorUnauthorized.ValidateAsync(request);
-            var response = await _handler.Handle(request, CancellationToken.None);
+            _validator.Validate(request);
+            var response = await _handlerUnauthorized.Handle(request, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -54,8 +54,8 @@ public class GetMedicineLogsByMedicineIdQueryHandlerTest : QueryTestBase
         try
         {
             var request = new GetMedicineLogsByMedicineIdQuery(1);
-            await _validatorForbidden.ValidateAsync(request);
-            var response = await _handler.Handle(request, CancellationToken.None);
+            _validator.Validate(request);
+            var response = await _handlerForbidden.Handle(request, CancellationToken.None);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)

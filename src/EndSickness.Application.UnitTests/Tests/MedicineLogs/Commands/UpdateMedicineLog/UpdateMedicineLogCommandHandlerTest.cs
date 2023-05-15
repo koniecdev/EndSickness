@@ -7,17 +7,17 @@ namespace EndSickness.Application.UnitTests.Tests.MedicineLogs.Commands.UpdateMe
 
 public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
 {
-    private readonly UpdateMedicineLogCommandHandler _handler;
     private readonly UpdateMedicineLogCommandValidator _validator;
-    private readonly UpdateMedicineLogCommandValidator _validatorUnauthorized;
-    private readonly UpdateMedicineLogCommandValidator _validatorForbidden;
+    private readonly UpdateMedicineLogCommandHandler _handler;
+    private readonly UpdateMedicineLogCommandHandler _handlerUnauthorized;
+    private readonly UpdateMedicineLogCommandHandler _handlerForbidden;
 
     public UpdateMedicineLogCommandHandlerTest()
     {
-        _handler = new(_context, _mapper);
-        _validator = new(_time, _context, _resourceOwnershipValidUser);
-        _validatorUnauthorized = new(_time, _context, _resourceOwnershipUnauthorizedUser);
-        _validatorForbidden = new(_time, _context, _resourceOwnershipForbiddenUser);
+        _validator = new(_time);
+        _handler = new(_context, _mapper, _resourceOwnershipValidUser);
+        _handlerUnauthorized = new(_context, _mapper, _resourceOwnershipUnauthorizedUser);
+        _handlerForbidden = new(_context, _mapper, _resourceOwnershipForbiddenUser);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
         var id = 4;
         var newData = new DateTime(2023, 6, 6, 6, 6, 6);
         var command = new UpdateMedicineLogCommand() { Id = id, LastlyTaken = newData };
-        await ValidateRequestAsync(command, _validator);
+        await ValidateRequestAsync(command, _handler);
         var updatedFromDb = await _context.MedicineLogs.SingleAsync(m => m.Id == id);
         updatedFromDb.LastlyTaken.Equals(newData).Should().Be(true);
     }
@@ -40,7 +40,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
             var id = 4;
             var newData = new DateTime(2022, 6, 6, 6, 6, 6);
             var command = new UpdateMedicineLogCommand { Id = id, LastlyTaken = newData };
-            await ValidateRequestAsync(command, _validator);
+            await ValidateRequestAsync(command, _handler);
         }
         catch (Exception ex)
         {
@@ -56,7 +56,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
             var id = 4;
             var newData = new DateTime(2024, 6, 6, 6, 6, 6);
             var command = new UpdateMedicineLogCommand() { Id = id, LastlyTaken = newData };
-            await ValidateRequestAsync(command, _validator);
+            await ValidateRequestAsync(command, _handler);
         }
         catch (Exception ex)
         {
@@ -72,7 +72,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
             var id = 4;
             var newData = new DateTime(2023, 6, 6, 6, 6, 6);
             var command = new UpdateMedicineLogCommand() { Id = id, LastlyTaken = newData };
-            await ValidateRequestAsync(command, _validatorUnauthorized);
+            await ValidateRequestAsync(command, _handlerUnauthorized);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -89,7 +89,7 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
         {
             var newData = new DateTime(2023, 6, 6, 6, 6, 6);
             var command = new UpdateMedicineLogCommand() { Id = id, LastlyTaken = newData };
-            await ValidateRequestAsync(command, _validatorForbidden);
+            await ValidateRequestAsync(command, _handlerForbidden);
             throw new Exception(SD.UnexpectedErrorInTestMethod);
         }
         catch (Exception ex)
@@ -99,12 +99,12 @@ public class UpdateMedicineLogCommandHandlerTest : CommandTestBase
     }
 
 
-    private async Task ValidateRequestAsync(UpdateMedicineLogCommand command, UpdateMedicineLogCommandValidator validator)
+    private async Task ValidateRequestAsync(UpdateMedicineLogCommand command, UpdateMedicineLogCommandHandler handler)
     {
-        var validationResult = await validator.ValidateAsync(command);
+        var validationResult = await _validator.ValidateAsync(command);
         if (validationResult.IsValid)
         {
-            await _handler.Handle(command, CancellationToken.None);
+            await handler.Handle(command, CancellationToken.None);
         }
         else
         {

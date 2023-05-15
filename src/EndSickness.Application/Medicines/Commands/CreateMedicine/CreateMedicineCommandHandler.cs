@@ -16,9 +16,9 @@ public class CreateMedicineCommandHandler : IRequestHandler<CreateMedicineComman
 
     public async Task<int> Handle(CreateMedicineCommand request, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<Medicine>(request);
-        _db.Medicines.Add(entity);
+        var medicineToInsert = _mapper.Map<Medicine>(request);
+        _db.Medicines.Add(medicineToInsert);
         await _db.SaveChangesAsync(cancellationToken);
-        return entity.Id;
+        return medicineToInsert.Id;
     }
 }

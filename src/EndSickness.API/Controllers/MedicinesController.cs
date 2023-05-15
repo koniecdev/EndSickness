@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.Medicines.Commands.CreateMedicine;
+﻿using EndSickness.Shared.Dtos;
+using EndSickness.Shared.Medicines.Commands.CreateMedicine;
 using EndSickness.Shared.Medicines.Commands.DeleteMedicine;
 using EndSickness.Shared.Medicines.Commands.UpdateMedicine;
 using EndSickness.Shared.Medicines.Queries.GetDosageById;
@@ -20,7 +21,7 @@ public class MedicinesController : BaseApiController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetMedicineByIdVm>> Get(int id)
+    public async Task<ActionResult<MedicineDto>> Get(int id)
     {
         var result = await Mediator.Send(new GetMedicineByIdQuery(id));
         return Ok(result);
@@ -34,7 +35,7 @@ public class MedicinesController : BaseApiController
     }
 
     [HttpGet("{id}/dosages")]
-    public async Task<ActionResult<GetDosageByIdVm>> Dosages(int id)
+    public async Task<ActionResult<DosageDto>> Dosages(int id)
     {
         var result = await Mediator.Send(new GetDosageByIdQuery(id));
         return Ok(result);

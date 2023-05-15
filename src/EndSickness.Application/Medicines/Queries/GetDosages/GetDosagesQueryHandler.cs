@@ -1,4 +1,5 @@
-﻿using EndSickness.Shared.Medicines.Queries.GetDosages;
+﻿using EndSickness.Shared.Dtos;
+using EndSickness.Shared.Medicines.Queries.GetDosages;
 
 namespace EndSickness.Application.Medicines.Queries.GetDosages;
 
@@ -30,7 +31,7 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
 
     private async Task<GetDosagesVm> VmFactory(ICollection<int> medicineLogsIds, CancellationToken cancellationToken)
     {
-        var vm = new GetDosagesVm();
+        List<DosageDto> dosages = new();
         foreach (var medicineId in medicineLogsIds)
         {
             var medicine = await _db.Medicines.SingleAsync(m => m.Id == medicineId && m.StatusId != 0, cancellationToken);
@@ -43,7 +44,7 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
 
             DateTime vmNextDose = _calculateNeariestDosageService.Calculate(vmLastDose, medicine, medicineLogs);
 
-            vm.Dosages.Add(new GetDosagesDto()
+            dosages.Add(new DosageDto()
             {
                 MedicineId = medicine.Id,
                 MedicineName = medicine.Name,
@@ -51,6 +52,6 @@ public class GetDosagesQueryHandler : IRequestHandler<GetDosagesQuery, GetDosage
                 NextDose = vmNextDose
             });
         }
-        return vm;
+        return new GetDosagesVm(dosages);
     }
 }
